@@ -1,5 +1,4 @@
 //Better than BFS, still not great.
-//Made It Better.
 
 package ch.idsia.agents.controllers.examples;
 
@@ -20,6 +19,7 @@ import ch.idsia.benchmark.mario.engine.VisualizationComponent;
 import ch.idsia.benchmark.mario.engine.generalization.Enemy;
 import ch.idsia.benchmark.mario.engine.input.MarioInput;
 import ch.idsia.benchmark.mario.engine.input.MarioKey;
+import ch.idsia.benchmark.mario.engine.sprites.Mario;
 import ch.idsia.benchmark.mario.environments.IEnvironment;
 import ch.idsia.benchmark.mario.options.FastOpts;
 
@@ -28,7 +28,7 @@ import ch.idsia.benchmark.mario.options.FastOpts;
  * 
  * @author Jakub 'Jimmy' Gemrot, gemrot@gamedev.cuni.cz
  */
-public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
+public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 
 	
 	@Override
@@ -105,12 +105,11 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 		
 	}
 	public HashMap<Pair,Node> generateGraph() {
-		int gridSizeX = 4; //Controls how big the simulated graph is. Feel free to tweak.
-		int gridSizeY = 1;
+		int gridSize = 4; //Controls how big the simulated graph is. Feel free to tweak.
 		HashMap<Pair,Node> Graph = new HashMap<Pair,Node>();
 		//Generate all Nodes in the selected size range.
-		for( int i = 0; i <= gridSizeX; i++ ) {
-			for ( int j = 0; j>= -gridSizeY; j--) {
+		for( int i = 0; i <= gridSize; i++ ) {
+			for ( int j = 0; j>= -gridSize; j--) {
 				Node currentNode = new Node(i,j);
 				Graph.put(new Pair(i,j),currentNode);
 			}
@@ -126,7 +125,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 		Iterator<Node> listIter = listNodes.iterator();
 		while(listIter.hasNext()) {
 			Node iterable = listIter.next();
-			if((iterable.yPos-1<-gridSizeY) == false) {
+			if((iterable.yPos-1<-gridSize) == false) {
 				Node childUp = Graph.get(new Pair(iterable.xPos,iterable.yPos-1)); //Example of using a pair to check the HashMap
 				iterable.children.add(childUp);
 			}
@@ -134,7 +133,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 				Node childDown = Graph.get(new Pair(iterable.xPos,iterable.yPos+1));
 				iterable.children.add(childDown);
 			}
-			if(((iterable.xPos+1)>gridSizeX) == false) {
+			if(((iterable.xPos+1)>gridSize) == false) {
 				Node childForward = Graph.get(new Pair(iterable.xPos+1,iterable.yPos));
 				iterable.children.add(childForward);
 			}
@@ -153,6 +152,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 		public HashMap<Pair,Node> Graph = null;
 		public Collection<Node> List = null;
 		public boolean isGraphGenerated = false;
+		public int counter = 0;
 	public MarioInput actionSelectionAI() {
 		if( isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
 			Graph = generateGraph();
@@ -166,60 +166,59 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 				resetNode.reset();
 			}
 		}
-		Node StartNode = Graph.get(new Pair(0,0));
-		//--------- To here for what ever you want to do
+		Node StartNode = Graph.get(new Pair(0,0));	
 		if(StartNode.goal == true) {
 			action.press(MarioKey.RIGHT);
 			System.gc();
 			return action;
 		}
-		
+		//--------- To here for what ever you want to do
 		LinkedList<Node> frontier = new LinkedList<Node>();
 		frontier.add(StartNode);
-		while(frontier.isEmpty() == false) { //DFS Implementation
-			Node currentNode = frontier.removeLast();
-			currentNode.seen = true;
-			action.set(MarioKey.JUMP, (currentNode.enemyHere || currentNode.blockHere) && mario.mayJump);	
-			if (!mario.onGround) {
-				action.press(MarioKey.JUMP);
-			}
+//		while(StartNode.goal != true){
+			Vector<Node> children = StartNode.children;
+			frontier.addAll(children);
+			System.out.println(frontier.size());
+			int count2 = children.size();
+			for(int x = 0; x < children.size(); ++x){
+				
+				Node currentChild = children.elementAt(x);
+				currentChild.seen = true;
 
-			action.press(MarioKey.RIGHT);
-			Iterator<Node> iter = currentNode.children.iterator();
-			while(iter.hasNext()) {
-				Node currentChild = iter.next();
-				if(currentChild.frontier == false && currentChild.seen == false) {
-					if(currentChild.goal == true) {
-						action.set(MarioKey.JUMP, (currentChild.enemyHere || currentChild.blockHere) && mario.mayJump);	
-						if (!mario.onGround) {
-							action.press(MarioKey.JUMP);
-						}
-						
-
-						action.press(MarioKey.RIGHT);
-						return action;
-					
-					}
-					else {
-
-						currentChild.frontier = true;
-						frontier.addLast(currentChild);
-					}
+				if(currentChild.enemyHere == false){
+					--count2;
 				}
+				if(currentChild.enemyHere || currentChild.blockHere){
+					if(currentChild.enemyHere && mario.mayShoot) {
+						action.press(MarioKey.SPEED);
+					}
+					action.set(MarioKey.JUMP, (currentChild.enemyHere || currentChild.blockHere) && mario.mayJump);	
+					if(!mario.onGround){
+						action.press(MarioKey.JUMP);
+					}
+//					System.out.println(mario.mayJump);
+				}
+				
 			}
-		}
+			if(count2 <= 0){
+				action.press(MarioKey.RIGHT);
+			}
+			
+//		}
 		
 
-		System.gc();
+		//Your code Here 
+		
+
+		System.gc(); //Suggest garbage clean-up after work here.
 		return action;
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA);
-		
+		String options = FastOpts.FAST_VISx2_04_BLOCKS + FastOpts.L_ENEMY(Enemy.GOOMBA);
 		MarioSimulator simulator = new MarioSimulator(options);
 		
-		IAgent agent = new DepthFirstAgent();
+		IAgent agent = new HillClimberAgent();
 		
 		simulator.run(agent);
 		

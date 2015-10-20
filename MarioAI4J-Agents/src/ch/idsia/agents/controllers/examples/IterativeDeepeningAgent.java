@@ -158,7 +158,7 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 		LinkedList<Node> frontier = new LinkedList<Node>();
 		frontier.add(StartNode);
 		while(frontier.isEmpty() == false) {
-			Node currentNode = frontier.removeLast();
+			Node currentNode = frontier.removeLast(); //HERE IS WHERE THE CURRENT NODE IS CHANGING
 			currentNode.seen = true;
 			action.set(MarioKey.JUMP, (currentNode.enemyHere || currentNode.blockHere) && mario.mayJump);	
 			if (!mario.onGround) {
