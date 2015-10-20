@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Set;
 import java.util.Vector;
+import java.util.ListIterator;
+
 
 import ch.idsia.agents.AgentOptions;
 import ch.idsia.agents.IAgent;
@@ -42,7 +44,19 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 		// provide custom visualization using 'g'
 	}
 
-
+	private boolean enemyAhead() {
+		return
+				   e.danger(1, 0) || e.danger(1, -1) 
+				|| e.danger(2, 0) || e.danger(2, -1)
+				|| e.danger(3, 0) || e.danger(2, -1);
+	}
+	
+	private boolean brickAhead() {
+		return
+				   t.brick(1, 0) || t.brick(1, -1) 
+				|| t.brick(2, 0) || t.brick(2, -1)
+				|| t.brick(3, 0) || t.brick(3, -1);
+	}
 	
 	//Node class, Shouldn't have to touch this. 
 	private class Node {
@@ -178,31 +192,68 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 //		while(StartNode.goal != true){
 			Vector<Node> children = StartNode.children;
 			frontier.addAll(children);
-			System.out.println(frontier.size());
-			int count2 = children.size();
-			for(int x = 0; x < children.size(); ++x){
-				
-				Node currentChild = children.elementAt(x);
-				currentChild.seen = true;
+			
+			Iterator<Node> frontIter = children.iterator();
+			
+			action.release(MarioKey.SPEED);
+			action.release(MarioKey.RIGHT);
+			int counter3 = 0;
 
-				if(currentChild.enemyHere == false){
-					--count2;
-				}
-				if(currentChild.enemyHere || currentChild.blockHere){
-					if(currentChild.enemyHere && mario.mayShoot) {
+			while(frontIter.hasNext()){
+				Node currChild = frontIter.next();
+				frontier.addAll(currChild.children);
+				Iterator<Node> iter = children.iterator();
+				while(iter.hasNext()){
+					action.set(MarioKey.JUMP, (enemyAhead() || brickAhead()) && mario.mayJump);
+					action.set(MarioKey.SPEED, (enemyAhead() || brickAhead()) && mario.mayShoot );
+					Node curr = iter.next();
+					if(curr.enemyHere || curr.blockHere){
+//						action.set(MarioKey.JUMP,  (curr.enemyHere || curr.blockHere && mario.mayJump));
+						action.set(MarioKey.JUMP, mario.mayJump || mario.speed.y < 0);
+						if(!mario.onGround){
+							action.press(MarioKey.JUMP);
+						}
+					}
+					if(currChild.enemyHere && mario.mayShoot){
 						action.press(MarioKey.SPEED);
+						return action;
+					}else{
+						action.press(MarioKey.RIGHT);
 					}
-					action.set(MarioKey.JUMP, (currentChild.enemyHere || currentChild.blockHere) && mario.mayJump);	
-					if(!mario.onGround){
-						action.press(MarioKey.JUMP);
-					}
-//					System.out.println(mario.mayJump);
 				}
-				
 			}
-			if(count2 <= 0){
-				action.press(MarioKey.RIGHT);
-			}
+			System.out.println(frontier.size());
+
+			
+//			System.out.println(frontier.size());
+//			int count2 = children.size();
+//			for(int x = 0; x < children.size(); ++x){
+//				boolean isShooting = false;
+//				
+//				Node currentChild = children.elementAt(x);
+//				currentChild.seen = true;
+//
+//				if(currentChild.enemyHere == false){
+//					--count2;
+//				}
+//
+//				if(currentChild.enemyHere || currentChild.blockHere){
+//					if(currentChild.enemyHere && mario.mayShoot) {
+//						isShooting = true;
+//						action.press(MarioKey.SPEED);
+//					}
+//					if(true && isShooting){
+//						action.press(MarioKey.RIGHT);
+//					}
+//					action.set(MarioKey.JUMP, (currentChild.enemyHere || currentChild.blockHere) && mario.mayJump);	
+//					if(!mario.onGround){
+//						action.press(MarioKey.JUMP);
+//					}
+////					System.out.println(mario.mayJump);
+//				}
+//				isShooting = false;
+//			}
+
 			
 //		}
 		
@@ -215,7 +266,7 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_04_BLOCKS + FastOpts.L_ENEMY(Enemy.GOOMBA);
+		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA);
 		MarioSimulator simulator = new MarioSimulator(options);
 		
 		IAgent agent = new HillClimberAgent();
