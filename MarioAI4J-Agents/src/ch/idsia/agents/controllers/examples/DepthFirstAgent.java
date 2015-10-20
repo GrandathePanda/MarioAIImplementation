@@ -1,4 +1,5 @@
 //Better than BFS, still not great.
+//Made It Better.
 
 package ch.idsia.agents.controllers.examples;
 
@@ -104,11 +105,12 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 		
 	}
 	public HashMap<Pair,Node> generateGraph() {
-		int gridSize = 4; //Controls how big the simulated graph is. Feel free to tweak.
+		int gridSizeX = 4; //Controls how big the simulated graph is. Feel free to tweak.
+		int gridSizeY = 1;
 		HashMap<Pair,Node> Graph = new HashMap<Pair,Node>();
 		//Generate all Nodes in the selected size range.
-		for( int i = 0; i <= gridSize; i++ ) {
-			for ( int j = 0; j>= -gridSize; j--) {
+		for( int i = 0; i <= gridSizeX; i++ ) {
+			for ( int j = 0; j>= -gridSizeY; j--) {
 				Node currentNode = new Node(i,j);
 				Graph.put(new Pair(i,j),currentNode);
 			}
@@ -124,7 +126,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 		Iterator<Node> listIter = listNodes.iterator();
 		while(listIter.hasNext()) {
 			Node iterable = listIter.next();
-			if((iterable.yPos-1<-gridSize) == false) {
+			if((iterable.yPos-1<-gridSizeY) == false) {
 				Node childUp = Graph.get(new Pair(iterable.xPos,iterable.yPos-1)); //Example of using a pair to check the HashMap
 				iterable.children.add(childUp);
 			}
@@ -132,7 +134,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 				Node childDown = Graph.get(new Pair(iterable.xPos,iterable.yPos+1));
 				iterable.children.add(childDown);
 			}
-			if(((iterable.xPos+1)>gridSize) == false) {
+			if(((iterable.xPos+1)>gridSizeX) == false) {
 				Node childForward = Graph.get(new Pair(iterable.xPos+1,iterable.yPos));
 				iterable.children.add(childForward);
 			}
@@ -180,9 +182,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 			if (!mario.onGround) {
 				action.press(MarioKey.JUMP);
 			}
-			if(currentNode.enemyHere && mario.mayShoot) {
-				action.press(MarioKey.SPEED);
-			}
+
 			action.press(MarioKey.RIGHT);
 			Iterator<Node> iter = currentNode.children.iterator();
 			while(iter.hasNext()) {
@@ -193,11 +193,10 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 						if (!mario.onGround) {
 							action.press(MarioKey.JUMP);
 						}
-						if(currentNode.enemyHere && mario.mayShoot) {
-							action.press(MarioKey.SPEED);
-						}
+						
 
 						action.press(MarioKey.RIGHT);
+						return action;
 					
 					}
 					else {

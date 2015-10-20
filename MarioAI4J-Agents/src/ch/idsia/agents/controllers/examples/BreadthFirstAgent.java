@@ -1,4 +1,4 @@
-//Sucks at this game.
+//Made it better.
 
 package ch.idsia.agents.controllers.examples;
 
@@ -194,8 +194,9 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 						/*if(currentNode.enemyHere && mario.mayShoot) {
 							action.press(MarioKey.SPEED);
 						}*/
-
+						
 						action.press(MarioKey.RIGHT);
+						return action;
 					
 					}
 					else {
