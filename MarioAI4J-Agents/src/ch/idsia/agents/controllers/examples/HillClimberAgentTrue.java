@@ -164,7 +164,9 @@ public class HillClimberAgentTrue extends MarioHijackAIBase implements IAgent {
 	}
 	public boolean shooting = false;
 	public void doActions(Node cNode) {
+//		if(brickAhead()){
 		if(brickAhead()){
+			System.out.println("trying to jump");
 			action.set(MarioKey.JUMP, mario.mayJump);	
 			if (!mario.onGround && brickAhead()) {
 				action.press(MarioKey.JUMP);
@@ -226,7 +228,7 @@ public class HillClimberAgentTrue extends MarioHijackAIBase implements IAgent {
 		Vector<Node> frontier2 = new Vector<Node>();
 		frontier.add(StartNode);		
 		frontier2.add(StartNode);
-		int bestNode = 0;
+		Node bestNode = StartNode;
 		while(!frontier.isEmpty()){ //Hill Climbing
 			Node curr = frontier.removeFirst();
 //			doActions(curr);
@@ -235,29 +237,33 @@ public class HillClimberAgentTrue extends MarioHijackAIBase implements IAgent {
 			Iterator<Node> iter = curr.children.iterator();
 			while(iter.hasNext()) {
 				int currHVal = 0;
-				curr = iter.next();
+				Node tcurr = iter.next();
 				frontier2.add(curr);
 				if(curr.frontier == false && curr.seen == false) {
 						curr.frontier = true;
 					
 				}
-				if(curr.enemyHere){
-					++currHVal;
-					System.out.println("here!");
+				if(tcurr.enemyHere){
+				    ++currHVal;
+				    ++currHVal;
+//					System.out.println("here!");
 				}
-				if(curr.blockHere){
-					System.out.println("Aye here");
+				if(tcurr.blockHere){
+//					System.out.println("Aye here");
 					++currHVal;
 				}
+//				System.out.println(currHVal);
 				if(currHVal < currMin){
-					++bestNode;
-					currHVal = currMin;
+					bestNode = tcurr;
+					currMin = currHVal;
 				}
 			}
 			
 			
 		}
-		doActions(frontier2.elementAt(bestNode));
+//		System.out.println("bestNode: ");
+//		doActions(StartNode);
+		doActions(bestNode);
 		
 
 		//Your code Here 
@@ -268,8 +274,8 @@ public class HillClimberAgentTrue extends MarioHijackAIBase implements IAgent {
 	}
 	
 	public static void main(String[] args) {
-//		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA);
-		String options = FastOpts.FAST_VISx2_02_JUMPING;
+		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA);
+//		String options = FastOpts.FAST_VISx2_02_JUMPING;
 		MarioSimulator simulator = new MarioSimulator(options);
 		
 		IAgent agent = new HillClimberAgentTrue();
