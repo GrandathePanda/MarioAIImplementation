@@ -14,18 +14,25 @@ public class GraphGenerator {
 	private Tiles t = null;
 	public boolean AStar = false;
 	public boolean HillClimb = false;
-	public enum AgentType {
-		OTHER, ASTAR, HILLCLIMB;
-	}
 	public boolean Other = false;
+	public enum AgentType {
+		ASTAR, HILLCLIMB;
+	}
 	public int gridSizeX = 0;
 	public int gridSizeY = 0;
 	public HashMap<Pair,Node> State = null;
 	public Collection<Node> List = null;
 	public boolean isGraphGenerated = false;
-	public GraphGenerator(int x, int y) {
+	public GraphGenerator(int x, int y, AgentType T) {
 		gridSizeX = x;
 		gridSizeY = y;
+		switch(T) {
+			case HILLCLIMB:
+				HillClimb = true;
+			case ASTAR:
+				AStar = true;
+		}
+				
 	}
 	public class Node {
 		public boolean enemyHere = false;
@@ -40,18 +47,36 @@ public class GraphGenerator {
 		public boolean frontier = false; // also prevents cycles if for some reason the first fails.
 		public int xPos = 0;
 		public int yPos = 0;
+		public Node next = null;
+		public Node prev = null;
 		public Vector<Node> children = new Vector<Node>();
 		public void reset() { // update the node to the current values
 			seen = false; 
 			frontier = false;
 			blockHere = t.brick(xPos,yPos);
-			enemyHere = e.danger(xPos,yPos);
+			enemyHere = e.danger(xPos,yPos);	
+			if(AStar == true) {
+
+				heuristicCost = Math.abs(gridSizeX-xPos);
+				if(blockHere && enemyHere) pathCost+=3;
+				else if(enemyHere) pathCost+=2;
+				else if(blockHere) pathCost+=1;
+				else pathCost = 0;
+			}
+			cost = pathCost+heuristicCost;
 		}
 		public Node(int x, int y) {
 			xPos = x;
 			yPos = y;
 			blockHere = t.brick(x,y);
 			enemyHere = e.danger(x,y);
+			if(AStar == true) {
+				heuristicCost = Math.abs(x);	
+				if(blockHere && enemyHere) pathCost+=3;
+				else if(enemyHere) pathCost+=2;
+				else if(blockHere) pathCost+=1;
+			}
+			cost = pathCost+heuristicCost;
 			
 		}
 	}

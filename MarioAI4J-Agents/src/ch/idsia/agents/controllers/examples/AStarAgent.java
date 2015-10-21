@@ -8,9 +8,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Vector;
-
+import java.util.Comparator;
 import ch.idsia.agents.AgentOptions;
 import ch.idsia.agents.IAgent;
 import ch.idsia.agents.controllers.MarioHijackAIBase;
@@ -44,77 +45,103 @@ public class AStarAgent extends MarioHijackAIBase implements IAgent {
 		// provide custom visualization using 'g'
 	}
 
-	private boolean brickAhead() {
-		return
-				   t.brick(1, 0) || t.brick(1, -1) 
-				|| t.brick(2, 0) || t.brick(2, -1)
-				|| t.brick(3, 0) || t.brick(3, -1);
-	}
 
-	public void doActions(Node cNode) {
-		if (mario.mayShoot) {
-			if (shooting) {
-				shooting = false;
-				action.release(MarioKey.SPEED);
-			} else 
-			if (action.isPressed(MarioKey.SPEED)) {				
-				action.release(MarioKey.SPEED);
+
+	public void doActions(Vector<Node> SolutionSet) {
+		Iterator<Node> solnIter = SolutionSet.iterator();
+		while(solnIter.hasNext()) {
+			Node cNode = solnIter.next();
+			
+			if (mario.mayShoot) {
+				if (shooting) {
+					shooting = false;
+					action.release(MarioKey.SPEED);
+				} else 
+				if (action.isPressed(MarioKey.SPEED)) {				
+					action.release(MarioKey.SPEED);
+				} else {
+					shooting = true;
+					action.press(MarioKey.SPEED);
+				}
 			} else {
-				shooting = true;
-				action.press(MarioKey.SPEED);
+				if (shooting) {
+					shooting = false;
+					action.release(MarioKey.SPEED);
+				}
 			}
-		} else {
-			if (shooting) {
-				shooting = false;
-				action.release(MarioKey.SPEED);
+			if(cNode.next != null) {
+				action.set(MarioKey.JUMP, (cNode.next.enemyHere || cNode.enemyHere) && mario.mayJump);
+				//System.out.println("(CNode X: "+cNode.xPos+", CNode Y: "+cNode.yPos+") Cost: "+cNode.cost+" CNode Block: "+ cNode.blockHere + " " +(cNode.next.yPos < cNode.yPos));
+				action.set(MarioKey.JUMP,((cNode.next.yPos <= cNode.yPos) || cNode.next.blockHere  || cNode.blockHere) && mario.mayJump);
+				if(cNode.prev != null) {
+					action.set(MarioKey.JUMP,(cNode.prev.yPos > cNode.yPos) && mario.mayJump);
+				}
+				
+		
 			}
+			else {
+				action.set(MarioKey.JUMP, ((cNode.enemyHere || cNode.blockHere || (cNode.prev.yPos > cNode.yPos)) && mario.mayJump));
+				if (!mario.onGround && (!cNode.prev.enemyHere || !cNode.enemyHere)) {
+					action.press(MarioKey.JUMP);
+				}
+				else action.press(MarioKey.RIGHT);
+				
+			}
+			
+
+
 		}
-		if(cNode.enemyHere || (cNode.xPos > 1 && cNode.yPos <= 0 && cNode.blockHere)) {
-			action.set(MarioKey.JUMP, mario.mayJump);	
-			if (!mario.onGround && brickAhead()) {
-				action.press(MarioKey.JUMP);
-			}
-		}
-		action.press(MarioKey.RIGHT);
 	}
 		//Make the graph a class level variable so it keeps its state. Only have to generate once.
 		//Keep from here---------
-		GraphGenerator Graph = new GraphGenerator(4,4);
-		public int limit = 4 ; // must be less then or equal to gridSize or null exceptions will occur.
+		GraphGenerator Graph = new GraphGenerator(4,2,GraphGenerator.AgentType.ASTAR);
 		
 	public MarioInput actionSelectionAI() {
 		if( Graph.isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
 			Graph.generateGraph(e,t);
-
 			Graph.isGraphGenerated = true;
 		}
 		else {
 			Graph.resetNodes(e,t);
 		}
+		Vector<Node> Solution = new Vector<Node>();
+		Node prevSolutionState = null;
 		Node StartNode = Graph.State.get(Graph.new Pair(0,0));
 		//--------- To here for what ever you want to do
 			if(StartNode.goal == true) {
-				doActions(StartNode);
+				Solution.add(StartNode);
+				doActions(Solution);
 				System.gc();
 				return action;
 			}
 			else {
-				LinkedList<Node> frontier = new LinkedList<Node>();
+				PriorityQueue<Node> frontier = new PriorityQueue<Node>(Graph.gridSizeX*Graph.gridSizeY, new Comparator<Node>() {
+
+					@Override
+					public int compare(Node node1, Node node2) {
+						return (node1.cost == node2.cost) ? ((node1.yPos < node2.yPos || node1.xPos < node2.xPos) ? 1 : -1)
+								: (node1.cost > node2.cost ? 1 : -1);
+						
+					}
+					
+				});
 				frontier.add(StartNode);
 				while(frontier.isEmpty() == false) { //ID Implementation
-					Node currentNode = frontier.removeLast();
+					Node currentNode = frontier.remove();
+					if(prevSolutionState == null) prevSolutionState = currentNode;
+					else { prevSolutionState.next = currentNode; currentNode.prev = prevSolutionState; prevSolutionState = currentNode;}
+					Solution.add(currentNode);
 					currentNode.seen = true;
-					doActions(currentNode);
-					if(currentNode.goal == true)
-					
-		
-					action.press(MarioKey.RIGHT);
+					if(currentNode.goal == true) {
+						doActions(Solution);
+						return action;
+					}
 					Iterator<Node> iter = currentNode.children.iterator();
 					while(iter.hasNext()) {
 						Node currentChild = iter.next();
 						if(currentChild.frontier == false && currentChild.seen == false) {
 								currentChild.frontier = true;
-								frontier.addLast(currentChild);
+								frontier.add(currentChild);
 							
 						}
 					}
