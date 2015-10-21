@@ -4,6 +4,6 @@
 	<classpathentry kind="lib" path="lib/asm-all-3.3.jar"/>
 	<classpathentry kind="lib" path="lib/jdom.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/MarioAI4J-v0.3.0"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/MarioAI4J"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

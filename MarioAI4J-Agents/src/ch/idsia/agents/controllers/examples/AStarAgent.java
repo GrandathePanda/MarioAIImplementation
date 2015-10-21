@@ -30,7 +30,7 @@ import togepi.GraphGenerator.*;
  * 
  * @author Jakub 'Jimmy' Gemrot, gemrot@gamedev.cuni.cz
  */
-public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent {
+public class AStarAgent extends MarioHijackAIBase implements IAgent {
 
 	public boolean shooting = false;
 	@Override
@@ -93,17 +93,10 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 		}
 		Node StartNode = Graph.State.get(Graph.new Pair(0,0));
 		//--------- To here for what ever you want to do
-		for(int i = 0; i < limit; ) {
 			if(StartNode.goal == true) {
 				doActions(StartNode);
 				System.gc();
 				return action;
-			}
-			else if(StartNode.xPos >= i || StartNode.yPos >= i) {
-				i++;
-				System.out.println(i);
-				Graph.resetNodes(e,t);
-				continue;
 			}
 			else {
 				LinkedList<Node> frontier = new LinkedList<Node>();
@@ -112,43 +105,21 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 					Node currentNode = frontier.removeLast();
 					currentNode.seen = true;
 					doActions(currentNode);
+					if(currentNode.goal == true)
 					
 		
 					action.press(MarioKey.RIGHT);
 					Iterator<Node> iter = currentNode.children.iterator();
-					boolean limitBool = false;
 					while(iter.hasNext()) {
 						Node currentChild = iter.next();
 						if(currentChild.frontier == false && currentChild.seen == false) {
-							if(currentChild.goal == true) {
-								doActions(currentChild);
-								return action;
-							
-							}
-							else {
-								if(currentChild.xPos >= i || currentChild.yPos >= i) {
-									
-
-									doActions(currentChild);
-									
-									break;
-									
-								}
-								
 								currentChild.frontier = true;
 								frontier.addLast(currentChild);
-							}
+							
 						}
 					}
-					if(limitBool == true )	
-						break;
 				}
 			}
-			i++;
-			System.out.println(i);
-			Graph.resetNodes(e,t);
-			continue;
-		}
 
 		action.press(MarioKey.RIGHT);
 		return action;
@@ -159,7 +130,7 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		
-		IAgent agent = new IterativeDeepeningAgent();
+		IAgent agent = new AStarAgent();
 		
 		simulator.run(agent);
 		

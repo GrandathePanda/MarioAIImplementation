@@ -24,6 +24,8 @@ import ch.idsia.benchmark.mario.engine.input.MarioKey;
 import ch.idsia.benchmark.mario.engine.sprites.Mario;
 import ch.idsia.benchmark.mario.environments.IEnvironment;
 import ch.idsia.benchmark.mario.options.FastOpts;
+import togepi.GraphGenerator;
+import togepi.GraphGenerator.Node;
 
 /**
  * Your custom agent! Feel free to fool around!
@@ -43,12 +45,11 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 		super.debugDraw(vis, level, env, g);
 		// provide custom visualization using 'g'
 	}
-
 	private boolean enemyAhead() {
 		return
 				   e.danger(1, 0) || e.danger(1, -1) 
 				|| e.danger(2, 0) || e.danger(2, -1)
-				|| e.danger(3, 0) || e.danger(2, -1);
+				|| e.danger(3, 0) || e.danger(3, -1);
 	}
 	
 	private boolean brickAhead() {
@@ -57,130 +58,16 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 				|| t.brick(2, 0) || t.brick(2, -1)
 				|| t.brick(3, 0) || t.brick(3, -1);
 	}
-	
-	//Node class, Shouldn't have to touch this. 
-	private class Node {
-		public boolean enemyHere = false;
-		public boolean blockHere = false;
-		public boolean goal = false;
-		public boolean seen = false; //prevents cycles in the searching algorithms
-		public boolean frontier = false; // also prevents cycles if for some reason the first fails.
-		public int xPos = 0;
-		public int yPos = 0;
-		public Vector<Node> children = new Vector<Node>();
-		public void reset() { // update the node to the current values
-			seen = false; 
-			frontier = false;
-			blockHere = t.brick(xPos,yPos);
-			enemyHere = e.danger(xPos,yPos);
-		}
-		public Node(int x, int y) {
-			xPos = x;
-			yPos = y;
-			blockHere = t.brick(x,y);
-			enemyHere = e.danger(x,y);
-			
-		}
-	}
-	
-	//Pair class to use in the Graphs node indexing. You shouldn't have to touch this.
-	private class Pair {
-		public int x = 0;
-		public int y = 0;
-		
-		@Override
-		public int hashCode() { // Again don't have to touch this but cool thing worth noting.
-			// A pair of integers can form a bijection(one to one and onto, thus unique and useful for hashing) to a single integer ZxZ->Z
-			// This is a modified cantor pairing function, that maps positive and negative integers into
-			// a computationally less expensive set, contained in 32 bits for unsigned and 64 bit for signed.
-			int A = x >= 0 ? 2 * x : -2 * x - 1;
-			int B = y >= 0 ? 2 * y : -2 * y - 1;
-			int code = A >= B ? A * A + A + B : A + B * B;
-			return code;
-		}
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Pair other = (Pair)obj;
-			if(this.x == other.x && this.y == other.y)
-				return true;
-			return false;
-		}
-		public Pair(int a, int b) {
-			x = a;
-			y = b;
-		}
-		
-		
-	}
-	public HashMap<Pair,Node> generateGraph() {
-		int gridSize = 4; //Controls how big the simulated graph is. Feel free to tweak.
-		HashMap<Pair,Node> Graph = new HashMap<Pair,Node>();
-		//Generate all Nodes in the selected size range.
-		for( int i = 0; i <= gridSize; i++ ) {
-			for ( int j = 0; j>= -gridSize; j--) {
-				Node currentNode = new Node(i,j);
-				Graph.put(new Pair(i,j),currentNode);
-			}
-		}
-		/*Create a list from the graph of all nodes in the graph in no particular order.
-		 * Iterate through the list. At any given node all we have to do is test for the boundaries.
-		 * If a node is a boundary point, don't generate children outside of the grid. If the node
-		 * is not a boundary generate all children nodes in the up down forward and back direction.
-		 * This forms the edges of the graph, every node has at most four children. 
-		 * This finishes creating our undirected graph.
-		 */
-		Collection<Node> listNodes = Graph.values();
-		Iterator<Node> listIter = listNodes.iterator();
-		while(listIter.hasNext()) {
-			Node iterable = listIter.next();
-			if((iterable.yPos-1<-gridSize) == false) {
-				Node childUp = Graph.get(new Pair(iterable.xPos,iterable.yPos-1)); //Example of using a pair to check the HashMap
-				iterable.children.add(childUp);
-			}
-			if((iterable.yPos+1>0) == false) {
-				Node childDown = Graph.get(new Pair(iterable.xPos,iterable.yPos+1));
-				iterable.children.add(childDown);
-			}
-			if(((iterable.xPos+1)>gridSize) == false) {
-				Node childForward = Graph.get(new Pair(iterable.xPos+1,iterable.yPos));
-				iterable.children.add(childForward);
-			}
-			else { iterable.goal = true;}
-			if((iterable.xPos-1<0) == false) {
-				Node childBackward = Graph.get(new Pair(iterable.xPos-1,iterable.yPos));
-				iterable.children.add(childBackward);
-			}	
-		}
-
-		
-		return Graph;
-	}
-		//Make the graph a class level variable so it keeps its state. Only have to generate once.
-		//Keep from here---------
-		public HashMap<Pair,Node> Graph = null;
-		public Collection<Node> List = null;
-		public boolean isGraphGenerated = false;
-		public int counter = 0;
+	GraphGenerator Graph = new GraphGenerator(4,4);
 	public MarioInput actionSelectionAI() {
-		if( isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
-			Graph = generateGraph();
-			List = Graph.values();
-			isGraphGenerated = true;
+		if( Graph.isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
+			Graph.generateGraph(e,t);
+			Graph.isGraphGenerated = true;
 		}
 		else {
-			Iterator<Node> resetNodes = List.iterator(); //If it has been generated just update all the nodes. 
-			while(resetNodes.hasNext()) {
-				Node resetNode = resetNodes.next();
-				resetNode.reset();
-			}
+			Graph.resetNodes(e, t);
 		}
-		Node StartNode = Graph.get(new Pair(0,0));	
+		Node StartNode = Graph.State.get(Graph.new Pair(0,0));	
 		if(StartNode.goal == true) {
 			action.press(MarioKey.RIGHT);
 			System.gc();
@@ -204,9 +91,9 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 				frontier.addAll(currChild.children);
 				Iterator<Node> iter = children.iterator();
 				while(iter.hasNext()){
-					action.set(MarioKey.JUMP, (enemyAhead() || brickAhead()) && mario.mayJump);
-					action.set(MarioKey.SPEED, (enemyAhead() || brickAhead()) && mario.mayShoot );
 					Node curr = iter.next();
+					action.set(MarioKey.JUMP, (enemyAhead() || brickAhead()) && mario.mayJump);
+					action.set(MarioKey.SPEED, (enemyAhead() || brickAhead()) && mario.mayShoot );				
 					if(curr.enemyHere || curr.blockHere){
 //						action.set(MarioKey.JUMP,  (curr.enemyHere || curr.blockHere && mario.mayJump));
 						action.set(MarioKey.JUMP, mario.mayJump || mario.speed.y < 0);

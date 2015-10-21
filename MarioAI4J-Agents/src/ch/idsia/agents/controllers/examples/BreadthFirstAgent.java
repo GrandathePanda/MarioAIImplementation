@@ -112,10 +112,10 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 		
 	}
 	public HashMap<Pair,Node> generateGraph() {
-		int gridSize = 4; //Controls how big the simulated graph is. 
+		int gridSize = 2; //Controls how big the simulated graph is. 
 		HashMap<Pair,Node> Graph = new HashMap<Pair,Node>();
 		for( int i = 0; i <= gridSize; i++ ) {
-			for ( int j = 0; j>= -gridSize; j--) {
+			for ( int j = gridSize; j>= -gridSize; j--) {
 				Node currentNode = new Node(i,j);
 				Graph.put(new Pair(i,j),currentNode);
 			}
@@ -136,7 +136,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 				Node childForward = Graph.get(new Pair(iterable.xPos+1,iterable.yPos));
 				iterable.children.add(childForward);
 			}
-			else { iterable.goal = true;}
+			else { if(iterable.enemyHere == false && iterable.blockHere == false) {iterable.goal = true;}}
 			if((iterable.xPos-1<0) == false) {
 				Node childBackward = Graph.get(new Pair(iterable.xPos-1,iterable.yPos));
 				iterable.children.add(childBackward);
@@ -174,13 +174,26 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 			Node currentNode = frontier.removeFirst();
 			currentNode.seen = true;
 			action.set(MarioKey.JUMP, (currentNode.enemyHere || currentNode.blockHere) && mario.mayJump);	
-			if (!mario.onGround) {
+			if (!mario.onGround && brickAhead()) {
 				action.press(MarioKey.JUMP);
 			}
-			/*if(currentNode.enemyHere && mario.mayShoot) {
-				action.press(MarioKey.SPEED);
-				action.release(MarioKey.SPEED);
-			}*/
+			if (mario.mayShoot) {
+				if (shooting) {
+					shooting = false;
+					action.release(MarioKey.SPEED);
+				} else 
+				if (action.isPressed(MarioKey.SPEED)) {				
+					action.release(MarioKey.SPEED);
+				} else {
+					shooting = true;
+					action.press(MarioKey.SPEED);
+				}
+			} else {
+				if (shooting) {
+					shooting = false;
+					action.release(MarioKey.SPEED);
+				}
+			}
 			action.press(MarioKey.RIGHT);
 			Iterator<Node> iter = currentNode.children.iterator();
 			while(iter.hasNext()) {
@@ -188,12 +201,26 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 				if(currentChild.frontier == false && currentChild.seen == false) {
 					if(currentChild.goal == true) {
 						action.set(MarioKey.JUMP, (currentChild.enemyHere || currentChild.blockHere) && mario.mayJump);	
-						if (!mario.onGround) {
+						if (!mario.onGround && brickAhead()) {
 							action.press(MarioKey.JUMP);
 						}
-						/*if(currentNode.enemyHere && mario.mayShoot) {
-							action.press(MarioKey.SPEED);
-						}*/
+						if (mario.mayShoot) {
+							if (shooting) {
+								shooting = false;
+								action.release(MarioKey.SPEED);
+							} else 
+							if (action.isPressed(MarioKey.SPEED)) {				
+								action.release(MarioKey.SPEED);
+							} else {
+								shooting = true;
+								action.press(MarioKey.SPEED);
+							}
+						} else {
+							if (shooting) {
+								shooting = false;
+								action.release(MarioKey.SPEED);
+							}
+						}
 						
 						action.press(MarioKey.RIGHT);
 						return action;
@@ -214,7 +241,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA);
+		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA) /*+ FastOpts.L_RANDOMIZE*/;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		
