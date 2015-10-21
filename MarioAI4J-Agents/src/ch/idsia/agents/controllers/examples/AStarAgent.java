@@ -45,14 +45,55 @@ public class AStarAgent extends MarioHijackAIBase implements IAgent {
 		// provide custom visualization using 'g'
 	}
 
-
-
+	private boolean brickAhead() {
+		return
+				   t.brick(1, 0) || t.brick(1, -1) 
+				|| t.brick(2, 0) || t.brick(2, -1)
+				|| t.brick(3, 0) || t.brick(3, -1);
+	}
+	private boolean enemyAhead() {
+		return
+				   e.danger(1, 0) || e.danger(1, -1) 
+				|| e.danger(2, 0) || e.danger(2, -1)
+				|| e.danger(3, 0) || e.danger(3, -1);
+	}
+	
 	public void doActions(Vector<Node> SolutionSet) {
 		Iterator<Node> solnIter = SolutionSet.iterator();
 		while(solnIter.hasNext()) {
 			Node cNode = solnIter.next();
-			
+			if(brickAhead() || enemyAhead()){
+				System.out.println("trying to jump");
+				action.set(MarioKey.JUMP, mario.mayJump);	
+				if (!mario.onGround && (brickAhead() || enemyAhead())) {
+					action.press(MarioKey.JUMP);
+				}
+			}
 			if (mario.mayShoot) {
+				if (shooting) {
+					shooting = false;
+					action.release(MarioKey.SPEED);
+				} else 
+				if (action.isPressed(MarioKey.SPEED)) {				
+					action.release(MarioKey.SPEED);
+				} else {
+					shooting = true;
+					action.press(MarioKey.SPEED);
+				}
+			} else {
+				if (shooting) {
+					shooting = false;
+					action.release(MarioKey.SPEED);
+				}
+			}
+			if(cNode.enemyHere ||  (cNode.xPos > 1 && cNode.yPos <= 0 && cNode.blockHere)) {
+				action.set(MarioKey.JUMP, mario.mayJump);	
+				if (!mario.onGround && brickAhead() || enemyAhead()) {
+					action.press(MarioKey.JUMP);
+				}
+			}
+			action.press(MarioKey.RIGHT);
+			/*if (mario.mayShoot) {
 				if (shooting) {
 					shooting = false;
 					action.release(MarioKey.SPEED);
@@ -86,7 +127,7 @@ public class AStarAgent extends MarioHijackAIBase implements IAgent {
 				}
 				else action.press(MarioKey.RIGHT);
 				
-			}
+			}*/
 			
 
 
@@ -94,7 +135,7 @@ public class AStarAgent extends MarioHijackAIBase implements IAgent {
 	}
 		//Make the graph a class level variable so it keeps its state. Only have to generate once.
 		//Keep from here---------
-		GraphGenerator Graph = new GraphGenerator(4,2,GraphGenerator.AgentType.ASTAR);
+		GraphGenerator Graph = new GraphGenerator(1,1,GraphGenerator.AgentType.ASTAR);
 		
 	public MarioInput actionSelectionAI() {
 		if( Graph.isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
@@ -153,7 +194,7 @@ public class AStarAgent extends MarioHijackAIBase implements IAgent {
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA)/*+ FastOpts.L_RANDOMIZE*/;
+		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA)+ FastOpts.L_RANDOMIZE;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		

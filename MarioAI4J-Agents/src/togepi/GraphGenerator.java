@@ -57,7 +57,7 @@ public class GraphGenerator {
 			enemyHere = e.danger(xPos,yPos);	
 			if(AStar == true) {
 
-				heuristicCost = Math.abs(gridSizeX-xPos);
+				heuristicCost = Math.abs(xPos);
 				if(blockHere && enemyHere) pathCost+=3;
 				else if(enemyHere) pathCost+=2;
 				else if(blockHere) pathCost+=1;
