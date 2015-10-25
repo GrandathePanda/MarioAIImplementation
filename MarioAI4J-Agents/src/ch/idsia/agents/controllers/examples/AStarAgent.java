@@ -63,7 +63,6 @@ public class AStarAgent extends MarioHijackAIBase implements IAgent {
 		while(solnIter.hasNext()) {
 			Node cNode = solnIter.next();
 			if(brickAhead() || enemyAhead()){
-				System.out.println("trying to jump");
 				action.set(MarioKey.JUMP, mario.mayJump);	
 				if (!mario.onGround && (brickAhead() || enemyAhead())) {
 					action.press(MarioKey.JUMP);

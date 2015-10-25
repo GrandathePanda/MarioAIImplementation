@@ -166,7 +166,6 @@ public class HillClimberAgentTrue extends MarioHijackAIBase implements IAgent {
 	public void doActions(Node cNode) {
 //		if(brickAhead()){
 		if(brickAhead()){
-			System.out.println("trying to jump");
 			action.set(MarioKey.JUMP, mario.mayJump);	
 			if (!mario.onGround && brickAhead()) {
 				action.press(MarioKey.JUMP);
