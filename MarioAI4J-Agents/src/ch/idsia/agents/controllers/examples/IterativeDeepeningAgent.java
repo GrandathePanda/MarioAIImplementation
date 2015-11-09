@@ -84,7 +84,7 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 		
 	public MarioInput actionSelectionAI() {
 		if( Graph.isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
-			Graph.generateGraph(e,t);
+			Graph.generateGraph(e,t,GraphGenerator.AgentType.HILLCLIMB);
 
 			Graph.isGraphGenerated = true;
 		}

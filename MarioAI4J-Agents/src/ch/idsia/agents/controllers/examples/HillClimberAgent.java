@@ -61,7 +61,7 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent {
 	GraphGenerator Graph = new GraphGenerator(4,4);
 	public MarioInput actionSelectionAI() {
 		if( Graph.isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
-			Graph.generateGraph(e,t);
+			Graph.generateGraph(e,t,GraphGenerator.AgentType.HILLCLIMB);
 			Graph.isGraphGenerated = true;
 		}
 		else {

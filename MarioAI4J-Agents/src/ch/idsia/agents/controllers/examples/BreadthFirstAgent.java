@@ -241,7 +241,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA) /*+ FastOpts.L_RANDOMIZE*/;
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA,Enemy.GREEN_KOOPA,Enemy.RED_KOOPA);
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		

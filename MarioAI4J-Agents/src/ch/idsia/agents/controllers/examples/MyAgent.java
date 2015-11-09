@@ -36,9 +36,9 @@ public class MyAgent extends MarioHijackAIBase implements IAgent {
 
 	private boolean enemyAhead() {
 		return
-				   e.danger(1, 0) || e.danger(1, -1) 
-				|| e.danger(2, 0) || e.danger(2, -1)
-				|| e.danger(3, 0) || e.danger(2, -1);
+				   e.danger(1, 0) || e.danger(1, -1) || e.danger(1, 1)
+				|| e.danger(2, 0) || e.danger(2, -1) || e.danger(2, 1)	
+				|| e.danger(3, 0) || e.danger(3, -1) || e.danger(3, 1);
 	}
 	
 	private boolean brickAhead() {
