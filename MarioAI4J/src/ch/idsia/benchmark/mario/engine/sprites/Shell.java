@@ -38,7 +38,7 @@ public class Shell extends Sprite
 private boolean onGround = false;
 
 private int width = 4;
-int height = 24;
+public int height = 24;
 
 private LevelScene world;
 public int facing;
