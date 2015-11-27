@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;MARIOAI&apos;" deleteContents="false" description="Delete resource &apos;MARIOAI&apos;" element1="/MARIOAI" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1448588187888"/>
+</session>

@@ -1,0 +1,7 @@
+package EnemyActorPhysics;
+import java.util.ArrayList;
+
+public class controller {
+	public ArrayList<Sprite> allActors;
+	
+}

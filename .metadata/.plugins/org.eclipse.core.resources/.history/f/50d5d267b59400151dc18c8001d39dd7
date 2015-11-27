@@ -1,0 +1,18 @@
+package EnemyActorPhysics;
+import java.util.ArrayList;
+
+public class controller {
+	public float timer;
+	public ArrayList<Sprite> allActors;
+	
+	public controller(){
+		timer = 0.0;
+	}
+	public ArrayList<node> stepForward(){
+		ArrayList<node> ret = new ArrayList<node>();
+		for(int x = 0; x < allActors.size(); ++x){
+			ret.add(allActors.get(x).nodeMove());
+		}
+		return ret;
+	}
+}

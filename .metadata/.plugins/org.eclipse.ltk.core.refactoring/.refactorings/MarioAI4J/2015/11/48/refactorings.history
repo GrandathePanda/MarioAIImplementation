@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;Sprite.java&apos; to &apos;MarioAI4J-Agents/src/EnemyActorPhysics&apos;&#x0A;- Original project: &apos;MarioAI4J&apos;&#x0A;- Destination element: &apos;MarioAI4J-Agents/src/EnemyActorPhysics&apos;&#x0A;- Original element: &apos;ch.idsia.benchmark.mario.engine.sprites.Sprite.java&apos;" description="Copy compilation unit" destination="=MarioAI4J-Agents/src&lt;EnemyActorPhysics" element1="/src&lt;ch.idsia.benchmark.mario.engine.sprites{Sprite.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1448591698199" units="1" version="1.0"/>
+</session>
