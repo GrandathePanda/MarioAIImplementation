@@ -4,10 +4,17 @@ import ch.idsia.agents.AgentOptions;
 import ch.idsia.agents.IAgent;
 import ch.idsia.agents.controllers.MarioHijackAIBase;
 import ch.idsia.benchmark.mario.MarioSimulator;
+import ch.idsia.benchmark.mario.engine.LevelScene;
 import ch.idsia.benchmark.mario.engine.generalization.Enemy;
+import ch.idsia.benchmark.mario.engine.generalization.Entity;
+import ch.idsia.benchmark.mario.engine.generalization.EntityType;
 import ch.idsia.benchmark.mario.engine.input.MarioInput;
 import ch.idsia.benchmark.mario.engine.input.MarioKey;
 import ch.idsia.benchmark.mario.options.FastOpts;
+import togepi.GraphGenerator;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Agent that sprints forward, jumps and shoots.
@@ -17,12 +24,19 @@ import ch.idsia.benchmark.mario.options.FastOpts;
 public class Agent04_Shooter extends MarioHijackAIBase implements IAgent {
 
 	private boolean shooting = false;
+	LevelScene y = new LevelScene();
+	LevelScene x = new LevelScene();
 	
 	@Override
 	public void reset(AgentOptions options) {
 		super.reset(options);
 	}
+	protected void approxMove(float x, float y, float sX, float sY, float dx, float dy){
+		double xF = sX*0.04+0.5*dx*0.00004;
+		double yF = sY*0.04+0.5*dy*0.00004;
+		System.out.println((x+xF)+"---"+(y+yF));
 
+	}
 	private boolean enemyAhead() {
 		return
 				   e.danger(1, 0) || e.danger(1, -1) 
@@ -38,6 +52,19 @@ public class Agent04_Shooter extends MarioHijackAIBase implements IAgent {
 	}
 
 	public MarioInput actionSelectionAI() {
+		e.getClass();
+		System.out.println((mario.mode.getCode()-2)*-1);
+		List<Entity>[][] test = e.entityField;
+		for (int i = 0; i < test.length; ++i) {
+			for (int j = 0; j < test[i][j].size(); ++j) {
+				Iterator<Entity> t = test[i][j].iterator();
+				while (t.hasNext()) {
+					Entity mu = t.next();
+					approxMove(i,j,mu.speed.x,mu.speed.y,mu.dX,mu.dY);
+				}
+			}
+		}
+
 		// ALWAYS RUN RIGHT
 		action.press(MarioKey.RIGHT);
 		

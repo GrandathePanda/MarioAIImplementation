@@ -30,7 +30,7 @@ import togepi.GraphGenerator.*;
  * 
  * @author Jakub 'Jimmy' Gemrot, gemrot@gamedev.cuni.cz
  */
-public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent {
+/*public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent {
 
 	public boolean shooting = false;
 	@Override
@@ -156,7 +156,7 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 	
 	public static void main(String[] args) {
 		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA)/*+ FastOpts.L_RANDOMIZE*/;
-		
+/*
 		MarioSimulator simulator = new MarioSimulator(options);
 		
 		IAgent agent = new IterativeDeepeningAgent();
@@ -166,3 +166,5 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 		System.exit(0);
 	}
 }
+
+*/

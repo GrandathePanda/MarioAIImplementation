@@ -78,6 +78,7 @@ public abstract class MarioAIBase extends MarioAgentBase {
 		action.reset();
 		e.reset(options);
 		t.reset(options);
+
 	}
 
 	@Override

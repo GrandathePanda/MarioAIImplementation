@@ -46,9 +46,13 @@ import ch.idsia.benchmark.mario.options.FastOpts;
  * 
  * @author Sergey Karakovskiy
  * @author Jakub 'Jimmy' Gemrot, gemrot@gamedev.cuni.cz
+ *
  */
+
+import ch.idsia.benchmark.mario.engine.LevelScene;
 public class Agent02_Jumpee extends MarioHijackAIBase implements IAgent {
-	
+	LevelScene x = new LevelScene();
+	LevelScene y = new LevelScene();
 	@Override
 	public void reset(AgentOptions options) {
 		super.reset(options);
@@ -56,6 +60,8 @@ public class Agent02_Jumpee extends MarioHijackAIBase implements IAgent {
 	
 	@Override
 	public MarioInput actionSelectionAI() {
+		System.out.println(y.fireballsOnScreen);
+
 		// ALWAYS RUN RIGHT
 		action.press(MarioKey.RIGHT);
 		
