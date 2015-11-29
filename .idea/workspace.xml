@@ -2,142 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60d62f5c-077a-439a-afa7-3428bda93297" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarAgent$1.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarAgent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/IterativeDeepeningAgent.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$AgentType.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Node.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Pair.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent00_Random.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent00_Random.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent01_SprintForward.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent01_SprintForward.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent02_Jumpee.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent02_Jumpee.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent03_Forward.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent03_Forward.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent04_Shooter.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent04_Shooter.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent$Node.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent$Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent$Pair.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent$Pair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent$Node.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent$Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent$Pair.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent$Pair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue$Node.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue$Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue$Pair.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue$Pair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/MyAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/MyAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing$Node.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing$Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing$Pair.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing$Pair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/TogepiGeneralTemplate$Node.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/TogepiGeneralTemplate$Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/TogepiGeneralTemplate$Pair.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/TogepiGeneralTemplate$Pair.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/TogepiGeneralTemplate.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/TogepiGeneralTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/AgentOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/AgentOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/IAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/IAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/IMarioDebugDraw.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/IMarioDebugDraw.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/MarioAIBase.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/MarioAIBase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/MarioAgentBase.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/MarioAgentBase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/MarioHijackAIBase.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/MarioHijackAIBase.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/ReplayAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/ReplayAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/TimingAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/TimingAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/keyboard/CheaterKeyboardAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/keyboard/CheaterKeyboardAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/keyboard/KeyboardAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/keyboard/KeyboardAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/modules/Entities.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/modules/Entities.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/modules/Tiles.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/controllers/modules/Tiles.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/pool/AgentLoader.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/pool/AgentLoader.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/pool/AgentsPool.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/agents/pool/AgentsPool.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/MarioSimulator.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/MarioSimulator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/Art.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/Art.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/BgRenderer.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/BgRenderer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/LevelRenderer.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/LevelRenderer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/LevelScene.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/LevelScene.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/Recorder.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/Recorder.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/Replayer.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/Replayer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/SimulatorOptions$ReceptiveFieldMode.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/SimulatorOptions$ReceptiveFieldMode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/SimulatorOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/SimulatorOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/VisualizationComponent.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/VisualizationComponent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Enemy.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Enemy.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Entity$Speed.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Entity$Speed.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Entity.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Entity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/EntityGeneralizer.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/EntityGeneralizer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/EntityType.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/EntityType.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/MarioEntity.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/MarioEntity.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Tile.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/Tile.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/TileGeneralizer.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/generalization/TileGeneralizer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioCheatKey.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioCheatKey.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioCheaterKeyboard.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioCheaterKeyboard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioHumanKeyboard.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioHumanKeyboard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioInput$1.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioInput$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioInput.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioInput.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioKey.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioKey.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioKeyboard$1.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioKeyboard$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioKeyboard.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/input/MarioKeyboard.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/BgLevelGenerator.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/BgLevelGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/ImprovedNoise.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/ImprovedNoise.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/Level$objCounters.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/Level$objCounters.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/Level.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/Level.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/LevelGenerator.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/LevelGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/SpriteTemplate.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/level/SpriteTemplate.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/LevelEditView.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/LevelEditView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/LevelEditor$1.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/LevelEditor$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/LevelEditor.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/LevelEditor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/TilePicker.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/mapedit/TilePicker.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/BulletBill.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/BulletBill.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/CoinAnim.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/CoinAnim.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Enemy.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Enemy.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/FireFlower.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/FireFlower.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Fireball.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Fireball.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/FlowerEnemy.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/FlowerEnemy.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/GreenMushroom.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/GreenMushroom.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Mario$MarioMode.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Mario$MarioMode.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Mario.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Mario.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Mushroom.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Mushroom.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Particle.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Particle.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Princess.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Princess.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Shell.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Shell.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Sparkle.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Sparkle.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Sprite.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/Sprite.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/SpriteContext.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/SpriteContext.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/WaveGoomba.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/sprites/WaveGoomba.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/tools/Scale2x.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/engine/tools/Scale2x.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/environments/IEnvironment.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/environments/IEnvironment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/environments/MarioEnvironment.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/environments/MarioEnvironment.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/AIOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/AIOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/FastOpts.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/FastOpts.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/LevelOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/LevelOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$BoolOption.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$BoolOption.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$FloatOption.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$FloatOption.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$IntOption.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$IntOption.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$StringOption.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions$StringOption.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/MarioOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/SimulationOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/SimulationOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/SystemOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/SystemOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/VisualizationOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/benchmark/mario/options/VisualizationOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tasks/MarioSystemOfValues$timeLengthMapping.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tasks/MarioSystemOfValues$timeLengthMapping.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tasks/MarioSystemOfValues.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tasks/MarioSystemOfValues.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tasks/SystemOfValues.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tasks/SystemOfValues.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/EvaluationInfo.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/EvaluationInfo.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/Evaluator.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/Evaluator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/GameViewer$GameViewerActions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/GameViewer$GameViewerActions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/GameViewer$GameViewerView.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/GameViewer$GameViewerView.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/GameViewer.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/GameViewer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/RandomCreatureGenerator.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/RandomCreatureGenerator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/ReplayerOptions$Interval.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/ReplayerOptions$Interval.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/ReplayerOptions.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/ReplayerOptions.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/ToolsConfigurator.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/ToolsConfigurator.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/punj/PunctualJudge.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/tools/punj/PunctualJudge.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/ErrorCodes.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/ErrorCodes.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/ParameterContainer.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/ParameterContainer.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/StatisticalSummary$Watch.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/StatisticalSummary$Watch.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/StatisticalSummary.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/StatisticalSummary.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/StatisticalTests.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/StatisticalTests.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/Stats.class" afterPath="$PROJECT_DIR$/MarioAI4J/bin/ch/idsia/utils/statistics/Stats.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarAgent.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/Agent02_Jumpee.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/Agent02_Jumpee.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/Agent04_Shooter.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/Agent04_Shooter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/HillClimberAgent.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/HillClimberAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/IterativeDeepeningAgent.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/IterativeDeepeningAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/MarioAIBase.java" afterPath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/MarioAIBase.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarAgent$1.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarAgent.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgent.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/IterativeDeepeningAgent.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$AgentType.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Node.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Pair.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/BulletBill.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/Fireball.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/FlowerEnemy.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/MyEnemy.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/MySprite.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/MyWaveGoomba.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/Particle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/Shell.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/controller.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/node.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J/bin/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/.classpath" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/.classpath" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Fireball.java" afterPath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Fireball.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Mario.java" afterPath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Mario.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Shell.java" afterPath="$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Shell.java" />
     </list>
     <ignored path="MarioAIImplementation.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -161,99 +50,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="GraphGenerator.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="GraphGenerator.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="460" column="30" selection-start-line="460" selection-start-column="30" selection-end-line="460" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.49588138">
+              <caret line="518" column="0" selection-start-line="518" selection-start-column="0" selection-end-line="518" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#13491#13511#0" expanded="true" />
                 <element signature="e#13606#13632#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Agent04_Shooter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/Agent04_Shooter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MarioAIBase.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/MarioAIBase.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="21" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mario.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Mario.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.62069">
-              <caret line="494" column="14" selection-start-line="494" selection-start-column="12" selection-end-line="494" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Sprite.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Sprite.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.62069">
-              <caret line="68" column="39" selection-start-line="68" selection-start-column="39" selection-end-line="68" selection-end-column="39" />
-              <folding>
-                <element signature="e#5164#5165#0" expanded="true" />
-                <element signature="e#5204#5205#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Entity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/generalization/Entity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47611204">
-              <caret line="100" column="11" selection-start-line="100" selection-start-column="11" selection-end-line="100" selection-end-column="11" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LevelScene.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/LevelScene.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="528" column="68" selection-start-line="528" selection-start-column="35" selection-end-line="528" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimulationOptions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/options/SimulationOptions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="88" column="66" selection-start-line="88" selection-start-column="63" selection-end-line="88" selection-end-column="91" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MarioOptions.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/options/MarioOptions.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="107" column="8" selection-start-line="107" selection-start-column="8" selection-end-line="107" selection-end-column="8" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -355,6 +161,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="togepi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MarioAIImplementation" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MarioAI4J-Agents" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -945,16 +765,16 @@
       <option name="number" value="Default" />
       <updated>1448516812692</updated>
       <workItem from="1448516819981" duration="22939000" />
-      <workItem from="1448693870812" duration="13173000" />
+      <workItem from="1448693870812" duration="13805000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36112000" />
+    <option name="totallyTimeSpent" value="36744000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1108,6 +928,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3321859">
           <caret line="103" column="0" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1124,34 +945,6 @@
         <state vertical-scroll-proportion="-0.25925925">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/MarioAIBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="21" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/Agent04_Shooter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="460" column="30" selection-start-line="460" selection-start-column="30" selection-end-line="460" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#13491#13511#0" expanded="true" />
-            <element signature="e#13606#13632#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1182,7 +975,7 @@
     <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/sprites/Mario.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.62069">
-          <caret line="494" column="14" selection-start-line="494" selection-start-column="12" selection-end-line="494" selection-end-column="14" />
+          <caret line="494" column="14" selection-start-line="494" selection-start-column="14" selection-end-line="494" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -1200,9 +993,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/generalization/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47611204">
-          <caret line="100" column="11" selection-start-line="100" selection-start-column="11" selection-end-line="100" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="97" column="7" selection-start-line="97" selection-start-column="7" selection-end-line="97" selection-end-column="7" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/Agent04_Shooter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0082372">
+          <caret line="54" column="8" selection-start-line="54" selection-start-column="8" selection-end-line="54" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/MarioAIBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5041186">
+          <caret line="61" column="21" selection-start-line="61" selection-start-column="14" selection-end-line="61" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2520593">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.49588138">
+          <caret line="518" column="0" selection-start-line="518" selection-start-column="0" selection-end-line="518" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#13491#13511#0" expanded="true" />
+            <element signature="e#13606#13632#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

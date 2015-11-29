@@ -25,13 +25,15 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-package ch.idsia.benchmark.mario.engine.sprites;
+package EnemyActorPhysics;
 
 import ch.idsia.benchmark.mario.engine.Art;
 import ch.idsia.benchmark.mario.engine.LevelScene;
+/*
+ * NEED TO HANDLE WORLD.MARIO STUFF HERE
+ */
 
-
-public class Shell extends Sprite
+public class Shell extends MySprite
 {
 
 //    private float runTime;
@@ -113,7 +115,7 @@ public void collideCheck()
         {
             if (world.mario.ya > 0 && yMarioD <= 0 && (!world.mario.onGround || !world.mario.wasOnGround))
             {
-                world.mario.stomp(this);
+//                world.mario.stomp(this); //THIS HERE
                 if (facing != 0)
                 {
                     xa = 0;
@@ -129,7 +131,7 @@ public void collideCheck()
                     world.mario.getHurt(this.kind);
                 } else
                 {
-                    world.mario.kick(this);
+//                    world.mario.kick(this); //THIS HERE
                     facing = world.mario.facing;
                 }
             }
@@ -141,7 +143,7 @@ public void move()
 {
     if (carried)
     {
-        world.checkShellCollide(this);
+//        world.checkShellCollide(this); //THIS HERE
         return;
     }
 
@@ -154,9 +156,9 @@ public void move()
             deadTime = 1;
             for (int i = 0; i < 8; i++)
             {
-                world.addSprite(new Sparkle((int) (x + Math.random() * 16 - 8) + 4, (int) (y - Math.random() * 8) + 4, (float) (Math.random() * 2 - 1), (float) Math.random() * -1, 0, 1, 5));
+//                world.addSprite(new Sparkle((int) (x + Math.random() * 16 - 8) + 4, (int) (y - Math.random() * 8) + 4, (float) (Math.random() * 2 - 1), (float) Math.random() * -1, 0, 1, 5));
             }
-            spriteContext.removeSprite(this);
+//            spriteContext.removeSprite(this);
         }
 
         x += xa;
@@ -185,7 +187,7 @@ public void move()
 
     if (facing != 0)
     {
-        world.checkShellCollide(this);
+//        world.checkShellCollide(this); //THIS
     }
 
     xFlipPic = facing == -1;
@@ -205,10 +207,10 @@ public void move()
     ya *= 0.85f;
     if (onGround)
     {
-        xa *= Sprite.GROUND_INERTIA;
+        xa *= MySprite.GROUND_INERTIA;
     } else
     {
-        xa *= Sprite.AIR_INERTIA;
+        xa *= MySprite.AIR_INERTIA;
     }
 
     if (!onGround)
@@ -353,11 +355,11 @@ public boolean shellCollideCheck(Shell shell)
     {
         if (yD > -height && yD < shell.height)
         {
-            if (world.mario.carried == shell || world.mario.carried == this)
-            {
-                world.mario.carried = null;
-                world.mario.setRacoon(false);
-            }
+//            if (world.mario.carried == shell || world.mario.carried == this)
+//            {
+//                world.mario.carried = null;
+//                world.mario.setRacoon(false);
+//            }
 
             die();
             shell.die();
@@ -367,11 +369,11 @@ public boolean shellCollideCheck(Shell shell)
     return false;
 }
 
-
-public void release(Mario mario)
-{
-    carried = false;
-    facing = mario.facing;
-    x += facing * 8;
-}
+//
+//public void release(Mario mario)
+//{
+//    carried = false;
+//    facing = mario.facing;
+//    x += facing * 8;
+//}
 }

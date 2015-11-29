@@ -125,8 +125,8 @@ public final class Mario extends Sprite {
 	public MarioInput keys = new MarioInput(); 
 	
 	private float runTime;
-	boolean wasOnGround = false;
-	boolean onGround = false;
+	public boolean wasOnGround = false;
+	public boolean onGround = false;
 	private boolean mayJump = false;
 	private boolean ducking = false;
 	private boolean sliding = false;
@@ -137,7 +137,7 @@ public final class Mario extends Sprite {
 	private boolean ableToShoot = false;
 
 	int width = 4;
-	int height = 24;
+	public int height = 24;
 
 	private static LevelScene levelScene;
 	public int facing;
@@ -835,7 +835,7 @@ public final class Mario extends Sprite {
 		}
 	}
 
-	public void stomp(final BulletBill bill) {
+	public void stomp(BulletBill bill) {
 		if (deathTime > 0)
 			return;
 
@@ -903,6 +903,26 @@ public final class Mario extends Sprite {
 	public boolean isOnTopOfLadder() {
 		return this.onTopOfLadder;
 	}
+/*
+	public void stomp1(BulletBill bulletBill) {
+		// TODO Auto-generated method stub
+		if (deathTime > 0)
+			return;
+
+		float targetY = bill.y - bill.height / 2;
+		move(0, targetY - y);
+		mapY = (int) y / 16;
+
+		xJumpSpeed = 0;
+		yJumpSpeed = -1.9f;
+		jumpTime = (int) jT + 1;
+		ya = jumpTime * yJumpSpeed;
+		onGround = false;
+		sliding = false;
+		invulnerableTime = 1;
+		levelScene
+				.appendBonusPoints(MarioEnvironment.IntermediateRewardsSystemOfValues.stomp);
+	}*/
 }
 
 // public byte getKeyMask()
