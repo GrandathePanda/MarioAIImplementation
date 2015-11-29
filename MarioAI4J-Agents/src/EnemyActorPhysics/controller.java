@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class controller {
 	public double timer;
-	public ArrayList<Sprite> allActors;
+	public ArrayList<MySprite> allActors;
 	
 	public controller(){
 		timer = 0.0;

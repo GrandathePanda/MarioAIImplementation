@@ -8,7 +8,7 @@ import ch.idsia.benchmark.mario.engine.sprites.Shell;
 import ch.idsia.benchmark.mario.engine.sprites.Sparkle;
 
 
-public class BulletBill extends Sprite
+public class BulletBill extends MySprite
 {
 private int width = 4;
 int height = 24;

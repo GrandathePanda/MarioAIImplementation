@@ -28,6 +28,7 @@
 package EnemyActorPhysics;
 
 import ch.idsia.benchmark.mario.engine.SimulatorOptions;
+//import ch.idsia.benchmark.mario.engine.sprites.*;
 import ch.idsia.benchmark.mario.engine.VisualizationComponent;
 import ch.idsia.benchmark.mario.engine.level.SpriteTemplate;
 import ch.idsia.benchmark.mario.engine.sprites.Fireball;
@@ -37,7 +38,7 @@ import ch.idsia.benchmark.mario.engine.sprites.SpriteContext;
 
 import java.awt.*;
 
-public class Sprite {
+public class MySprite {
 	public static final int KIND_NONE = 0;
 	public static final int KIND_MARIO = -31;
 	public static final int KIND_GOOMBA = 80;
@@ -94,15 +95,15 @@ public class Sprite {
 	public SpriteTemplate spriteTemplate;
 
 	public static void setCreaturesGravity(final float creaturesGravity) {
-		Sprite.creaturesGravity = creaturesGravity;
+		MySprite.creaturesGravity = creaturesGravity;
 	}
 
 	public static void setCreaturesWind(final float wind) {
-		Sprite.windCoeff = wind;
+		MySprite.windCoeff = wind;
 	}
 
 	public static void setCreaturesIce(final float ice) {
-		Sprite.iceCoeff = ice;
+		MySprite.iceCoeff = ice;
 	}
 
 	protected static float creaturesGravity;
@@ -111,38 +112,38 @@ public class Sprite {
 
 	public static String getNameByKind(final int kind) {
 		switch (kind) {
-		case Sprite.KIND_MARIO:
+		case MySprite.KIND_MARIO:
 			return "Mario";
-		case Sprite.KIND_GOOMBA:
+		case MySprite.KIND_GOOMBA:
 			return "Goomba";
-		case Sprite.KIND_GOOMBA_WINGED:
+		case MySprite.KIND_GOOMBA_WINGED:
 			return "Goomba Winged";
-		case Sprite.KIND_RED_KOOPA:
+		case MySprite.KIND_RED_KOOPA:
 			return "Red Koopa";
-		case Sprite.KIND_RED_KOOPA_WINGED:
+		case MySprite.KIND_RED_KOOPA_WINGED:
 			return "Red Koopa Winged";
-		case Sprite.KIND_GREEN_KOOPA:
+		case MySprite.KIND_GREEN_KOOPA:
 			return "Green Koopa";
-		case Sprite.KIND_GREEN_KOOPA_WINGED:
+		case MySprite.KIND_GREEN_KOOPA_WINGED:
 			return "Green Koopa Winged";
-		case Sprite.KIND_SPIKY:
+		case MySprite.KIND_SPIKY:
 			return "Spiky";
-		case Sprite.KIND_SPIKY_WINGED:
+		case MySprite.KIND_SPIKY_WINGED:
 			return "Spiky Winged";
-		case Sprite.KIND_BULLET_BILL:
+		case MySprite.KIND_BULLET_BILL:
 			return "Bullet";
-		case Sprite.KIND_ENEMY_FLOWER:
+		case MySprite.KIND_ENEMY_FLOWER:
 			return "Flower";
-		case Sprite.KIND_SHELL:
+		case MySprite.KIND_SHELL:
 			return "Shell";
-		case Sprite.KIND_MUSHROOM:
+		case MySprite.KIND_MUSHROOM:
 			return "Mushroom";
-		case Sprite.KIND_FIRE_FLOWER:
+		case MySprite.KIND_FIRE_FLOWER:
 			return "Power up Flower";
-		case Sprite.KIND_GREEN_MUSHROOM:
+		case MySprite.KIND_GREEN_MUSHROOM:
 			return "Green mushroom";
 			/*
-			 * case Sprite.KIND_PRINCESS: return "Princess";
+			 * case MySprite.KIND_PRINCESS: return "Princess";
 			 */
 		}
 
@@ -244,4 +245,6 @@ public class Sprite {
 	public boolean isDead() {
 		return spriteTemplate != null && spriteTemplate.isDead;
 	}
+	
+	
 }
