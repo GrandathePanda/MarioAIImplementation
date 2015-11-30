@@ -28,6 +28,7 @@
 package EnemyActorPhysics;
 
 import ch.idsia.benchmark.mario.engine.Art;
+import ch.idsia.benchmark.mario.engine.generalization.EntityType;
 
 public class Particle extends MySprite
 {
@@ -40,19 +41,11 @@ public Particle(int x, int y, float xa, float ya)
 
 public Particle(int x, int y, float xa, float ya, int xPic, int yPic)
 {
-    kind = KIND_PARTICLE;
-    sheet = Art.particles;
+    type = EntityType.SOMETHING;
     this.x = x;
     this.y = y;
     this.xa = xa;
     this.ya = ya;
-    this.xPic = xPic;
-    this.yPic = yPic;
-    this.xPicO = 4;
-    this.yPicO = 4;
-
-    wPic = 8;
-    hPic = 8;
     life = 10;
 }
 

@@ -2,6 +2,7 @@ package EnemyActorPhysics;
 
 import ch.idsia.benchmark.mario.engine.SimulatorOptions;
 import ch.idsia.benchmark.mario.engine.LevelScene;
+import ch.idsia.benchmark.mario.engine.generalization.EntityType;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,10 +20,8 @@ private int sideWayCounter = 0;
 
 public MyWaveGoomba(LevelScene world, int x, int y, int dir, int mapX, int mapY)
 {
-    super(world, x, y, dir, MySprite.KIND_WAVE_GOOMBA, true, mapX, mapY);
+    super(x, y, dir, true, EntityType.WAVE_GOOMBA);
     noFireballDeath = false;
-    this.xPic = 0;
-    this.yPic = 7;
     this.world = world;
     lastSin = (float) Math.sin(x);
 }
@@ -37,16 +36,7 @@ public void move()
     if (deadTime > 0)
     {
         deadTime--;
-
-        if (deadTime == 0)
-        {
-            deadTime = 1;
-            for (int i = 0; i < 8; i++)
-            {
-//                world.addSprite(new Sparkle((int) (x + Math.random() * 16 - 8) + 4, (int) (y - Math.random() * 8) + 4, (float) (Math.random() * 2 - 1), (float) Math.random() * -1, 0, 1, 5));
-            }
-//            spriteContext.removeSprite(this);
-        }
+        
 
         if (flyDeath)
         {
@@ -71,8 +61,7 @@ public void move()
     }
 
     xa = facing * sideWaysSpeed;
-    
-    xFlipPic = facing == -1;
+
 
     runTime += (Math.abs(xa)) + 5;
 
@@ -83,7 +72,6 @@ public void move()
         runFrame = 1;
     }
 
-    if (!move(xa, 0)) facing = -facing;
     onGround = false;
     if (winged)
     {
@@ -92,7 +80,7 @@ public void move()
         lastSin = curSin;
         sideWayCounter++;
     }
-    move(0, ya);
+
 
     if (sideWayCounter >= 100)
     {
@@ -116,6 +104,5 @@ public void move()
 
     if (winged) runFrame = wingTime / 4 % 2;
 
-    xPic = runFrame;
 }
 }

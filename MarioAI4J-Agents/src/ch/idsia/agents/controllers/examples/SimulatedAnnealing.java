@@ -2,14 +2,6 @@
 
 package ch.idsia.agents.controllers.examples;
 
-import java.awt.Graphics;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.Vector;
-
 import ch.idsia.agents.AgentOptions;
 import ch.idsia.agents.IAgent;
 import ch.idsia.agents.controllers.MarioHijackAIBase;
@@ -18,9 +10,14 @@ import ch.idsia.benchmark.mario.engine.LevelScene;
 import ch.idsia.benchmark.mario.engine.VisualizationComponent;
 import ch.idsia.benchmark.mario.engine.generalization.Enemy;
 import ch.idsia.benchmark.mario.engine.input.MarioInput;
-import ch.idsia.benchmark.mario.engine.input.MarioKey;
 import ch.idsia.benchmark.mario.environments.IEnvironment;
 import ch.idsia.benchmark.mario.options.FastOpts;
+
+import java.awt.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * Your custom agent! Feel free to fool around!

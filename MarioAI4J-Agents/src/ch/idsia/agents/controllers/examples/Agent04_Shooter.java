@@ -50,20 +50,50 @@ public class Agent04_Shooter extends MarioHijackAIBase implements IAgent {
 				|| t.brick(2, 0) || t.brick(2, -1)
 				|| t.brick(3, 0) || t.brick(3, -1);
 	}
+	public void approxMarioJump(float x, float y, float sX, float sY,boolean left,boolean right,boolean longJ) {
+		int jumpTime = 0;
+		double xD = 0;
+		double yD = 0;
+		float xJump = 0;
+		float yJump = 0;
+		int count = 0;
+		float xa = 0.6f;
+		float ya = 0;
+		boolean onGround = true;
+
+		int limit = 14;
+		if(!longJ) limit = 4;
+		while (count < limit) {
+			if (jumpTime < 0) {
+				xa = xJump;
+				ya = -jumpTime * yJump;
+				jumpTime++;
+			} else if (onGround) {
+				xJump = 0;
+				yJump = -1.9f;
+				jumpTime = 7;
+				ya = jumpTime * yJump;
+				onGround = false;
+			} else if (jumpTime > 0) {
+				xa += xJump;
+				ya = jumpTime * yJump;
+				jumpTime--;
+			} else {
+				jumpTime = 0;
+				onGround = true;
+			}
+			yD += ya * 0.04 + 0.5 * (jumpTime) * 0.0016;
+			xD += xa * 0.4;
+			++count;
+		}
+		System.out.println(x+=xD);
+		System.out.println(y+=yD);
+	}
 
 	public MarioInput actionSelectionAI() {
 		e.getClass();
-		System.out.println((mario.mode.getCode()-2)*-1);
-		List<Entity>[][] test = e.entityField;
-		for (int i = 0; i < test.length; ++i) {
-			for (int j = 0; j < test[i][j].size(); ++j) {
-				Iterator<Entity> t = test[i][j].iterator();
-				while (t.hasNext()) {
-					Entity mu = t.next();
-					approxMove(i,j,mu.speed.x,mu.speed.y,mu.dX,mu.dY);
-				}
-			}
-		}
+		approxMarioJump(0,0,0.6f,0,false,false,false);
+
 
 		// ALWAYS RUN RIGHT
 		action.press(MarioKey.RIGHT);

@@ -67,7 +67,6 @@ public class Agent02_Jumpee extends MarioHijackAIBase implements IAgent {
 		
 		// ALWAYS SPEED RUN
 		action.press(MarioKey.SPEED);
-		
 		// JUMP IF YOU CAN!
 		action.set(MarioKey.JUMP, mario.mayJump || mario.speed.y < 0);
 		return action;
