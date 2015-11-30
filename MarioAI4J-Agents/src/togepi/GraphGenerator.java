@@ -278,24 +278,55 @@ public class GraphGenerator {
 			}
 		}
 		//Make copies of the new state for the number of possible actions mario can take and move mario based on a possible action
+		Node mTemp;
 		for (Action possibleAction : possibleActions) {
 			Pair newMarioPos = null;
 			HashMap<Pair, Node> currPossibleState = mapCopy(blankState);
 			switch (possibleAction) {
 				case Jump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, false, false);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case RightShortJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, true, false);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case RightLongJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, true, true);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case LeftShortJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, false);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case LeftLongJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, true);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case Left:
 					newMarioPos = approxMove(marioNode.xPos, marioNode.yPos, true, false, false);
@@ -342,7 +373,6 @@ public class GraphGenerator {
 			blankState.get(new Pair(cNode.xPos, cNode.yPos)).doubleBlock = cNode.doubleBlock;
 
 			if (cNode.mario) marioNode = cNode;
-
 		}
 		//Update the enemy positions
 		for (genPair<Pair, MySprite> e : existingEntities) {
@@ -383,6 +413,7 @@ public class GraphGenerator {
 					break;
 			}
 		}
+		Node mTemp;
 		//Make copies of the new state for the number of possible actions mario can take and move mario based on a possible action
 		for (Action possibleAction : possibleActions) {
 			Pair newMarioPos = null;
@@ -390,18 +421,48 @@ public class GraphGenerator {
 			switch (possibleAction) {
 				case Jump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, false, false);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case RightShortJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, true, false);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case RightLongJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, true, true);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case LeftShortJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, false);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case LeftLongJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, true);
+					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					if(mTemp.doubleBlock){
+						newMarioPos.y += 2;
+					} else if(mTemp.blockHere){
+						newMarioPos.y += 1;
+					}
 					break;
 				case Left:
 					newMarioPos = approxMove(marioNode.xPos, marioNode.yPos, true, false, false);
