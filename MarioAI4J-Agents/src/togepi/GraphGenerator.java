@@ -285,7 +285,7 @@ public class GraphGenerator {
 			switch (possibleAction) {
 				case Jump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, false, false);
-					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					mTemp = currPossibleState.get(new Pair(newMarioPos.x, newMarioPos.y));
 					if(mTemp.doubleBlock){
 						newMarioPos.y += 2;
 					} else if(mTemp.blockHere){
@@ -294,7 +294,7 @@ public class GraphGenerator {
 					break;
 				case RightShortJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, true, false);
-					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					mTemp = currPossibleState.get(new Pair(newMarioPos.x, newMarioPos.y));
 					if(mTemp.doubleBlock){
 						newMarioPos.y += 2;
 					} else if(mTemp.blockHere){
@@ -303,7 +303,7 @@ public class GraphGenerator {
 					break;
 				case RightLongJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, false, true, true);
-					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					mTemp = currPossibleState.get(new Pair(newMarioPos.x, newMarioPos.y));
 					if(mTemp.doubleBlock){
 						newMarioPos.y += 2;
 					} else if(mTemp.blockHere){
@@ -312,7 +312,7 @@ public class GraphGenerator {
 					break;
 				case LeftShortJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, false);
-					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					mTemp = currPossibleState.get(new Pair(newMarioPos.x, newMarioPos.y));
 					if(mTemp.doubleBlock){
 						newMarioPos.y += 2;
 					} else if(mTemp.blockHere){
@@ -321,7 +321,7 @@ public class GraphGenerator {
 					break;
 				case LeftLongJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, true);
-					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					mTemp = currPossibleState.get(new Pair(newMarioPos.x, newMarioPos.y));
 					if(mTemp.doubleBlock){
 						newMarioPos.y += 2;
 					} else if(mTemp.blockHere){
@@ -448,7 +448,7 @@ public class GraphGenerator {
 					break;
 				case LeftShortJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, false);
-					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					mTemp = currPossibleState.get(new Pair(newMarioPos.x, newMarioPos.y));
 					if(mTemp.doubleBlock){
 						newMarioPos.y += 2;
 					} else if(mTemp.blockHere){
@@ -457,7 +457,7 @@ public class GraphGenerator {
 					break;
 				case LeftLongJump:
 					newMarioPos = approxMarioJump(marioNode.xPos, marioNode.yPos, simMario.xa, simMario.ya, true, false, true);
-					mTemp = new Node(newMarioPos.x,newMarioPos.y, marioNode.sizeX, marioNode.sizeY);
+					mTemp = currPossibleState.get(new Pair(newMarioPos.x, newMarioPos.y));
 					if(mTemp.doubleBlock){
 						newMarioPos.y += 2;
 					} else if(mTemp.blockHere){
