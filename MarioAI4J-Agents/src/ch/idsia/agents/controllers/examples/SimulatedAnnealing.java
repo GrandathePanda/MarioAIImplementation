@@ -96,8 +96,10 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 	
 
 	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickRandom(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> vec){
-		int index = (int)Math.random()/vec.size();
-		return vec.get(index);
+			int rand = (int)Math.random();
+			double actRand = Math.random() * 10;
+			int index = (int)actRand%vec.size();
+			return vec.get(index);
 	}
 
 	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickBetter(genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p1,genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p2 ){
@@ -185,12 +187,11 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 			childStates.remove(option1);
 			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> option2 = pickRandom(childStates);
 			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> act = pickBetter(option1, option2);
-			System.out.println(act.y.x);
+//			System.out.println(act.y.x);
 			toDo.add(act.y.x);
-
 			++runs;
 		}
-		
+//		System.out.println("toDo size: " + toDo.size());
 		return doActions(toDo);
 	}
 	/*
