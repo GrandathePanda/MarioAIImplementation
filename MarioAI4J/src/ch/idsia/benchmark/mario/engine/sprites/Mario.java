@@ -333,10 +333,14 @@ public final class Mario extends Sprite {
 		// xa += Wind * Math.cos(windAngle * Math.PI / 180);
 
 		if (keys.isPressed(MarioKey.JUMP) || (jumpTime < 0 && !onGround && !sliding)) {
+			if(!(mayJump) && onGround) {
+
+			}
 			if (jumpTime < 0) {
 				xa = xJumpSpeed;
 				ya = -jumpTime * yJumpSpeed;
 				jumpTime++;
+				keys.reset();
 			} else if (onGround && mayJump) {
 				xJumpSpeed = 0;
 				yJumpSpeed = -1.9f;

@@ -92,11 +92,14 @@ public class Agent04_Shooter extends MarioHijackAIBase implements IAgent {
 
 	public MarioInput actionSelectionAI() {
 		e.getClass();
-		approxMarioJump(0,0,0.6f,0,false,false,false);
+		approxMarioJump(0,0,0.6f,0,false,true,true);
 
-
+		boolean run = false;
 		// ALWAYS RUN RIGHT
-		action.press(MarioKey.RIGHT);
+		if(run == false) {
+			action.press(MarioKey.RIGHT);
+			run = true;
+		}
 		
 		// ENEMY || BRICK AHEAD => JUMP
 		// WARNING: do not press JUMP if UNABLE TO JUMP!

@@ -1,16 +1,8 @@
-//Better than BFS, still not great.
-//Made It Better.
+//Made it better.
 
 package ch.idsia.agents.controllers.examples;
 
-import java.awt.Graphics;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Set;
-import java.util.Vector;
-
+import EnemyActorPhysics.MyMario;
 import ch.idsia.agents.AgentOptions;
 import ch.idsia.agents.IAgent;
 import ch.idsia.agents.controllers.MarioHijackAIBase;
@@ -22,6 +14,19 @@ import ch.idsia.benchmark.mario.engine.input.MarioInput;
 import ch.idsia.benchmark.mario.engine.input.MarioKey;
 import ch.idsia.benchmark.mario.environments.IEnvironment;
 import ch.idsia.benchmark.mario.options.FastOpts;
+import togepi.GraphGenerator;
+import togepi.GraphGenerator.Action;
+import togepi.GraphGenerator.Node;
+import togepi.Pair;
+import togepi.genPair;
+
+import java.awt.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Vector;
+
+import static togepi.GraphGenerator.mapCopy;
 
 /**
  * Your custom agent! Feel free to fool around!
@@ -30,239 +35,133 @@ import ch.idsia.benchmark.mario.options.FastOpts;
  */
 public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 
-	public boolean shooting = false;
+	private boolean shooting = false;
+
 	@Override
 	public void reset(AgentOptions options) {
 		super.reset(options);
 	}
-	
+
 	@Override
 	public void debugDraw(VisualizationComponent vis, LevelScene level,	IEnvironment env, Graphics g) {
 		super.debugDraw(vis, level, env, g);
 		// provide custom visualization using 'g'
 	}
 
-	private boolean enemyAhead() {
-		return
-				   e.danger(1, 0) || e.danger(1, -1) 
-				|| e.danger(2, 0) || e.danger(2, -1)
-				|| e.danger(3, 0) || e.danger(3, -1);
-	}
-	
-	private boolean brickAhead() {
-		return
-				   t.brick(1, 0) || t.brick(1, -1) 
-				|| t.brick(2, 0) || t.brick(2, -1)
-				|| t.brick(3, 0) || t.brick(3, -1);
-	}
 
-	
-	//Node class, Shouldn't have to touch this. 
-	private class Node {
-		public boolean enemyHere = false;
-		public boolean blockHere = false;
-		public boolean goal = false;
-		public boolean seen = false; //prevents cycles in the searching algorithms
-		public boolean frontier = false; // also prevents cycles if for some reason the first fails.
-		public int xPos = 0;
-		public int yPos = 0;
-		public Vector<Node> children = new Vector<Node>();
-		public void reset() { // update the node to the current values
-			seen = false; 
-			frontier = false;
-			blockHere = t.brick(xPos,yPos);
-			enemyHere = e.danger(xPos,yPos);
-		}
-		public Node(int x, int y) {
-			xPos = x;
-			yPos = y;
-			blockHere = t.brick(x,y);
-			enemyHere = e.danger(x,y);
-			
-		}
-	}
-	
-	//Pair class to use in the Graphs node indexing. You shouldn't have to touch this.
-	private class Pair {
-		public int x = 0;
-		public int y = 0;
-		
-		@Override
-		public int hashCode() { // Again don't have to touch this but cool thing worth noting.
-			// A pair of integers can form a bijection(one to one and onto, thus unique and useful for hashing) to a single integer ZxZ->Z
-			// This is a modified cantor pairing function, that maps positive and negative integers into
-			// a computationally less expensive set, contained in 32 bits for unsigned and 64 bit for signed.
-			int A = x >= 0 ? 2 * x : -2 * x - 1;
-			int B = y >= 0 ? 2 * y : -2 * y - 1;
-			int code = A >= B ? A * A + A + B : A + B * B;
-			return code;
-		}
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj)
-				return true;
-			if (obj == null)
-				return false;
-			if (getClass() != obj.getClass())
-				return false;
-			Pair other = (Pair)obj;
-			if(this.x == other.x && this.y == other.y)
-				return true;
-			return false;
-		}
-		public Pair(int a, int b) {
-			x = a;
-			y = b;
-		}
-		
-		
-	}
-	public HashMap<Pair,Node> generateGraph() {
-		int gridSizeX = 2; //Controls how big the simulated graph is. Feel free to tweak.
-		int gridSizeY = 2;
-		HashMap<Pair,Node> Graph = new HashMap<Pair,Node>();
-		//Generate all Nodes in the selected size range.
-		for( int i = 0; i <= gridSizeX; i++ ) {
-			for ( int j = gridSizeY; j>= -gridSizeY; j--) {
-				Node currentNode = new Node(i,j);
-				Graph.put(new Pair(i,j),currentNode);
-			}
-		}
-		/*Create a list from the graph of all nodes in the graph in no particular order.
-		 * Iterate through the list. At any given node all we have to do is test for the boundaries.
-		 * If a node is a boundary point, don't generate children outside of the grid. If the node
-		 * is not a boundary generate all children nodes in the up down forward and back direction.
-		 * This forms the edges of the graph, every node has at most four children. 
-		 * This finishes creating our undirected graph.
-		 */
-		Collection<Node> listNodes = Graph.values();
-		Iterator<Node> listIter = listNodes.iterator();
-		while(listIter.hasNext()) {
-			Node iterable = listIter.next();
-			if((iterable.yPos-1<-gridSizeY) == false) {
-				Node childUp = Graph.get(new Pair(iterable.xPos,iterable.yPos-1)); //Example of using a pair to check the HashMap
-				iterable.children.add(childUp);
-			}
-			if((iterable.yPos+1>gridSizeY) == false) {
-				Node childDown = Graph.get(new Pair(iterable.xPos,iterable.yPos+1));
-				iterable.children.add(childDown);
-			}
-			if(((iterable.xPos+1)>gridSizeX) == false) {
-				Node childForward = Graph.get(new Pair(iterable.xPos+1,iterable.yPos));
-				iterable.children.add(childForward);
-			}
-			else { if(iterable.enemyHere == false && iterable.blockHere == false) {iterable.goal = true;}}
-			if((iterable.xPos-1<0) == false) {
-				Node childBackward = Graph.get(new Pair(iterable.xPos-1,iterable.yPos));
-				iterable.children.add(childBackward);
-			}	
-		}
 
-		
-		return Graph;
-	}
-		//Make the graph a class level variable so it keeps its state. Only have to generate once.
-		//Keep from here---------
-		public HashMap<Pair,Node> Graph = null;
-		public Collection<Node> List = null;
-		public boolean isGraphGenerated = false;
-		//public void doActions();
+
+	boolean graph = false;
+	GraphGenerator Graph = null;
+	private final Action[] allPossibleActions = {Action.Jump,Action.LeftLongJump,Action.RightLongJump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
+	private final Action[] airPossibleActions = {Action.LeftLongJump,Action.RightLongJump,Action.Left,Action.Right};
+	private final Action[] groundPossibleActions = {Action.Jump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
+	private final Action[] airHangPossibleActions = {Action.Left,Action.Right};
+	boolean g1 = false; //deal with air drop in the beggining
 	public MarioInput actionSelectionAI() {
-		//Vector<MarioKey> goalActions = new Vector<MarioKey>();
-		if( isGraphGenerated == false ) { //If the graph hasn't been generated yet, generate it.
-			Graph = generateGraph();
-			List = Graph.values();
-			isGraphGenerated = true;
+
+		Vector<HashMap<Pair,Node>> solutionStates = new Vector<HashMap<Pair, Node>>();
+		LinkedList<HashMap<Pair,Node>> frontierStates = new LinkedList<HashMap<Pair,Node>>();
+		Vector<HashMap<Pair,Node>> seenStates = new Vector<HashMap<Pair,Node>>();
+		if(!graph) { //If the graph hasn't been generated yet, generate it.
+			Graph = new GraphGenerator(9,9,mario);
+			Graph.generateGraph(e,t);
+			Graph.isGraphGenerated = true;
+			graph = true;
 		}
 		else {
-			Iterator<Node> resetNodes = List.iterator(); //If it has been generated just update all the nodes. 
-			while(resetNodes.hasNext()) {
-				Node resetNode = resetNodes.next();
-				resetNode.reset();
-			}
+			Graph.resetNodes(e,t);
 		}
-		Node StartNode = Graph.get(new Pair(0,0));
-		//--------- To here for what ever you want to do
-		if(StartNode.goal == true) {
-			action.press(MarioKey.RIGHT);
-			System.gc();
-			return action;
+		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
+		Action[] modPosAction;
+		if(simM.onGround) {
+			modPosAction = groundPossibleActions;
 		}
-		LinkedList<Node> frontier = new LinkedList<Node>();
-		frontier.add(StartNode);
-		while(frontier.isEmpty() == false) { //DFS Implementation
-			Node currentNode = frontier.removeLast();
-			currentNode.seen = true;
-			action.set(MarioKey.JUMP, (currentNode.enemyHere || currentNode.blockHere) && mario.mayJump);	
-			if (!mario.onGround && brickAhead()) {
-				action.press(MarioKey.JUMP);
+		else {
+			if(simM.jumpTime > 3)
+				modPosAction = airPossibleActions;
+			else modPosAction = airHangPossibleActions;
+		}
+		int runs = 0;
+		boolean firstStateSeenCurrent = false;
+		frontierStates.push(mapCopy(Graph.State));
+		solutionStates.add(mapCopy(Graph.State));
+		while(!frontierStates.isEmpty() && runs < 4) {
+			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
+			for(Map.Entry<Pair,Node> x : currentState.entrySet()) {
+				if(x.getValue().mario) simM = x.getValue().alterMario;
 			}
-			if (mario.mayShoot) {
-				if (shooting) {
-					shooting = false;
-					action.release(MarioKey.SPEED);
-				} else 
-				if (action.isPressed(MarioKey.SPEED)) {				
-					action.release(MarioKey.SPEED);
-				} else {
-					shooting = true;
-					action.press(MarioKey.SPEED);
-				}
+			solutionStates.add(currentState);
+			seenStates.add(currentState);
+			Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> childStates = null;
+			if (firstStateSeenCurrent) {
+				System.out.println("HERE TickModel");
+				childStates = Graph.tickModel(currentState, modPosAction);
 			} else {
-				if (shooting) {
-					shooting = false;
-					action.release(MarioKey.SPEED);
-				}
+				System.out.println("HERE Tick");
+				childStates = Graph.tick(currentState, modPosAction);
+				firstStateSeenCurrent = true;
 			}
-
-			action.press(MarioKey.RIGHT);
-			Iterator<Node> iter = currentNode.children.iterator();
-			while(iter.hasNext()) {
-				Node currentChild = iter.next();
-				if(currentChild.frontier == false && currentChild.seen == false) {
-					if(currentChild.goal == true) {
-						action.set(MarioKey.JUMP, (currentChild.enemyHere || currentChild.blockHere) && mario.mayJump);	
-						if (!mario.onGround && brickAhead()) {
-							action.press(MarioKey.JUMP);
-						}
-						if (mario.mayShoot) {
-							if (shooting) {
-								shooting = false;
-								action.release(MarioKey.SPEED);
-							} else 
-							if (action.isPressed(MarioKey.SPEED)) {				
-								action.release(MarioKey.SPEED);
-							} else {
-								shooting = true;
-								action.press(MarioKey.SPEED);
-							}
-						} else {
-							if (shooting) {
-								shooting = false;
-								action.release(MarioKey.SPEED);
-							}
-						}
-
+			if(mario.onGround && !g1) g1 = true;
+			if(!g1) return action;
+			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> x : childStates) {
+				Pair marioPosChild = x.x;
+				HashMap<Pair,Node> child = x.y.y;
+				Action doThis = x.y.x;
+				if(runs+1 < 4) frontierStates.addFirst(child);
+				//action.press(MarioKey.RIGHT);
+				System.out.println(doThis.toString()+" ");
+				switch(doThis) {
+					case Jump:
+						action.set(MarioKey.JUMP,mario.mayJump && g1);
+						System.out.println("HERE j");
+						break;
+					case RightLongJump:
+						System.out.println("HERE rlj"+simM.jumpTime);
+						if(!simM.onGround) action.press(MarioKey.JUMP);
+						action.toggle(MarioKey.LEFT);
 						action.press(MarioKey.RIGHT);
-						return action;
-					
-					}
-					else {
-						
-						currentChild.frontier = true;
-						frontier.addLast(currentChild);
-					}
+					case LeftLongJump:
+						System.out.println("HERE llj");
+						if(!simM.onGround) action.press(MarioKey.JUMP);
+						action.toggle(MarioKey.RIGHT);
+						action.press(MarioKey.LEFT);
+					case Right:
+						System.out.println("HERE r");
+						action.toggle(MarioKey.LEFT);
+						action.press(MarioKey.RIGHT);
+						break;
+					case RightSpeed:
+						System.out.println("HERE rs");
+						action.toggle(MarioKey.LEFT);
+						action.press(MarioKey.RIGHT);
+						action.press(MarioKey.SPEED);
+						break;
+					case Left:
+						System.out.println("HERE L");
+						action.toggle(MarioKey.RIGHT);
+						action.press(MarioKey.LEFT);
+						break;
+					case LeftSpeed:
+						System.out.println("HERE ls");
+						action.toggle(MarioKey.RIGHT);
+						action.press(MarioKey.LEFT);
+						action.press(MarioKey.SPEED);
+						break;
 				}
+
+
 			}
+			++runs;
 		}
 		
-		System.out.print("No Solution");
+		System.out.println("REturning");
 		System.gc();
 		return action;
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING + FastOpts.L_ENEMY(Enemy.GOOMBA) /*+ FastOpts.L_RANDOMIZE*/;
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(10)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		

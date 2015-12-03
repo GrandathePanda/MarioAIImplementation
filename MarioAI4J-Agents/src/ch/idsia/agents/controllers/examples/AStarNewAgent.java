@@ -23,7 +23,6 @@ import togepi.genPair;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
 import java.util.Vector;
 
 import static togepi.GraphGenerator.mapCopy;
@@ -33,7 +32,7 @@ import static togepi.GraphGenerator.mapCopy;
  * 
  * @author Jakub 'Jimmy' Gemrot, gemrot@gamedev.cuni.cz
  */
-public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent {
+public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 
 	private boolean shooting = false;
 
@@ -58,11 +57,50 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 	private final Action[] groundPossibleActions = {Action.Jump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
 	private final Action[] airHangPossibleActions = {Action.Left,Action.Right};
 	boolean g1 = false; //deal with air drop in the beggining
+
+	private MarioInput doActions(Vector<Action> ac) {
+		MarioInput doThese = new MarioInput();
+		for(Action x : ac) {
+			switch (x) {
+				case Jump:
+					doThese.set(MarioKey.JUMP, mario.mayJump);
+					break;
+				case RightLongJump:
+					doThese.press(MarioKey.JUMP);
+					doThese.release(MarioKey.LEFT);
+					doThese.press(MarioKey.RIGHT);
+				case LeftLongJump:
+					doThese.press(MarioKey.JUMP);
+					doThese.release(MarioKey.RIGHT);
+					action.press(MarioKey.LEFT);
+				case Right:
+					doThese.release(MarioKey.LEFT);
+					doThese.press(MarioKey.RIGHT);
+					break;
+				case RightSpeed:
+					doThese.release(MarioKey.LEFT);
+					doThese.press(MarioKey.RIGHT);
+					doThese.press(MarioKey.SPEED);
+					break;
+				case Left:
+					doThese.release(MarioKey.RIGHT);
+					doThese.press(MarioKey.LEFT);
+					break;
+				case LeftSpeed:
+					doThese.release(MarioKey.RIGHT);
+					doThese.press(MarioKey.LEFT);
+					doThese.press(MarioKey.SPEED);
+					break;
+			}
+		}
+		return doThese;
+	}
 	public MarioInput actionSelectionAI() {
 
 		Vector<HashMap<Pair,Node>> solutionStates = new Vector<HashMap<Pair, Node>>();
 		LinkedList<HashMap<Pair,Node>> frontierStates = new LinkedList<HashMap<Pair,Node>>();
 		Vector<HashMap<Pair,Node>> seenStates = new Vector<HashMap<Pair,Node>>();
+		Vector<Action> bestInTime = new Vector<>();
 		if(!graph) { //If the graph hasn't been generated yet, generate it.
 			Graph = new GraphGenerator(9,9,mario);
 			Graph.generateGraph(e,t);
@@ -71,6 +109,7 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 		}
 		else {
 			Graph.resetNodes(e,t);
+
 		}
 		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
 		Action[] modPosAction;
@@ -83,87 +122,65 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 			else modPosAction = airHangPossibleActions;
 		}
 		int runs = 0;
-		int limit = 1;
-		boolean weMadeIt = false;
 		boolean firstStateSeenCurrent = false;
-		frontierStates.push(mapCopy(Graph.State));
-		solutionStates.add(mapCopy(Graph.State));
-		while(!frontierStates.isEmpty() && runs < limit) {
+		frontierStates.push(Graph.State);
+		solutionStates.add(Graph.State);
+		while(!frontierStates.isEmpty() && runs < 5) {
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
-			for(Map.Entry<Pair,Node> x : currentState.entrySet()) {
-				if(x.getValue().mario) simM = x.getValue().alterMario;
-			}
 			solutionStates.add(currentState);
 			seenStates.add(currentState);
 			Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> childStates = null;
-			if(mario.onGround && !g1) g1 = true;
-			if(!g1) return action;
 			if (firstStateSeenCurrent) {
+				System.out.println("HERE TickModel");
 				childStates = Graph.tickModel(currentState, modPosAction);
-				System.out.println("TICKING MODEL");
 			} else {
+				System.out.println("HERE Tick");
 				childStates = Graph.tick(currentState, modPosAction);
-				System.out.println("TICKING ORIGINAL");
 				firstStateSeenCurrent = true;
 			}
-			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> x : childStates) {
-				Pair marioPosChild = x.x;
-				System.out.println("MarioX: "+marioPosChild.x+" MarioY: "+marioPosChild.y);
-				HashMap<Pair,Node> child = x.y.y;
-				Action doThis = x.y.x;
-				if(marioPosChild.x > 2 || runs >= 9) weMadeIt = true;
-				if(runs < limit) frontierStates.addFirst(child);
-				//action.press(MarioKey.RIGHT);
-				System.out.println(doThis.toString()+" ");
-				switch(doThis) {
-					case Jump:
-						action.set(MarioKey.JUMP,simM.mayJump && g1);
-						break;
-					case RightLongJump:
-						if(!simM.onGround) action.press(MarioKey.JUMP);
-						action.toggle(MarioKey.LEFT);
-						action.press(MarioKey.RIGHT);
-					case LeftLongJump:
-						if(!simM.onGround) action.press(MarioKey.JUMP);
-						action.toggle(MarioKey.RIGHT);
-						action.press(MarioKey.LEFT);
-					case Right:
-						action.toggle(MarioKey.LEFT);
-						action.press(MarioKey.RIGHT);
-						break;
-					case RightSpeed:
-						action.toggle(MarioKey.LEFT);
-						action.press(MarioKey.RIGHT);
-						action.press(MarioKey.SPEED);
-						break;
-					case Left:
-						action.toggle(MarioKey.RIGHT);
-						action.press(MarioKey.LEFT);
-						break;
-					case LeftSpeed:
-						action.toggle(MarioKey.RIGHT);
-						action.press(MarioKey.LEFT);
-						action.press(MarioKey.SPEED);
-						break;
+			genPair<Action,HashMap<Pair,Node>> tentativeBest = null;
+			Pair tentativeLoc = null;
+			double tentativeCost = 0;
+			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> x: childStates) {
+				int cost = 0;
+				Pair marioLoc = x.x;
+				genPair<Action,HashMap<Pair,Node>> currChild = x.y;
+				double heuristic = Math.sqrt(Math.pow(9-marioLoc.x,2)+Math.pow(-4-marioLoc.y,2));
+
+				double enemyCost = (currChild.y.get(marioLoc).enemyHere) ? 1 : 0;
+				double scaleCost = enemyCost*10;
+				double pathCost =  0;
+				if(tentativeLoc == null) {
+					pathCost= Math.sqrt(Math.pow(0-marioLoc.x,2)+Math.pow(0-marioLoc.y,2));
+				}
+				else pathCost = Math.sqrt(Math.pow(tentativeLoc.x-marioLoc.x,2)+Math.pow(tentativeLoc.y-marioLoc.y,2));
+				cost = (int)(pathCost+scaleCost+heuristic);
+				if(tentativeBest == null || cost <= tentativeCost)
+				{
+					tentativeBest = currChild;
+					tentativeLoc = marioLoc;
+					tentativeCost = cost;
 				}
 
-
 			}
-			if(!weMadeIt) ++limit;
+			frontierStates.addFirst(tentativeBest.y);
+			System.out.println(tentativeLoc.x + "  " + tentativeLoc.y);
+			simM = tentativeBest.y.get(tentativeLoc).alterMario;
+			bestInTime.add(tentativeBest.x);
 			++runs;
 		}
 		
 		System.out.println("REturning");
 		System.gc();
-		return action;
+		return doActions(bestInTime);
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(1)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		
-		IAgent agent = new IterativeDeepeningAgent();
+		IAgent agent = new AStarNewAgent();
 		
 		simulator.run(agent);
 		

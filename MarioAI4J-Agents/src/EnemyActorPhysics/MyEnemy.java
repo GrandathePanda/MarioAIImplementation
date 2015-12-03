@@ -117,7 +117,7 @@ public void move()
 
 
 
-    if (Math.random() > 0.7) facing = -facing;
+    if (Math.random() > 0.5) facing = -facing;
     if(ya == 0)
         onGround = false;
 
@@ -143,6 +143,7 @@ public void move()
     {
         ya = -10;
     }
+    super.move();
 
 }
 

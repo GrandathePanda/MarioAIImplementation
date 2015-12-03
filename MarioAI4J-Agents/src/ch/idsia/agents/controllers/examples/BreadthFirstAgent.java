@@ -5,6 +5,7 @@ package ch.idsia.agents.controllers.examples;
 import java.awt.Graphics;
 import java.util.*;
 
+import EnemyActorPhysics.MyMario;
 import ch.idsia.agents.AgentOptions;
 import ch.idsia.agents.IAgent;
 import ch.idsia.agents.controllers.MarioHijackAIBase;
@@ -48,8 +49,13 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 
 	boolean graph = false;
 	GraphGenerator Graph = null;
-	Action[] possibleActions = {Action.Jump,Action.LeftLongJump,Action.LeftShortJump,Action.RightLongJump,Action.RightShortJump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
+	private final Action[] allPossibleActions = {Action.Jump,Action.LeftLongJump,Action.RightLongJump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
+	private final Action[] airPossibleActions = {Action.LeftLongJump,Action.RightLongJump,Action.Left,Action.Right};
+	private final Action[] groundPossibleActions = {Action.Jump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
+	private final Action[] airHangPossibleActions = {Action.Left,Action.Right};
+	boolean g1 = false; //deal with air drop in the beggining
 	public MarioInput actionSelectionAI() {
+
 		Vector<HashMap<Pair,Node>> solutionStates = new Vector<HashMap<Pair, GraphGenerator.Node>>();
 		LinkedList<HashMap<Pair,Node>> frontierStates = new LinkedList<HashMap<Pair,Node>>();
 		Vector<HashMap<Pair,Node>> seenStates = new Vector<HashMap<Pair,Node>>();
@@ -62,76 +68,80 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 		else {
 			Graph.resetNodes(e,t);
 		}
+		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
+		Action[] modPosAction;
+		if(simM.onGround) {
+			modPosAction = groundPossibleActions;
+		}
+		else {
+			if(simM.jumpTime > 3)
+				modPosAction = airPossibleActions;
+			else modPosAction = airHangPossibleActions;
+		}
 		int runs = 0;
 		boolean firstStateSeenCurrent = false;
 		frontierStates.push(mapCopy(Graph.State));
 		solutionStates.add(mapCopy(Graph.State));
-		while(!frontierStates.isEmpty() && runs < 9) {
+		while(!frontierStates.isEmpty() && runs < 4) {
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
+			for(Map.Entry<Pair,Node> x : currentState.entrySet()) {
+				if(x.getValue().mario) simM = x.getValue().alterMario;
+			}
 			solutionStates.add(currentState);
 			seenStates.add(currentState);
 			Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> childStates = null;
 			if (firstStateSeenCurrent) {
 				System.out.println("HERE TickModel");
-				childStates = Graph.tickModel(currentState, possibleActions);
+				childStates = Graph.tickModel(currentState, modPosAction);
 			} else {
 				System.out.println("HERE Tick");
-				childStates = Graph.tick(currentState, possibleActions);
+				childStates = Graph.tick(currentState, modPosAction);
 				firstStateSeenCurrent = true;
 			}
-
+			if(mario.onGround && !g1) g1 = true;
+			if(!g1) return action;
 			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> x : childStates) {
 				Pair marioPosChild = x.x;
 				HashMap<Pair,Node> child = x.y.y;
 				Action doThis = x.y.x;
-				if(runs+1 < 9) frontierStates.add(child);
+				if(runs+1 < 4) frontierStates.addLast(child);
 				//action.press(MarioKey.RIGHT);
 				System.out.println(doThis.toString()+" ");
 				switch(doThis) {
 					case Jump:
-						action.set(MarioKey.JUMP,mario.mayJump);
+						action.set(MarioKey.JUMP,mario.mayJump && g1);
 						System.out.println("HERE j");
 						break;
-					case RightShortJump:
-						System.out.println("HERE rsj");
-						action.set(MarioKey.JUMP,mario.mayJump);
-						action.press(MarioKey.RIGHT);
-
-						break;
 					case RightLongJump:
-						System.out.println("HERE rlj");
-						action.set(MarioKey.JUMP,Graph.simMario.mayJump);
+						System.out.println("HERE rlj"+simM.jumpTime);
+						if(!simM.onGround) action.press(MarioKey.JUMP);
+						action.toggle(MarioKey.LEFT);
 						action.press(MarioKey.RIGHT);
-						action.press(MarioKey.JUMP);
-
-						break;
-					case LeftShortJump:
-						System.out.println("HERE lsj");
-						action.set(MarioKey.JUMP,Graph.simMario.mayJump);
-						//action.press(MarioKey.LEFT);
-						//action.release(MarioKey.JUMP);
-						break;
 					case LeftLongJump:
 						System.out.println("HERE llj");
-						action.set(MarioKey.JUMP,Graph.simMario.mayJump);
-						//action.press(MarioKey.LEFT);
-						break;
+						if(!simM.onGround) action.press(MarioKey.JUMP);
+						action.toggle(MarioKey.RIGHT);
+						action.press(MarioKey.LEFT);
 					case Right:
 						System.out.println("HERE r");
+						action.toggle(MarioKey.LEFT);
 						action.press(MarioKey.RIGHT);
 						break;
 					case RightSpeed:
 						System.out.println("HERE rs");
+						action.toggle(MarioKey.LEFT);
 						action.press(MarioKey.RIGHT);
 						action.press(MarioKey.SPEED);
 						break;
 					case Left:
-						System.out.println("HERE l");
-						//action.press(MarioKey.LEFT);
+						System.out.println("HERE L");
+						action.toggle(MarioKey.RIGHT);
+						action.press(MarioKey.LEFT);
 						break;
 					case LeftSpeed:
 						System.out.println("HERE ls");
-						//action.press(MarioKey.LEFT);
+						action.toggle(MarioKey.RIGHT);
+						action.press(MarioKey.LEFT);
 						action.press(MarioKey.SPEED);
 						break;
 				}
@@ -147,7 +157,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA);
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(10)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		

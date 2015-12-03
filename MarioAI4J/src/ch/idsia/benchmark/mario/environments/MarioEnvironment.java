@@ -218,6 +218,7 @@ public final class MarioEnvironment implements IEnvironment {
 	}
 
 	public void tick() {
+		System.out.println("----------------------------------------------");
 		levelScene.tick();			
 		updateMario();
 		computeTiles(mario.zLevelTiles);
@@ -387,7 +388,7 @@ public final class MarioEnvironment implements IEnvironment {
 				recorder.changeRecordingState(SimulatorOptions.isRecording, getTimeSpent());
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
 		levelScene.performAction(action);
 	}
