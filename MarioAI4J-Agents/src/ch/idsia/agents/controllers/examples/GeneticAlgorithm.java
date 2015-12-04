@@ -276,7 +276,7 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 			graph = true;
 		}
 		else {
-			Graph.resetNodes(e,t);
+			Graph.resetNodes(e,t, mario);
 		}
 		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
 		Action[] modPosAction;
@@ -302,16 +302,16 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 				solutionStates.add(currentState);
 				seenStates.add(currentState);
 				Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> childStates = new Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>>();
-//				if (firstStateSeenCurrent) {
-//					System.out.println("HERE TickModel");
-//
-//					childStates = Graph.tickModel(currentState, modPosAction);
-//				} else {
-//					System.out.println("HERE Tick");
-//					childStates = Graph.tick(currentState, modPosAction);
-//					firstStateSeenCurrent = true;
-//				}
-				childStates = Graph.tickModel(currentState, modPosAction);
+				if (firstStateSeenCurrent) {
+					System.out.println("HERE TickModel");
+
+					childStates = Graph.tickModel(currentState, modPosAction);
+				} else {
+					System.out.println("HERE Tick");
+					childStates = Graph.tick(currentState, modPosAction);
+					firstStateSeenCurrent = true;
+				}
+//				childStates = Graph.tickModel(currentState, modPosAction);
 //				System.out.println(childStates.get(3).y.y.get(childStates.get(3).x).xPos + "POSSX");
 //				System.out.println("childStates Size: " + childStates.size());
 				genPair<Pair,genPair<Action,HashMap<Pair,Node>>> randAct = pickRandom(childStates);

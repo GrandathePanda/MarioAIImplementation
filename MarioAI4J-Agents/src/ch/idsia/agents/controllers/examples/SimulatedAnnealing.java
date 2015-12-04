@@ -108,26 +108,40 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 		if(p1.x != p2.x){
 			System.out.println("err");
 		}
+		System.out.println(p1.x.y + " posY");
 		Pair marioLoc = p1.x;
 		genPair<Action,HashMap<Pair,Node>> p1Child = p1.y;
-		
+//		System.out.println(p1Child.y.get(marioLoc).xPos + " posX");
+		System.out.println(marioLoc.x + " posX");
 		if(p1Child.y.get(marioLoc).enemyHere){
+//			System.out.println("HEEEEEERRRREEEEE");
+
 			--heuristic1;
 		}
 		if(p1Child.y.get(marioLoc).blockHere){
+//			System.out.println("HEEEEEERRRREEEEE");
+
 			--heuristic1;
 		}
 		if(p1Child.y.get(marioLoc).xPos > 0){
+//			System.out.println("HEEEEEERRRREEEEE");
 			++heuristic1;
 		}
 		genPair<Action,HashMap<Pair,Node>> p2Child = p2.y;
 		if(p2Child.y.get(marioLoc).enemyHere){
+//			System.out.println("HEEEEEERRRREEEEE");
+
 			--heuristic2;
 		}
 		if(p2Child.y.get(marioLoc).blockHere){
+			System.out.println("HEEEEEERRRREEEEE");
+
+			
 			--heuristic2;
 		}
 		if(p2Child.y.get(marioLoc).xPos > 0){
+			System.out.println("HEEEEEERRRREEEEE");
+
 			++heuristic2;
 		}		
 		genPair<Pair, genPair<Action, HashMap<Pair,Node>>> ret = (heuristic1 > heuristic2) ?  p1 :  p2;
@@ -150,7 +164,7 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 			graph = true;
 		}
 		else {
-			Graph.resetNodes(e,t);
+			Graph.resetNodes(e,t, mario);
 
 		}
 		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
@@ -169,7 +183,7 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 		frontierStates.push(Graph.State);
 		solutionStates.add(Graph.State);
 		Vector<Action> toDo = new Vector<Action>();
-		while(!frontierStates.isEmpty() && runs < 9){
+		while(!frontierStates.isEmpty() && runs < 2){
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
 			solutionStates.add(currentState);
 			seenStates.add(currentState);
@@ -177,6 +191,7 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 			if (firstStateSeenCurrent) {
 				System.out.println("HERE TickModel");
 				childStates = Graph.tickModel(currentState, modPosAction);
+//				firstStateSeenCurrent = true;
 			} else {
 				System.out.println("HERE Tick");
 				childStates = Graph.tick(currentState, modPosAction);
@@ -187,6 +202,8 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 			childStates.remove(option1);
 			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> option2 = pickRandom(childStates);
 			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> act = pickBetter(option1, option2);
+			frontierStates.push(currentState);
+//			System.out.println(act.y.x);
 //			System.out.println(act.y.x);
 			toDo.add(act.y.x);
 			++runs;
