@@ -20,10 +20,13 @@ import togepi.GraphGenerator;
 import togepi.genPair;
 import togepi.GraphGenerator.*;
 import togepi.Pair;
+import java.util.Collections;
+import java.util.Comparator;
+ 
 
 import static togepi.GraphGenerator.mapCopy;
 
-public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
+public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 	private final Action[] allPossibleActions = {Action.Jump,Action.LeftLongJump,Action.RightLongJump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
 	private final Action[] airPossibleActions = {Action.LeftLongJump,Action.RightLongJump,Action.Left,Action.Right};
 	private final Action[] groundPossibleActions = {Action.Jump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
@@ -95,56 +98,100 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 	}
 	
 
-	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickRandom(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> vec){
-			int rand = (int)Math.random();
-			double actRand = Math.random() * 10;
-			int index = (int)actRand%vec.size();
-			return vec.get(index);
+	
+	public Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> eliminateUseless( Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> vec){
+		for(genPair<Pair,genPair<Action, HashMap<Pair,Node>>> curr: vec){
+			HashMap<Pair,Node> map = curr.y.y;
+			Iterator it = map.entrySet().iterator();
+			while(it.hasNext()){
+				Node p = (Node)it.next();
+				
+//				if(p.blockHere){
+//					it.remove();
+//				}
+			}
+		}
+		System.out.println("got out");
+		return vec;
 	}
+	/**
+	 * 
+	 * @param vec -> This is going to be a vector with all of the action options
+	 * @param currentPos -> This is going to be mario's current position.
+	 * @return
+	 */
+	public genPair<Node, Action> pickBest(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> vec, Node currentPos){
+		//Takes the node looks at xPos and yPos, picks the option that will bring it 
+		//furthest to the right
+		System.out.println("vec size: " + vec.size());
+//		vec = eliminateUseless(vec);
+		double currGreatestHeuristic = 0.0; //Current greatest heuristic, or furthest distance
+		Node greatestNode = null; //Current chosen Node.
+		Action toDo = null; //current chosen Action
+//		System.out.println("vec size: " +vec.size());
+		for(genPair<Pair,genPair<Action, HashMap<Pair,Node>>> curr: vec){ //Loop through all possible location results, finds the one with gratest distance
+//			Pair marioPosChild = x.x;
+			int counter = 0;
 
-	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickBetter(genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p1,genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p2 ){
-		int heuristic1 = 0;
-		int heuristic2 = 0;
-		if(p1.x != p2.x){
-			System.out.println("err");
-		}
-		System.out.println(p1.x.y + " posY");
-		Pair marioLoc = p1.x;
-		genPair<Action,HashMap<Pair,Node>> p1Child = p1.y;
-//		System.out.println(p1Child.y.get(marioLoc).xPos + " posX");
-		System.out.println(marioLoc.x + " posX");
-		if(p1Child.y.get(marioLoc).enemyHere){
-//			System.out.println("HEEEEEERRRREEEEE");
+			HashMap<Pair,Node> child = curr.y.y;
+//			System.out.println(child.size()); //***NOTE*** I NEED THIS TO JUST LOOP THROUGH 81 ELEMENTS SURROUNDING MARIO. NOT THE FULL MAP!
+			Iterator it = child.entrySet().iterator();
+			while(it.hasNext()){ //Loop through and picks the action/node with heighest heuristic
+				if(counter == 8){
+					System.out.println("breaking");
+					break;
+				}
+				Map.Entry pair = (Map.Entry)it.next();
+				Node p = (Node)pair.getValue();
+				double distance = distance(p.xPos, p.yPos, currentPos.xPos, currentPos.yPos); //cannot calculate distance this way
+				if(curr.y.x == Action.Jump){
+					System.out.println("TRYING");
+				}
+//				System.out.println("p.xPos: " + p.xPos + " p.yPos: " + p.yPos + " currentPos.xPos: " + currentPos.xPos + " currentPos.yPos: " + currentPos.yPos);
+//				System.out.println("Distance: " + distance);
 
-			--heuristic1;
-		}
-		if(p1Child.y.get(marioLoc).blockHere){
-//			System.out.println("HEEEEEERRRREEEEE");
+				if(/*p.xPos > currentPos.xPos && */distance > currGreatestHeuristic){
+					greatestNode = p;
+					currGreatestHeuristic = distance;
+					toDo = curr.y.x;
+//					System.out.println("Node: " + greatestNode.xPos + ", " + greatestNode.yPos + " heuristic: " + currGreatestHeuristic + " action: " + toDo );
+				}
+				++counter;
+				it.remove();
+			}
 
-			--heuristic1;
 		}
-		if(p1Child.y.get(marioLoc).xPos > 0){
-//			System.out.println("HEEEEEERRRREEEEE");
-			++heuristic1;
+		
+		System.out.println("**************************************** HERE");
+//		System.out.println("I have changed my mind: " + counter + " number of times.");
+		System.out.println("I will do: " + toDo);
+		genPair<Node, Action> ret = new genPair<Node,Action>(greatestNode, toDo);
+		return ret;
+	}
+	
+	public Vector<Action> pickMove(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> childStates){
+		System.out.println("Child states size: " + childStates.size());
+		Vector<Action> ret = null;
+		double greatestDistance = 0;
+		Pair greatPos;
+		Action currActions = Action.Right;
+		int count = 1;
+		for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> each: childStates){
+			if(count == childStates.size()){
+				break;
+			}
+			Pair marioPos = each.x;
+			genPair<Action, HashMap<Pair,Node>> currChild = each.y;
+//			double distance = distance(9,-4,each.x.x,each.x.y);
+			double distance  = 1.0;
+			if(greatestDistance < distance){
+				greatestDistance = distance;
+				greatPos = each.x;
+				currActions = each.y.x;
+			}
+			++count;
 		}
-		genPair<Action,HashMap<Pair,Node>> p2Child = p2.y;
-		if(p2Child.y.get(marioLoc).enemyHere){
-//			System.out.println("HEEEEEERRRREEEEE");
-
-			--heuristic2;
-		}
-		if(p2Child.y.get(marioLoc).blockHere){
-			System.out.println("HEEEEEERRRREEEEE");
-
-			
-			--heuristic2;
-		}
-		if(p2Child.y.get(marioLoc).xPos > 0){
-			System.out.println("HEEEEEERRRREEEEE");
-
-			++heuristic2;
-		}		
-		genPair<Pair, genPair<Action, HashMap<Pair,Node>>> ret = (heuristic1 > heuristic2) ?  p1 :  p2;
+		ret.add(currActions);
 		return ret;
 	}
 
@@ -164,7 +211,7 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 			graph = true;
 		}
 		else {
-			Graph.resetNodes(e,t, mario);
+			Graph.resetNodes(e,t,mario);
 
 		}
 		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
@@ -183,7 +230,7 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 		frontierStates.push(Graph.State);
 		solutionStates.add(Graph.State);
 		Vector<Action> toDo = new Vector<Action>();
-		while(!frontierStates.isEmpty() && runs < 2){
+		while(!frontierStates.isEmpty() && runs < 9){
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
 			solutionStates.add(currentState);
 			seenStates.add(currentState);
@@ -191,70 +238,45 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 			if (firstStateSeenCurrent) {
 				System.out.println("HERE TickModel");
 				childStates = Graph.tickModel(currentState, modPosAction);
-//				firstStateSeenCurrent = true;
 			} else {
 				System.out.println("HERE Tick");
 				childStates = Graph.tick(currentState, modPosAction);
 				firstStateSeenCurrent = true;
 			}
-//			System.out.println(childStates.size());
-			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> option1 = pickRandom(childStates);
-			childStates.remove(option1);
-			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> option2 = pickRandom(childStates);
-			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> act = pickBetter(option1, option2);
-			frontierStates.push(currentState);
-//			System.out.println(act.y.x);
-//			System.out.println(act.y.x);
-			toDo.add(act.y.x);
+			double greatestDistance = 0;
+			Pair greatPos;
+			Action currActions = Action.Left;
+			int count = 1;
+			System.out.println(childStates.size());
+			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> each: childStates){
+				if(count == childStates.size()){
+					break;
+				}
+				Pair marioPos = each.x;
+				genPair<Action, HashMap<Pair,Node>> currChild = each.y;
+//				double distance = distance(9,-4,each.x.x,each.x.y);
+				double distance  = 1.0;
+				if(greatestDistance < distance){
+					greatestDistance = distance;
+					greatPos = each.x;
+					currActions = each.y.x;
+				}
+				++count;
+//				System.out.println(currActions);
+				toDo.add(currActions);
+
+			}
 			++runs;
 		}
-//		System.out.println("toDo size: " + toDo.size());
+		
 		return doActions(toDo);
 	}
-	/*
-	public MarioInput actionSelectionAI2(){
-		if(!graph){
-			Graph = new GraphGenerator(9,9,mario);
-			Graph.generateGraph(e, t);
-			Graph.isGraphGenerated = true;
-			graph = true;
-		}
-		else {
-			Graph.resetNodes(e, t);
-		}
-		int runs = 0;
-		Vector<HashMap<Pair,Node>> states = new Vector<HashMap<Pair, GraphGenerator.Node>>();
-		states.add(mapCopy(Graph.State));
-		HashMap<Pair,Node> curr = states.get(0);
-		Pair p2 = new Pair(9,9);
-		Node p = curr.get(p2);
-		Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> possibleMoves = null;
-		possibleMoves = Graph.tickModel(curr, possibleActions);
-
-		possibleMoves.get(0).y.y.get(p2);
-		
-		Node marioNode = null;
-		Vector<genPair<Pair, MySprite>> existingEntities = new Vector<>();
-		for(Map.Entry<Pair, Node> et: curr.entrySet()){
-			Node cNode = et.getValue();
-			Pair pos = new Pair(cNode.xPos, cNode.yPos);
-			List<MySprite> cNodeEntities = cNode.modelEntitiesHere;
-			for(MySprite x: cNodeEntities){
-				existingEntities.add(new genPair<>(pos,x));
-			}
-			if(cNode.mario) marioNode = cNode;
-		}
-		
-		genPair<Node, Action> myAct = pickBest(possibleMoves, marioNode);
-		Action toDo = myAct.y;
 	
-		System.gc();
-		return action;
-	}*/
 	public static void main(String[] args){
-		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(3)+FastOpts.L_ENEMY(Enemy.GOOMBA);
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA);
+
 		MarioSimulator simulator = new MarioSimulator(options);
-		IAgent agent = new SimulatedAnnealing();
+		IAgent agent = new KNearestNeighbors();
 		simulator.run(agent);
 		
 		System.exit(0);

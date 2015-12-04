@@ -150,7 +150,7 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 	
 	public static void main(String[] args) {
 		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
-		
+
 		MarioSimulator simulator = new MarioSimulator(options);
 		
 		IAgent agent = new AStarNewAgent();
