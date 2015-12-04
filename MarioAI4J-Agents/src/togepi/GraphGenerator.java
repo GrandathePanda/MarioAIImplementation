@@ -473,6 +473,7 @@ public class GraphGenerator {
 			MyMario altRealityMario = marioNode.alterMario.clone();
 			//System.out.println(altRealityMario.mayJump + "" + altRealityMario.onGround);
 			HashMap<Pair, Node> currPossibleState = mapCopy(blankState);
+			altRealityMario.myKeys.reset();
 			switch (possibleAction) {
 				case Jump:
 					altRealityMario.myKeys.set(MarioKey.JUMP,altRealityMario.mayJump);
@@ -493,22 +494,26 @@ public class GraphGenerator {
 					break;
 				case Left:
 					altRealityMario.myKeys.press(MarioKey.LEFT);
+					altRealityMario.myKeys.release(MarioKey.RIGHT);
 					altRealityMario.tick();
 					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case Right:
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
+					altRealityMario.myKeys.release(MarioKey.LEFT);
 					altRealityMario.tick();
 					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case RightSpeed:
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
+					altRealityMario.myKeys.release(MarioKey.LEFT);
 					altRealityMario.myKeys.press(MarioKey.SPEED);
 					altRealityMario.tick();
 					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case LeftSpeed:
 					altRealityMario.myKeys.press(MarioKey.LEFT);
+					altRealityMario.myKeys.release(MarioKey.RIGHT);
 					altRealityMario.myKeys.press(MarioKey.SPEED);
 					altRealityMario.tick();
 					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);

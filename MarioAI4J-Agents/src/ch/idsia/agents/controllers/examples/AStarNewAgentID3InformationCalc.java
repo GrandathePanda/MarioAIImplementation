@@ -145,7 +145,7 @@ public class AStarNewAgentID3InformationCalc extends MarioHijackAIBase implement
 		frontierStates.push(Graph.State);
 		solutionStates.add(Graph.State);
 		Pair oldMarioPos = new Pair(0,0);
-		while(!frontierStates.isEmpty() && runs < 2) {
+		while(!frontierStates.isEmpty() && runs < 7) {
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
 			solutionStates.add(currentState);
 			seenStates.add(currentState);
@@ -171,7 +171,9 @@ public class AStarNewAgentID3InformationCalc extends MarioHijackAIBase implement
 				double notMovingCost = ( samePos ) ? 1 : 0;
 				double enemyCost = (Graph.collision(currChild.y.get(marioLoc).alterMario,currChild.y)) ? 1  : 0;
 				if(enemyCost > 0) ++ enemies;
-				if(samePos) ++blocks;
+				if(currChild.x == Action.Jump && (Graph.collision(currChild.y.get(marioLoc).alterMario,currChild.y)) == false) {
+					++blocks;
+				}
 				double scaleCost = enemyCost*100;
 				double pathCost =  0;
 				if(tentativeLoc == null) {
@@ -211,6 +213,26 @@ public class AStarNewAgentID3InformationCalc extends MarioHijackAIBase implement
 		if(gains.isEmpty()) {
 			return Tree;
 		}
+		if(Tree.isEmpty()) {
+			Id3Node root = new Id3Node();
+			root.atrib = gains.remove(2).x;
+			root.root = true;
+			root.no = new Id3Node();
+			root.yes = new Id3Node();
+			root.yes.leaf = true;
+			switch (root.atrib) {
+				case Enemy:
+					root.yes.doThis = Action.Jump;
+					break;
+				case Block:
+					root.yes.doThis = Action.Jump;
+					break;
+				case DoubleBlock:
+					root.yes.doThis = Action.RightLongJump;
+
+			}
+			return produceTree()
+		}
 		return null;
 	}
 	public static void main(String[] args) {
@@ -242,10 +264,10 @@ public class AStarNewAgentID3InformationCalc extends MarioHijackAIBase implement
 		double GainDblBlk = entropy-probDblBlk*Math.log(probDblBlk)-probNotDbl*Math.log(probNotDbl);
 		Vector<genPair<Id3Node.Attribute,Double>> gains = new Vector<>();
 		Vector<Double> gainsN = new Vector<>();
-		System.out.println(GainBlk);
 		gainsN.add(GainBlk);
 		gainsN.add(GainEnemy);
 		gainsN.add(GainDblBlk);
+
 		Collections.sort(gainsN);
 		for( Double x : gainsN) {
 			System.out.println(x.doubleValue());

@@ -91,7 +91,7 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 		frontierStates.push(Graph.State);
 		solutionStates.add(Graph.State);
 		Pair oldMarioPos = new Pair(0,0);
-		while(!frontierStates.isEmpty() && runs < 3) {
+		while(!frontierStates.isEmpty() && runs < 7) {
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
 			solutionStates.add(currentState);
 			seenStates.add(currentState);
