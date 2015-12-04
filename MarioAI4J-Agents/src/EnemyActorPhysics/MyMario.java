@@ -155,12 +155,13 @@ public class MyMario extends MySprite {
 
 	// private static Mario instance;
 
-	public MyMario(int xp, int yp) {
+	public MyMario(int xp, int yp,boolean OG, boolean MJ) {
 		type = EntityType.MARIO;
 		// Mario.instance = this;
 		x = xp;
 		y = yp;
-
+		onGround = OG;
+		mayJump = MJ;
 
 		facing = 1;
 		setMode(MyMario.large, MyMario.fire);
@@ -175,7 +176,7 @@ public class MyMario extends MySprite {
 	private boolean newFire;
 
 	public MyMario clone() {
-		MyMario newMario = new MyMario(this.x,this.y);
+		MyMario newMario = new MyMario(this.x,this.y,this.onGround,this.mayJump);
 		newMario.ableToShoot = this.ableToShoot;
 		newMario.deathTime = this.deathTime;
 		newMario.xa = this.xa;
@@ -233,7 +234,7 @@ public class MyMario extends MySprite {
 
 
 		wasOnGround = onGround;
-		System.out.println(myKeys.isPressed(MarioKey.RIGHT));
+		//System.out.println(myKeys.isPressed(MarioKey.RIGHT));
 		float sideWaysSpeed = myKeys.isPressed(MarioKey.SPEED) ? 1.2f : 0.6f;
 
 		// float sideWaysSpeed = onGround ? 2.5f : 1.2f;
@@ -396,7 +397,6 @@ public class MyMario extends MySprite {
 			ya += yaa;
 		}
 
-		super.move();
 	}
 
 

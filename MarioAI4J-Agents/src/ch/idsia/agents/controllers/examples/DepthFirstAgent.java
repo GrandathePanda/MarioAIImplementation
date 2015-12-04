@@ -70,7 +70,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 			graph = true;
 		}
 		else {
-			Graph.resetNodes(e,t);
+			Graph.resetNodes(e,t,mario);
 		}
 		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
 		Action[] modPosAction;

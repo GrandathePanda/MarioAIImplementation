@@ -87,6 +87,12 @@ public class MySprite {
 		xOld = x;
 		yOld = y;
 		move();
+		float xPrime = 0.0f;
+		float yPrime = 0.0f;
+		xPrime+=x+xa;
+		yPrime+=y+ya;
+		x =  (int)xPrime;
+		y =  (int)yPrime;
 		return new Pair(x,y);
 	}
 

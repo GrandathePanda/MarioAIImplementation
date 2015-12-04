@@ -96,6 +96,7 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 		return doThese;
 	}
 	public MarioInput actionSelectionAI() {
+		//System.out.println(t.brick(1,0));
 
 		Vector<HashMap<Pair,Node>> solutionStates = new Vector<HashMap<Pair, Node>>();
 		LinkedList<HashMap<Pair,Node>> frontierStates = new LinkedList<HashMap<Pair,Node>>();
@@ -108,7 +109,7 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 			graph = true;
 		}
 		else {
-			Graph.resetNodes(e,t);
+			Graph.resetNodes(e,t,mario);
 
 		}
 		MyMario simM = Graph.State.get(new Pair(0,0)).alterMario;
@@ -117,7 +118,7 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 			modPosAction = groundPossibleActions;
 		}
 		else {
-			if(simM.jumpTime > 3)
+			if(!simM.onGround)
 				modPosAction = airPossibleActions;
 			else modPosAction = airHangPossibleActions;
 		}
@@ -125,16 +126,17 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 		boolean firstStateSeenCurrent = false;
 		frontierStates.push(Graph.State);
 		solutionStates.add(Graph.State);
-		while(!frontierStates.isEmpty() && runs < 5) {
+		Pair oldMarioPos = new Pair(0,0);
+		while(!frontierStates.isEmpty() && runs < 4) {
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
 			solutionStates.add(currentState);
 			seenStates.add(currentState);
 			Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> childStates = null;
 			if (firstStateSeenCurrent) {
-				System.out.println("HERE TickModel");
+				//System.out.println("HERE TickModel");
 				childStates = Graph.tickModel(currentState, modPosAction);
 			} else {
-				System.out.println("HERE Tick");
+				//System.out.println("HERE Tick");
 				childStates = Graph.tick(currentState, modPosAction);
 				firstStateSeenCurrent = true;
 			}
@@ -142,19 +144,21 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 			Pair tentativeLoc = null;
 			double tentativeCost = 0;
 			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> x: childStates) {
-				int cost = 0;
+				double cost = 0;
 				Pair marioLoc = x.x;
 				genPair<Action,HashMap<Pair,Node>> currChild = x.y;
-				double heuristic = Math.sqrt(Math.pow(9-marioLoc.x,2)+Math.pow(-4-marioLoc.y,2));
-
-				double enemyCost = (currChild.y.get(marioLoc).enemyHere) ? 1 : 0;
-				double scaleCost = enemyCost*10;
+				double heuristic = Math.sqrt(Math.pow(9-marioLoc.x,2)+Math.pow(-2-marioLoc.y,2));
+				boolean samePos = (marioLoc.x == oldMarioPos.x && marioLoc.y == oldMarioPos.y);
+				if(currChild.x == Action.Left || currChild.x == Action.LeftSpeed || currChild.x == Action.LeftLongJump) cost+= 5;
+				double notMovingCost = ( samePos ) ? 1 : 0;
+				double enemyCost = (Graph.collision(currChild.y.get(marioLoc).alterMario,currChild.y)) ? 1  : 0;
+				double scaleCost = enemyCost*100;
 				double pathCost =  0;
 				if(tentativeLoc == null) {
 					pathCost= Math.sqrt(Math.pow(0-marioLoc.x,2)+Math.pow(0-marioLoc.y,2));
 				}
 				else pathCost = Math.sqrt(Math.pow(tentativeLoc.x-marioLoc.x,2)+Math.pow(tentativeLoc.y-marioLoc.y,2));
-				cost = (int)(pathCost+scaleCost+heuristic);
+				cost += (pathCost+scaleCost+heuristic+notMovingCost);
 				if(tentativeBest == null || cost <= tentativeCost)
 				{
 					tentativeBest = currChild;
@@ -163,20 +167,24 @@ public class AStarNewAgent extends MarioHijackAIBase implements IAgent {
 				}
 
 			}
+			if(childStates.size() == 0) {
+				System.out.println(runs);
+				return doActions(bestInTime);
+			}
 			frontierStates.addFirst(tentativeBest.y);
-			System.out.println(tentativeLoc.x + "  " + tentativeLoc.y);
+			oldMarioPos = tentativeLoc;
+			//System.out.println(tentativeLoc.x + "  " + tentativeLoc.y +" --- " + tentativeBest.x.toString() + " -- " +tentativeCost);
 			simM = tentativeBest.y.get(tentativeLoc).alterMario;
 			bestInTime.add(tentativeBest.x);
 			++runs;
 		}
-		
-		System.out.println("REturning");
+
 		System.gc();
 		return doActions(bestInTime);
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(1)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_CANNONS_ON;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		

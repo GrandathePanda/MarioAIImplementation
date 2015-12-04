@@ -4,6 +4,7 @@ import EnemyActorPhysics.*;
 import ch.idsia.agents.controllers.modules.Entities;
 import ch.idsia.agents.controllers.modules.Tiles;
 import ch.idsia.benchmark.mario.engine.generalization.Entity;
+import ch.idsia.benchmark.mario.engine.generalization.EntityType;
 import ch.idsia.benchmark.mario.engine.generalization.MarioEntity;
 import ch.idsia.benchmark.mario.engine.input.MarioKey;
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +23,7 @@ public class GraphGenerator {
 	public marioDoll simMario = null;*/
 	/*! X Size of Grid After Instantiation */
 	public int gridSizeX = 0;
+	public MarioEntity actualMario = null;
 	/*! Y Size of Grid After Instantiation */
 	public int gridSizeY = 0;
 	/*! Hashmap of <Pair,Node> Type containing current Perceptive State */
@@ -39,7 +41,7 @@ public class GraphGenerator {
 	public GraphGenerator(int x, int y, MarioEntity marioClone) {
 		gridSizeX = x;
 		gridSizeY = y;
-		//MarioEntity mario = marioClone;
+		actualMario = marioClone;
 		//simMario = new marioDoll(mario.speed.x, mario.speed.y, ((mario.mode.getCode() - 2) * -1)+1, 0, 0, mario.mayJump, mario.onGround);
 	}
 	/*public void generateSimMario(@NotNull MarioEntity mario) {
@@ -74,7 +76,7 @@ public class GraphGenerator {
 				Node currentNode = new Node(i, j, 2 * gridSizeX, 2 * gridSizeY);
 				if (i == 0 && j == 0) {
 					currentNode.mario = true;
-					currentNode.alterMario = new MyMario(0,0);
+					currentNode.alterMario = new MyMario(0,0,actualMario.onGround,actualMario.mayJump);
 				}
 				Graph.put(new Pair(i, j), currentNode);
 			}
@@ -177,128 +179,20 @@ public class GraphGenerator {
 	/**
 	 * Function call loops through List of nodes and updates them to current state.
 	 */
-	public void resetNodes(Entities a, Tiles b) {
-
+	public void resetNodes(Entities a, Tiles b, MarioEntity aM) {
+		actualMario = aM;
 		e = a;
 		t = b;
 		for (Node resetNode : List) {
 			resetNode.reset();
+			if(resetNode.xPos == 0 && resetNode.yPos == 0) {
+				resetNode.alterMario = new MyMario(0,0, aM.onGround, aM.mayJump);
+				resetNode.mario = true;
+			}
 		}
 	}
 
-	/*protected Pair marioMove(float x, float y, boolean left, boolean right, boolean speed) {
-		simMario.xa = speed ? 1.2f : 0.6f;
-		float xD = simMario.xa * 0.4f;
-		x += left ? -xD : xD;
-		return new Pair((int) x, (int) y);
-	}*/
 
-	/*@NotNull
-	private Pair blockResMove(@NotNull Node marioNode, @NotNull HashMap<Pair,Node> state, boolean speed, boolean positive ) {
-		int x = positive ? marioNode.xPos+1 : marioNode.xPos-1;
-		if(x > 9) new Pair(9,marioNode.yPos);
-		if(x < -9) new Pair(-9,marioNode.yPos);
-		Pair newMarioPos = new Pair(x,marioNode.yPos);
-		if(state.get(newMarioPos).blockHere) {
-			Pair oldPos = new Pair(marioNode.xPos,marioNode.yPos);
-			return oldPos;
-		}
-		if(speed) {
-			if(positive) ++newMarioPos.x; else --newMarioPos.x;
-			if (state.get(newMarioPos).blockHere) {
-				Pair oldPos = new Pair(marioNode.xPos, marioNode.yPos);
-				return oldPos;
-			}
-		}
-
-
-		return newMarioPos;
-
-	}*/
-
-	/*public Pair approxMarioJump(float x, float y, float sX, float sY, boolean left, boolean right, boolean longJ) {
-		double xD = 0;
-		double yD = 0;
-		float xJump = 0;
-		float yJump = 0;
-			if (simMario.jumpTime < 0) {
-				simMario.xa = xJump;
-				simMario.ya = -simMario.jumpTime * yJump;
-				simMario.jumpTime++;
-			} else if (simMario.onGround && simMario.mayJump) {
-				xJump = 0;
-				yJump = -1.9f;
-				simMario.jumpTime = 7;
-				simMario.ya = simMario.jumpTime * yJump;
-				simMario.onGround = false;
-			} else if (simMario.jumpTime > 0) {
-				simMario.xa += xJump;
-				simMario.ya = simMario.jumpTime * yJump;
-				simMario.jumpTime--;
-			} else {
-				simMario.jumpTime = 0;
-				simMario.onGround = true;
-				simMario.mayJump = true;
-			}
-			yD += simMario.ya * 0.4 + 0.5 * (simMario.jumpTime) * 0.4;
-			xD += simMario.xa * 0.4;
-
-
-		x += left ? -xD : xD;
-		y += yD;
-
-		return new Pair((int) Math.ceil(x), (int) Math.ceil(y));
-	}*/
-
-	/*@Nullable
-	private Pair blockResJump(@NotNull Node marioNode, @NotNull HashMap<Pair,Node> state) {
-		Pair newMarioPos = null;
-		Node willBeHere = null;
-		if(simMario.jumpTime > 2) {
-			newMarioPos = new Pair(marioNode.xPos, marioNode.yPos-1);
-			simMario.onGround = false;
-			--simMario.jumpTime;
-		}
-		else {
-			newMarioPos = new Pair(marioNode.xPos, marioNode.yPos+1);
-			simMario.mayJump = false;
-			--simMario.jumpTime;
-			if(simMario.jumpTime <= 0) {
-				simMario.jumpTime = 4;
-				simMario.onGround = true;
-				simMario.mayJump = true;
-			}
-		}
-		willBeHere = state.get(newMarioPos);
-		return newMarioPos;
-	}*/
-	/*@Nullable
-	private Pair blockResMoveJump(@NotNull Node marioNode, @NotNull HashMap<Pair,Node> state, boolean positive) {
-		Pair newMarioPos = null;
-		Node willBeHere = null;
-		int x = marioNode.xPos;
-		if(positive) ++x; else --x;
-		if(simMario.jumpTime > 2) {
-			newMarioPos = new Pair(x, marioNode.yPos-1);
-			simMario.onGround = false;
-			--simMario.jumpTime;
-		}
-		else {
-			newMarioPos = new Pair(x, marioNode.yPos+1);
-			simMario.mayJump = false;
-			--simMario.jumpTime;
-			if(simMario.jumpTime <= 0) {
-				simMario.jumpTime = 4;
-				simMario.onGround = true;
-				simMario.mayJump = true;
-			}
-		}
-		willBeHere = state.get(newMarioPos);
-		return newMarioPos;
-	}*/
-	private boolean collisionDetect(@NotNull Node block) {
-		return block.enemyHere;
-	}
 
 	@NotNull
 	public Vector<genPair<Pair, genPair<Action, HashMap<Pair, Node>>>> tick(@NotNull HashMap<Pair, Node> cState, @NotNull Action[] possibleActions) {
@@ -320,7 +214,9 @@ public class GraphGenerator {
 			blankState.get(new Pair(cNode.xPos, cNode.yPos)).blockHere = cNode.blockHere;
 			blankState.get(new Pair(cNode.xPos, cNode.yPos)).doubleBlock = cNode.doubleBlock;
 
-			if (cNode.mario) marioNode = cNode;
+			if (cNode.mario) {
+				marioNode = cNode;
+			}
 
 		}
 		//Update the enemy positions
@@ -331,9 +227,10 @@ public class GraphGenerator {
 					Fireball a = new Fireball(e.x.x, e.x.y, 1);
 					a.ya = e.y.speed.y;
 					a.xa = e.y.speed.x;
-					a.tick();
+					Pair newLoc = a.tick();
 					if(!(a.x < -9 || a.x > 9)) {
-						moveEntityTo = blankState.get(new Pair(a.x, a.y));
+						moveEntityTo = blankState.get(newLoc);
+						if(moveEntityTo ==  null) continue;
 						moveEntityTo.modelEntitiesHere.add(a);
 					}
 					break;
@@ -341,9 +238,9 @@ public class GraphGenerator {
 					BulletBill f = new BulletBill(e.x.x, e.x.y, -1);
 					f.ya = e.y.speed.y;
 					f.xa = e.y.speed.x;
-					f.tick();
+					Pair newLoc2 = f.tick();
 					if(!(f.x < -9 || f.x > 9)) {
-						moveEntityTo = blankState.get(new Pair(f.x, f.y));
+						moveEntityTo = blankState.get(newLoc2);
 						moveEntityTo.modelEntitiesHere.add(f);
 						moveEntityTo.enemyHere = true;
 					}
@@ -352,9 +249,9 @@ public class GraphGenerator {
 					FlowerEnemy g = new FlowerEnemy(e.x.x, e.x.y);
 					g.ya = e.y.speed.y;
 					g.xa = e.y.speed.x;
-					g.tick();
+					Pair newLoc3 = g.tick();
 					if(!(g.x < -9 || g.x > 9)) {
-						moveEntityTo = blankState.get(new Pair(g.x, g.y));
+						moveEntityTo = blankState.get(newLoc3);
 						moveEntityTo.modelEntitiesHere.add(g);
 						moveEntityTo.enemyHere = true;
 					}
@@ -362,11 +259,16 @@ public class GraphGenerator {
 					break;
 				default:
 					MyEnemy h = new MyEnemy(e.x.x, e.x.y, -1, false, e.y.type);
-					h.tick();
+					Pair newLoc4 = h.tick();
 					if ((h.x < -9 || h.x > 9) || (h.y <-9 || h.y>9)) {
 					} else {
 						System.out.println(h.x+"--"+h.y);
-						moveEntityTo = blankState.get(new Pair(h.x, h.y));
+						moveEntityTo = blankState.get(newLoc4);
+						if(moveEntityTo.blockHere) {
+							newLoc4 = new Pair((int)h.xOld,(int)h.yOld);
+							moveEntityTo = blankState.get(newLoc4);
+							if(moveEntityTo.blockHere) break;
+						}
 						moveEntityTo.modelEntitiesHere.add(h);
 						moveEntityTo.enemyHere = true;
 					}
@@ -377,61 +279,67 @@ public class GraphGenerator {
 		for (Action possibleAction : possibleActions) {
 			Pair newMarioPos = null;
 			Pair oldMarioPos = new Pair(marioNode.xPos,marioNode.yPos);
+			MyMario oldMario = marioNode.alterMario;
 			MyMario altRealityMario = marioNode.alterMario.clone();
+			//System.out.println(altRealityMario.onGround +""+ altRealityMario.mayJump);
 			HashMap<Pair, Node> currPossibleState = mapCopy(blankState);
 			switch (possibleAction) {
 				case Jump:
 					altRealityMario.myKeys.set(MarioKey.JUMP,altRealityMario.mayJump);
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair(altRealityMario.x,--altRealityMario.y);
 					break;
 				case RightLongJump:
-					altRealityMario.myKeys.set(MarioKey.JUMP,!altRealityMario.onGround);
+					altRealityMario.myKeys.press(MarioKey.JUMP);
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
 					altRealityMario.facing = 1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case LeftLongJump:
-					altRealityMario.myKeys.set(MarioKey.JUMP,!altRealityMario.onGround);
+					altRealityMario.myKeys.press(MarioKey.JUMP);
 					altRealityMario.myKeys.press(MarioKey.LEFT);
 					altRealityMario.facing = -1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case Left:
 					altRealityMario.myKeys.press(MarioKey.LEFT);
-					altRealityMario.facing = -1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case Right:
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
-					altRealityMario.facing = 1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case RightSpeed:
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
 					altRealityMario.myKeys.press(MarioKey.SPEED);
-					altRealityMario.facing = 1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case LeftSpeed:
 					altRealityMario.myKeys.press(MarioKey.LEFT);
 					altRealityMario.myKeys.press(MarioKey.SPEED);
-					altRealityMario.facing = -1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 			}
 			if (newMarioPos.y < -9 || newMarioPos.y > 9) continue;
 			Node updatingMarioNode = currPossibleState.get(newMarioPos);
 			Node changeOldPos = currPossibleState.get(oldMarioPos);
-			changeOldPos.mario = false;
-			updatingMarioNode.mario = true;
-			updatingMarioNode.alterMario = altRealityMario;
+			if(updatingMarioNode.blockHere && possibleAction != Action.LeftLongJump && possibleAction != Action.RightLongJump) {
+				newMarioPos = oldMarioPos;
+				updatingMarioNode = currPossibleState.get(newMarioPos);
+				updatingMarioNode.mario = true;
+				updatingMarioNode.alterMario = oldMario;
+			}
+			else {
+				changeOldPos.mario = false;
+				updatingMarioNode.mario = true;
+				updatingMarioNode.alterMario = altRealityMario;
+			}
 			possibleStates.add(new genPair<Pair, genPair<Action, HashMap<Pair, Node>>>(newMarioPos,
 					new genPair<Action, HashMap<Pair, Node>>(possibleAction, currPossibleState)));
 		}
@@ -469,21 +377,22 @@ public class GraphGenerator {
 		//Update the enemy positions
 		for (genPair<Pair, MySprite> e : existingEntities) {
 			Node moveEntityTo = null;
+			Vector<Fireball> ballsOfFire = new Vector<>();
 			switch (e.y.type) {
 				case FIREBALL:
 					Fireball a = new Fireball(e.x.x, e.x.y, 1);
 					a.ya = e.y.ya;
 					a.xa = e.y.xa;
-					a.tick();
-					moveEntityTo = blankState.get(new Pair(a.x, a.y));
+					Pair newLoc = a.tick();
+					moveEntityTo = blankState.get(newLoc);
 					moveEntityTo.modelEntitiesHere.add(a);
 					break;
 				case BULLET_BILL:
 					BulletBill f = (BulletBill) e.y;
 					f.ya = e.y.ya;
 					f.xa = e.y.xa;
-					f.tick();
-					moveEntityTo = blankState.get(new Pair(f.x, f.y));
+					Pair newLoc2 = f.tick();
+					moveEntityTo = blankState.get(newLoc2);
 					moveEntityTo.modelEntitiesHere.add(f);
 					moveEntityTo.enemyHere = true;
 					break;
@@ -491,79 +400,92 @@ public class GraphGenerator {
 					FlowerEnemy g = (FlowerEnemy) e.y;
 					g.ya = e.y.ya;
 					g.xa = e.y.xa;
-					g.tick();
-					moveEntityTo = blankState.get(new Pair(g.x, g.y));
+					Pair newLoc3 = g.tick();
+					moveEntityTo = blankState.get(newLoc3);
 					moveEntityTo.modelEntitiesHere.add(g);
 					moveEntityTo.enemyHere = true;
 					break;
 				default:
 					MyEnemy h = (MyEnemy) e.y;
-					h.tick();
-					moveEntityTo = blankState.get(new Pair(h.x, h.y));
+					Pair newLoc4 = h.tick();
+					moveEntityTo = blankState.get(newLoc4);
+					if(moveEntityTo.blockHere) {
+						newLoc4 = new Pair((int)h.xOld,(int)h.yOld);
+						moveEntityTo = blankState.get(newLoc4);
+						if(moveEntityTo.blockHere) break;
+					}
 					moveEntityTo.modelEntitiesHere.add(h);
 					moveEntityTo.enemyHere = true;
 					break;
+			}
+			for( Fireball x : ballsOfFire) {
+				collision(x,blankState);
 			}
 		}
 		//Make copies of the new state for the number of possible actions mario can take and move mario based on a possible action
 		for (Action possibleAction : possibleActions) {
 			Pair oldMarioPos = new Pair(marioNode.xPos,marioNode.yPos);
 			Pair newMarioPos = null;
+			MyMario oldMario = marioNode.alterMario;
 			MyMario altRealityMario = marioNode.alterMario.clone();
+			//System.out.println(altRealityMario.mayJump + "" + altRealityMario.onGround);
 			HashMap<Pair, Node> currPossibleState = mapCopy(blankState);
 			switch (possibleAction) {
 				case Jump:
 					altRealityMario.myKeys.set(MarioKey.JUMP,altRealityMario.mayJump);
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,--altRealityMario.y);
 					break;
 				case RightLongJump:
-					altRealityMario.myKeys.set(MarioKey.JUMP,!altRealityMario.onGround);
+					altRealityMario.myKeys.press(MarioKey.JUMP);
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
-					altRealityMario.facing = 1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case LeftLongJump:
-					altRealityMario.myKeys.set(MarioKey.JUMP,!altRealityMario.onGround);
+					altRealityMario.myKeys.press(MarioKey.JUMP);
 					altRealityMario.myKeys.press(MarioKey.LEFT);
-					altRealityMario.facing = -1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case Left:
 					altRealityMario.myKeys.press(MarioKey.LEFT);
-					altRealityMario.facing = -1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case Right:
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
-					altRealityMario.facing = 1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case RightSpeed:
 					altRealityMario.myKeys.press(MarioKey.RIGHT);
 					altRealityMario.myKeys.press(MarioKey.SPEED);
-					altRealityMario.facing = 1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 				case LeftSpeed:
 					altRealityMario.myKeys.press(MarioKey.LEFT);
 					altRealityMario.myKeys.press(MarioKey.SPEED);
-					altRealityMario.facing = -1;
 					altRealityMario.tick();
-					newMarioPos = new Pair(altRealityMario.x,altRealityMario.y);
+					newMarioPos = new Pair((int)altRealityMario.x,(int)altRealityMario.y);
 					break;
 			}
-			if (newMarioPos.y < -9 || newMarioPos.y > 9) continue;
+			if (newMarioPos.y < -9 || newMarioPos.y > 9 || newMarioPos.x > 9 || newMarioPos.x < -9) continue;
 			Node updatingMarioNode = currPossibleState.get(newMarioPos);
 			Node updateOldPos = currPossibleState.get(oldMarioPos);
-			updateOldPos.mario = false;
-			updatingMarioNode.alterMario = altRealityMario;
-			updatingMarioNode.mario = true;
+			if(updatingMarioNode.blockHere && possibleAction != Action.LeftLongJump && possibleAction != Action.RightLongJump) {
+				newMarioPos = oldMarioPos;
+				updatingMarioNode = currPossibleState.get(newMarioPos);
+				updatingMarioNode.mario = true;
+				updatingMarioNode.alterMario = oldMario;
+			}
+			else {
+				updateOldPos.mario = false;
+				updateOldPos.alterMario = null;
+				updatingMarioNode.mario = true;
+				updatingMarioNode.alterMario = altRealityMario;
+			}
 			possibleStates.add(new genPair<Pair, genPair<Action, HashMap<Pair, Node>>>(newMarioPos,
 					new genPair<Action, HashMap<Pair, Node>>(possibleAction, currPossibleState)));
 		}
@@ -571,6 +493,45 @@ public class GraphGenerator {
 		return possibleStates;
 
 
+	}
+
+	public boolean collision(MySprite sprite, HashMap<Pair,Node> state) {
+		Pair mario = new Pair((int)sprite.x,(int)sprite.y);
+		Pair left = new Pair(mario.x-1,mario.y);
+		Pair right = new Pair(mario.x+1,mario.y);
+		Pair leftUp = new Pair(mario.x-1,mario.y-1);
+		Pair rightUp = new Pair(mario.x+1,mario.y-1);
+		Pair leftDown = new Pair(mario.x-1,mario.y+1);
+		Pair rightDown = new Pair(mario.x+1,mario.y+1);
+		Pair down = new Pair(mario.x,mario.y-1);
+		Pair up = new Pair(mario.x,mario.y);
+		Node leftN = state.get(left);
+		Node rightN = state.get(right);
+		Node leftUpN = state.get(leftUp);
+		Node rightUpN = state.get(rightUp);
+		Node leftDownN = state.get(leftDown);
+		Node rightDownN = state.get(rightDown);
+		Node upN = state.get(up);
+		Node here = state.get(mario);
+		boolean hit = false;
+		MyMario checkMario = here.alterMario;
+		Vector<Node> checkThese = new Vector<>();
+		if(leftN != null) checkThese.add(leftN);
+		if(rightN != null) checkThese.add(rightN);
+		if(upN != null) checkThese.add(upN);
+		if(leftUpN != null) checkThese.add(leftUpN);
+		if(rightUpN != null) checkThese.add(rightUpN);
+		if(leftDownN != null) checkThese.add(leftDownN);
+		if(rightDownN != null) checkThese.add(rightDownN);
+		for(Node x : checkThese) {
+			if(x.enemyHere) hit = true;
+			if(sprite.type == EntityType.FIREBALL  && hit== true) {
+				x.modelEntitiesHere = new Vector<>();
+				here.modelEntitiesHere.remove(sprite);
+
+			}
+		}
+		return hit;
 	}
 
 	public enum Action {
@@ -583,24 +544,6 @@ public class GraphGenerator {
 		LeftSpeed
 	}
 
-	/*public class marioDoll extends MyMario {
-		int strikes = 0;
-
-
-		public marioDoll(float xSpeed, float ySpeed, int marioSize, int xPos, int yPos, boolean marioOnGround, boolean marioMayJump) {
-			xa = xSpeed;
-			ya = ySpeed;
-			strikes = marioSize;
-			x = xPos;
-			y = yPos;
-			onGround = marioOnGround;
-			mayJump = marioMayJump;
-		}
-
-		public marioDoll() {
-
-		}
-	}*/
 
 	@SuppressWarnings("CloneDoesntCallSuperClone")
 	public class Node {
@@ -660,6 +603,9 @@ public class GraphGenerator {
 		 */
 		public void reset() {
 			blockHere = t.brick(xPos, yPos);
+			alterMario = null;
+			mario = false;
+			modelEntitiesHere = new Vector<>();
 			doubleBlock = (t.brick(xPos, yPos) && t.brick(xPos + 2, yPos - 1));
 			enemyHere = e.danger(xPos, yPos);
 		}
@@ -671,6 +617,7 @@ public class GraphGenerator {
 			copy.doubleBlock = this.doubleBlock;
 			copy.enemyHere = this.enemyHere;
 			copy.mario = this.mario;
+			copy.alterMario = this.alterMario;
 			return copy;
 		}
 	}
