@@ -57,13 +57,13 @@ public class ID3Agent extends MarioHijackAIBase implements IAgent {
 		for(Action x : ac) {
 			switch (x) {
 				case Jump:
-					if(mario.mayJump) {
+					if(mario.mayJump && mario.onGround) {
 						doThese.press(MarioKey.JUMP);
 					}
 						//doThese.press(MarioKey.JUMP);
 					break;
 				case RightLongJump:
-					if(!mario.onGround && mario.mayJump) {
+					if(!mario.onGround) {
 						doThese.press(MarioKey.JUMP);
 					}
 					doThese.release(MarioKey.LEFT);
@@ -175,7 +175,12 @@ public class ID3Agent extends MarioHijackAIBase implements IAgent {
 							break;
 						case Block:
 							if (CenterRight.blockHere && !CenterRight.doubleBlock) {
-								actionsDo.add(Action.Jump);
+								if(mario.onGround) {
+									actionsDo.add(Action.Jump);
+								}
+								else {
+									actionsDo.add(Action.RightLongJump);
+								}
 								break;
 							}
 							else {
