@@ -208,14 +208,17 @@ public class AStarNewAgentID3InformationCalc extends MarioHijackAIBase implement
 	}
 
 
-	public static ArrayList<Id3Node> produceTree(Vector<genPair<Id3Node.Attribute,Double>> gains, ArrayList<Id3Node> empty, Id3Node update) {
-		ArrayList<Id3Node> Tree = empty;
+	public static Vector<Id3Node> produceTree(Vector<genPair<Id3Node.Attribute,Double>> gains, Vector<Id3Node> empty, Id3Node update) {
+		Vector<Id3Node> Tree = empty;
 		if(gains.isEmpty()) {
+			update.atrib = Id3Node.Attribute.None;
+			Tree.add(update);
+			update.leaf = true;
 			return Tree;
 		}
 		if(Tree.isEmpty()) {
 			Id3Node root = new Id3Node();
-			root.atrib = gains.remove(2).x;
+			root.atrib = gains.remove(gains.size()-1).x;
 			root.root = true;
 			root.no = new Id3Node();
 			root.yes = new Id3Node();
@@ -231,9 +234,29 @@ public class AStarNewAgentID3InformationCalc extends MarioHijackAIBase implement
 					root.yes.doThis = Action.RightLongJump;
 
 			}
-			return produceTree()
+			Tree.add(root);
+			return produceTree(gains,Tree,root.no);
 		}
-		return null;
+		else {
+			update.atrib = gains.remove(gains.size()-1).x;
+			update.no = new Id3Node();
+			update.yes = new Id3Node();
+			update.yes.leaf = true;
+			switch (update.atrib) {
+				case Enemy:
+					update.yes.doThis = Action.Jump;
+					break;
+				case Block:
+					update.yes.doThis = Action.Jump;
+					break;
+				case DoubleBlock:
+					update.yes.doThis = Action.RightLongJump;
+
+			}
+			Tree.add(update);
+			return produceTree(gains,Tree,update.no);
+
+		}
 	}
 	public static void main(String[] args) {
 		for(int i = 0; i < 1; ++i) {
@@ -292,11 +315,15 @@ public class AStarNewAgentID3InformationCalc extends MarioHijackAIBase implement
 
 
 
-		/*System.out.println("Number of actions: "+actions);
-		ArrayList<Id3Node> id3Tree =  produceTree(gains,new ArrayList<Id3Node>(),null);
+
+		Vector<Id3Node> id3Tree =  produceTree(gains,new Vector<Id3Node>(),null);
 		for(Id3Node x : id3Tree) {
-			System.out.println(x.atrib.toString());
-		}*/
+			System.out.println(x.atrib);
+		}
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
+		MarioSimulator simulator = new MarioSimulator(options);
+		IAgent agent = new ID3Agent(id3Tree);
+		simulator.run(agent);
 
 	}
 }

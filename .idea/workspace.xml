@@ -2,31 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60d62f5c-077a-439a-afa7-3428bda93297" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent00_Random.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent01_SprintForward.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent02_Jumpee.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent03_Forward.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/Agent04_Shooter.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue$Node.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue$Pair.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgentTrue.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing$Node.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing$Pair.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarNewAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarNewAgent.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/ID3Agent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc$1.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/BreadthFirstAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/DepthFirstAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgent.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/HillClimberAgent.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/ch/idsia/agents/controllers/examples/SimulatedAnnealing.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Action.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Action.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Node.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator$Node.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/GraphGenerator.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/Id3Node$Attribute.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/Id3Node$Attribute.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/Id3Node.class" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/bin/togepi/Id3Node.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgent.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/BreadthFirstAgent.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/BreadthFirstAgent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/DepthFirstAgent.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/DepthFirstAgent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/Id3Node.java" afterPath="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/Id3Node.java" />
     </list>
     <ignored path="MarioAIImplementation.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,92 +36,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AStarNewAgentID3InformationCalc.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.java">
+      <file leaf-file-name="GraphGenerator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.54545456">
-              <caret line="225" column="26" selection-start-line="225" selection-start-column="26" selection-end-line="225" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BreadthFirstAgent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/BreadthFirstAgent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.827587">
-              <caret line="109" column="16" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DepthFirstAgent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/DepthFirstAgent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="163" column="79" selection-start-line="163" selection-start-column="79" selection-end-line="163" selection-end-column="79" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EvolutionStrategy.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/EvolutionStrategy.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GeneticAlgorithm.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/GeneticAlgorithm.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="HillClimberAgent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/HillClimberAgent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IterativeDeepeningAgent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/IterativeDeepeningAgent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="72" column="38" selection-start-line="72" selection-start-column="38" selection-end-line="72" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="KNearestNeighbors.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/KNearestNeighbors.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimulatedAnnealing.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/SimulatedAnnealing.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-              <folding />
+            <state vertical-scroll-proportion="-22.448277">
+              <caret line="675" column="0" selection-start-line="675" selection-start-column="0" selection-end-line="675" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="method#mapCopy#0;class#GraphGenerator#0" expanded="false" />
+                <element signature="method#generateEmptyGraph#0;class#GraphGenerator#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -144,7 +54,95 @@
         <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgent.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="51" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
+              <caret line="151" column="112" selection-start-line="151" selection-start-column="112" selection-end-line="151" selection-end-column="112" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Enum.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/lang/Enum.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+              <folding>
+                <element signature="e#3009#3010#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarioInput.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/input/MarioInput.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AStarNewAgentID3InformationCalc.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-151.34483">
+              <caret line="261" column="28" selection-start-line="261" selection-start-column="28" selection-end-line="261" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Vector.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/util/Vector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="1113" column="0" selection-start-line="1113" selection-start-column="0" selection-end-line="1113" selection-end-column="0" />
+              <folding>
+                <element signature="e#43205#43206#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ID3Agent.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/ID3Agent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.57575756">
+              <caret line="65" column="55" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
+              <folding>
+                <element signature="e#1289#1290#0" expanded="true" />
+                <element signature="e#1311#1312#0" expanded="true" />
+                <element signature="e#3447#3468#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarioSimulator.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/MarioSimulator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MarioHijackAIBase.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/MarioHijackAIBase.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BreadthFirstAgent.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/BreadthFirstAgent.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.586206">
+              <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="132" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -194,12 +192,13 @@
         <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/StateGenVectorImplementation.java" />
         <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/MySprite.java" />
         <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/EnemyActorPhysics/MyMario.java" />
-        <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/Id3Node.java" />
-        <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java" />
         <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/DepthFirstAgent.java" />
         <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/BreadthFirstAgent.java" />
+        <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/Id3Node.java" />
         <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgent.java" />
+        <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java" />
         <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.java" />
+        <option value="$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/ID3Agent.java" />
       </list>
     </option>
   </component>
@@ -934,15 +933,15 @@
       <workItem from="1449019919289" duration="43255000" />
       <workItem from="1449124423761" duration="46411000" />
       <workItem from="1449276494520" duration="8043000" />
-      <workItem from="1449270720871" duration="2466000" />
+      <workItem from="1449270720871" duration="13576000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182159000" />
+    <option name="totallyTimeSpent" value="193269000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="32" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="32" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1002,8 +1001,14 @@
           <properties />
           <option name="timeStamp" value="30" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/ID3Agent.java</url>
+          <line>216</line>
+          <properties />
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="40" />
+      <option name="time" value="41" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1012,27 +1017,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/options/SimulationOptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="73" selection-start-line="76" selection-start-column="73" selection-end-line="76" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/options/MarioOptions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="111" column="8" selection-start-line="111" selection-start-column="8" selection-end-line="111" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/modules/Entities.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21799308">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/IAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48105437">
@@ -1051,6 +1035,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="47" column="17" selection-start-line="47" selection-start-column="17" selection-end-line="47" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1093,13 +1078,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/input/MarioInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/AgentOptions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1132,6 +1110,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="332" column="13" selection-start-line="332" selection-start-column="13" selection-end-line="332" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1174,6 +1153,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="95" column="4" selection-start-line="95" selection-start-column="4" selection-end-line="95" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1269,22 +1249,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/Id3Node.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="31" selection-start-line="14" selection-start-column="31" selection-end-line="14" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/MarioSimulator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="39" selection-start-line="79" selection-start-column="39" selection-end-line="79" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/lang/Class.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1301,62 +1265,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/util/Vector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="1132" column="0" selection-start-line="1132" selection-start-column="0" selection-end-line="1132" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/lang/reflect/Method.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="605" column="0" selection-start-line="605" selection-start-column="0" selection-end-line="605" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="508" column="64" selection-start-line="508" selection-start-column="64" selection-end-line="508" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#mapCopy#0;class#GraphGenerator#0" expanded="false" />
-            <element signature="method#generateEmptyGraph#0;class#GraphGenerator#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/DepthFirstAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="163" column="79" selection-start-line="163" selection-start-column="79" selection-end-line="163" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/EvolutionStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/GeneticAlgorithm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/HillClimberAgent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1385,10 +1297,94 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/GeneticAlgorithm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/EvolutionStrategy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/DepthFirstAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="163" column="79" selection-start-line="163" selection-start-column="79" selection-end-line="163" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/HillClimberAgent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/Id3Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/BreadthFirstAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.827587">
-          <caret line="109" column="16" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="38" />
+        <state vertical-scroll-proportion="-11.586206">
+          <caret line="122" column="0" selection-start-line="122" selection-start-column="0" selection-end-line="132" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/util/Vector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="1113" column="0" selection-start-line="1113" selection-start-column="0" selection-end-line="1113" selection-end-column="0" />
+          <folding>
+            <element signature="e#43205#43206#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/agents/controllers/MarioHijackAIBase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/MarioSimulator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="108" column="0" selection-start-line="108" selection-start-column="0" selection-end-line="108" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.7.0_79/src.zip!/java/lang/Enum.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="0" selection-start-line="102" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+          <folding>
+            <element signature="e#3009#3010#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J/src/ch/idsia/benchmark/mario/engine/input/MarioInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1396,16 +1392,40 @@
     <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="51" selection-start-line="93" selection-start-column="51" selection-end-line="93" selection-end-column="51" />
+          <caret line="151" column="112" selection-start-line="151" selection-start-column="112" selection-end-line="151" selection-end-column="112" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/togepi/GraphGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-22.448277">
+          <caret line="675" column="0" selection-start-line="675" selection-start-column="0" selection-end-line="675" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#mapCopy#0;class#GraphGenerator#0" expanded="false" />
+            <element signature="method#generateEmptyGraph#0;class#GraphGenerator#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/AStarNewAgentID3InformationCalc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.54545456">
-          <caret line="225" column="26" selection-start-line="225" selection-start-column="26" selection-end-line="225" selection-end-column="26" />
+        <state vertical-scroll-proportion="-151.34483">
+          <caret line="261" column="28" selection-start-line="261" selection-start-column="28" selection-end-line="261" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MarioAI4J-Agents/src/ch/idsia/agents/controllers/examples/ID3Agent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.57575756">
+          <caret line="65" column="55" selection-start-line="65" selection-start-column="55" selection-end-line="65" selection-end-column="55" />
+          <folding>
+            <element signature="e#1289#1290#0" expanded="true" />
+            <element signature="e#1311#1312#0" expanded="true" />
+            <element signature="e#3447#3468#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

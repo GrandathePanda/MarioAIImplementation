@@ -203,7 +203,6 @@ public class GraphGenerator {
 					doThese.set(MarioKey.JUMP, MarioEnvironment.getInstance().getMario().mayJump);
 					break;
 				case RightLongJump:
-					if(!MarioEnvironment.getInstance().getMario().onGround)
 					doThese.press(MarioKey.JUMP);
 					doThese.release(MarioKey.LEFT);
 					doThese.press(MarioKey.RIGHT);
@@ -636,7 +635,7 @@ public class GraphGenerator {
 			xPos = x;
 			yPos = y;
 			blockHere = t.brick(x, y);
-			doubleBlock = (t.brick(x + 1, y) && t.brick(x, y - 1));
+			doubleBlock = (t.brick(x + 1, y) && t.brick(x+1, y - 1));
 
 		}
 
@@ -673,10 +672,6 @@ public class GraphGenerator {
 
 }
 
-/*
-* TODO: Modify all the state updating code to take lists of entites found on the node, create a list of the same entities using our implementation of them and then redistribute them accordingly
- 	Required Updates: Node Constructor and Reset Functions, tick()
- 	Probably Need: A list containing the old entities a queue for redistribution, and intermediate list of partially contained entities, a final list of entities;
 
- */
+
 

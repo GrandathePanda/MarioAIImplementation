@@ -9,7 +9,8 @@ public class Id3Node {
 	public enum Attribute {
 		Enemy,
 		Block,
-		DoubleBlock
+		DoubleBlock,
+		None
 	}
 	public boolean root = false;
 	public boolean leaf = true;
