@@ -82,6 +82,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 		boolean firstStateSeenCurrent = false;
 		frontierStates.push(mapCopy(Graph.State));
 		solutionStates.add(mapCopy(Graph.State));
+		Vector<Action> actionsDo = new Vector<>();
 		while(!frontierStates.isEmpty() && runs < 4) {
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
 			for(Map.Entry<Pair,Node> x : currentState.entrySet()) {
@@ -105,46 +106,8 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 				HashMap<Pair,Node> child = x.y.y;
 				Action doThis = x.y.x;
 				if(runs+1 < 4) frontierStates.addLast(child);
-				//action.press(MarioKey.RIGHT);
-				System.out.println(doThis.toString()+" ");
-				switch(doThis) {
-					case Jump:
-						action.set(MarioKey.JUMP,mario.mayJump && g1);
-						System.out.println("HERE j");
-						break;
-					case RightLongJump:
-						System.out.println("HERE rlj"+simM.jumpTime);
-						if(!simM.onGround) action.press(MarioKey.JUMP);
-						action.toggle(MarioKey.LEFT);
-						action.press(MarioKey.RIGHT);
-					case LeftLongJump:
-						System.out.println("HERE llj");
-						if(!simM.onGround) action.press(MarioKey.JUMP);
-						action.toggle(MarioKey.RIGHT);
-						action.press(MarioKey.LEFT);
-					case Right:
-						System.out.println("HERE r");
-						action.toggle(MarioKey.LEFT);
-						action.press(MarioKey.RIGHT);
-						break;
-					case RightSpeed:
-						System.out.println("HERE rs");
-						action.toggle(MarioKey.LEFT);
-						action.press(MarioKey.RIGHT);
-						action.press(MarioKey.SPEED);
-						break;
-					case Left:
-						System.out.println("HERE L");
-						action.toggle(MarioKey.RIGHT);
-						action.press(MarioKey.LEFT);
-						break;
-					case LeftSpeed:
-						System.out.println("HERE ls");
-						action.toggle(MarioKey.RIGHT);
-						action.press(MarioKey.LEFT);
-						action.press(MarioKey.SPEED);
-						break;
-				}
+				actionsDo.add(doThis);
+
 
 
 			}
@@ -153,11 +116,11 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 		
 		System.out.println("REturning");
 		System.gc();
-		return action;
+		return Graph.doActions(actionsDo);
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(10)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		

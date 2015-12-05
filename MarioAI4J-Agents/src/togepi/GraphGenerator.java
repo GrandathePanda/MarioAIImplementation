@@ -6,10 +6,11 @@ import ch.idsia.agents.controllers.modules.Tiles;
 import ch.idsia.benchmark.mario.engine.generalization.Entity;
 import ch.idsia.benchmark.mario.engine.generalization.EntityType;
 import ch.idsia.benchmark.mario.engine.generalization.MarioEntity;
+import ch.idsia.benchmark.mario.engine.input.MarioInput;
 import ch.idsia.benchmark.mario.engine.input.MarioKey;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
+import ch.idsia.benchmark.mario.environments.MarioEnvironment;
 import java.util.*;
 
 
@@ -76,7 +77,9 @@ public class GraphGenerator {
 				Node currentNode = new Node(i, j, 2 * gridSizeX, 2 * gridSizeY);
 				if (i == 0 && j == 0) {
 					currentNode.mario = true;
-					currentNode.alterMario = new MyMario(0,0,actualMario.onGround,actualMario.mayJump);
+					boolean mJ = MarioEnvironment.getInstance().getMario().mayJump;
+					boolean oG = MarioEnvironment.getInstance().getMario().onGround;
+					currentNode.alterMario = new MyMario(0,0,oG,mJ);
 				}
 				Graph.put(new Pair(i, j), currentNode);
 			}
@@ -192,7 +195,44 @@ public class GraphGenerator {
 		}
 	}
 
-
+	public MarioInput doActions(Vector<Action> ac) {
+		MarioInput doThese = new MarioInput();
+		for(Action x : ac) {
+			switch (x) {
+				case Jump:
+					doThese.set(MarioKey.JUMP, MarioEnvironment.getInstance().getMario().mayJump);
+					break;
+				case RightLongJump:
+					if(!MarioEnvironment.getInstance().getMario().onGround)
+					doThese.press(MarioKey.JUMP);
+					doThese.release(MarioKey.LEFT);
+					doThese.press(MarioKey.RIGHT);
+				case LeftLongJump:
+					doThese.press(MarioKey.JUMP);
+					doThese.release(MarioKey.RIGHT);
+					doThese.press(MarioKey.LEFT);
+				case Right:
+					doThese.release(MarioKey.LEFT);
+					doThese.press(MarioKey.RIGHT);
+					break;
+				case RightSpeed:
+					doThese.release(MarioKey.LEFT);
+					doThese.press(MarioKey.RIGHT);
+					doThese.press(MarioKey.SPEED);
+					break;
+				case Left:
+					doThese.release(MarioKey.RIGHT);
+					doThese.press(MarioKey.LEFT);
+					break;
+				case LeftSpeed:
+					doThese.release(MarioKey.RIGHT);
+					doThese.press(MarioKey.LEFT);
+					doThese.press(MarioKey.SPEED);
+					break;
+			}
+		}
+		return doThese;
+	}
 
 	@NotNull
 	public Vector<genPair<Pair, genPair<Action, HashMap<Pair, Node>>>> tick(@NotNull HashMap<Pair, Node> cState, @NotNull Action[] possibleActions) {
@@ -241,6 +281,7 @@ public class GraphGenerator {
 					Pair newLoc2 = f.tick();
 					if(!(f.x < -9 || f.x > 9)) {
 						moveEntityTo = blankState.get(newLoc2);
+						if(moveEntityTo == null) break;
 						moveEntityTo.modelEntitiesHere.add(f);
 						moveEntityTo.enemyHere = true;
 					}
@@ -262,10 +303,11 @@ public class GraphGenerator {
 					Pair newLoc4 = h.tick();
 					if ((h.x < -9 || h.x > 9) || (h.y <-9 || h.y>9)) {
 					} else {
-						System.out.println(h.x+"--"+h.y);
+						//System.out.println(h.x+"--"+h.y);
 						moveEntityTo = blankState.get(newLoc4);
 						if(moveEntityTo.blockHere) {
 							newLoc4 = new Pair((int)h.xOld,(int)h.yOld);
+							h.facing = -h.facing;
 							moveEntityTo = blankState.get(newLoc4);
 							if(moveEntityTo.blockHere) break;
 						}
@@ -411,6 +453,7 @@ public class GraphGenerator {
 					moveEntityTo = blankState.get(newLoc4);
 					if(moveEntityTo.blockHere) {
 						newLoc4 = new Pair((int)h.xOld,(int)h.yOld);
+						h.facing = -h.facing;
 						moveEntityTo = blankState.get(newLoc4);
 						if(moveEntityTo.blockHere) break;
 					}
