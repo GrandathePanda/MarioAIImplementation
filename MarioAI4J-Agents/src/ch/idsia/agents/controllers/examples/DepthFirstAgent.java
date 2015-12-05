@@ -109,8 +109,6 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 				HashMap<Pair,Node> child = x.y.y;
 				Action doThis = x.y.x;
 				if(runs+1 < 4) frontierStates.addFirst(child);
-				//action.press(MarioKey.RIGHT);
-				System.out.println(doThis.toString()+" ");
 				switch(doThis) {
 					case Jump:
 						action.set(MarioKey.JUMP,mario.mayJump && g1);
@@ -161,7 +159,7 @@ public class DepthFirstAgent extends MarioHijackAIBase implements IAgent {
 	}
 	
 	public static void main(String[] args) {
-		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(10)+FastOpts.L_ENEMY(Enemy.GOOMBA)+FastOpts.L_RANDOMIZE+FastOpts.L_CANNONS_ON;
 		
 		MarioSimulator simulator = new MarioSimulator(options);
 		

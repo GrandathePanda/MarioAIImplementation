@@ -74,7 +74,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 			modPosAction = groundPossibleActions;
 		}
 		else {
-			if(!simM.onGround)
+			if(simM.jumpTime > 3)
 				modPosAction = airPossibleActions;
 			else modPosAction = airHangPossibleActions;
 		}
@@ -83,7 +83,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 		frontierStates.push(mapCopy(Graph.State));
 		solutionStates.add(mapCopy(Graph.State));
 		Vector<Action> actionsDo = new Vector<>();
-		while(!frontierStates.isEmpty() && runs < 9) {
+		while(!frontierStates.isEmpty() && runs < 4) {
 			HashMap<Pair,Node> currentState = frontierStates.removeFirst();
 			for(Map.Entry<Pair,Node> x : currentState.entrySet()) {
 				if(x.getValue().mario) simM = x.getValue().alterMario;
@@ -105,8 +105,7 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 				Pair marioPosChild = x.x;
 				HashMap<Pair,Node> child = x.y.y;
 				Action doThis = x.y.x;
-				System.out.println(doThis.toString());
-				if(runs < 9) frontierStates.addLast(child);
+				if(runs+1 < 4) frontierStates.addLast(child);
 				actionsDo.add(doThis);
 
 
@@ -115,7 +114,6 @@ public class BreadthFirstAgent extends MarioHijackAIBase implements IAgent {
 			++runs;
 		}
 		
-		System.out.println("REturning");
 		System.gc();
 		return Graph.doActions(actionsDo);
 	}

@@ -53,7 +53,6 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 	private MarioInput doActions(Vector<Action> ac) {
 		MarioInput doThese = new MarioInput();
 		for(Action x : ac) {
-//			System.out.println(x);
 			switch (x) {
 				case Jump:
 					doThese.set(MarioKey.JUMP, mario.mayJump);
@@ -105,43 +104,26 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickBetter(genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p1,genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p2 ){
 		int heuristic1 = 0;
 		int heuristic2 = 0;
-		if(p1.x != p2.x){
-			System.out.println("err");
-		}
-		System.out.println(p1.x.y + " posY");
+
 		Pair marioLoc = p1.x;
 		genPair<Action,HashMap<Pair,Node>> p1Child = p1.y;
-//		System.out.println(p1Child.y.get(marioLoc).xPos + " posX");
-		System.out.println(marioLoc.x + " posX");
 		if(p1Child.y.get(marioLoc).enemyHere){
-//			System.out.println("HEEEEEERRRREEEEE");
-
 			--heuristic1;
 		}
 		if(p1Child.y.get(marioLoc).blockHere){
-//			System.out.println("HEEEEEERRRREEEEE");
-
 			--heuristic1;
 		}
 		if(p1Child.y.get(marioLoc).xPos > 0){
-//			System.out.println("HEEEEEERRRREEEEE");
 			++heuristic1;
 		}
 		genPair<Action,HashMap<Pair,Node>> p2Child = p2.y;
 		if(p2Child.y.get(marioLoc).enemyHere){
-//			System.out.println("HEEEEEERRRREEEEE");
-
 			--heuristic2;
 		}
 		if(p2Child.y.get(marioLoc).blockHere){
-			System.out.println("HEEEEEERRRREEEEE");
-
-			
 			--heuristic2;
 		}
 		if(p2Child.y.get(marioLoc).xPos > 0){
-			System.out.println("HEEEEEERRRREEEEE");
-
 			++heuristic2;
 		}		
 		genPair<Pair, genPair<Action, HashMap<Pair,Node>>> ret = (heuristic1 > heuristic2) ?  p1 :  p2;
@@ -191,68 +173,24 @@ public class SimulatedAnnealing extends MarioHijackAIBase implements IAgent {
 			if (firstStateSeenCurrent) {
 				System.out.println("HERE TickModel");
 				childStates = Graph.tickModel(currentState, modPosAction);
-//				firstStateSeenCurrent = true;
 			} else {
 				System.out.println("HERE Tick");
 				childStates = Graph.tick(currentState, modPosAction);
 				firstStateSeenCurrent = true;
 			}
-//			System.out.println(childStates.size());
 			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> option1 = pickRandom(childStates);
 			childStates.remove(option1);
 			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> option2 = pickRandom(childStates);
 			genPair<Pair,genPair<Action,HashMap<Pair,Node>>> act = pickBetter(option1, option2);
 			frontierStates.push(currentState);
-//			System.out.println(act.y.x);
-//			System.out.println(act.y.x);
 			toDo.add(act.y.x);
 			++runs;
 		}
-//		System.out.println("toDo size: " + toDo.size());
-		return doActions(toDo);
+		return Graph.doActions(toDo);
 	}
-	/*
-	public MarioInput actionSelectionAI2(){
-		if(!graph){
-			Graph = new GraphGenerator(9,9,mario);
-			Graph.generateGraph(e, t);
-			Graph.isGraphGenerated = true;
-			graph = true;
-		}
-		else {
-			Graph.resetNodes(e, t);
-		}
-		int runs = 0;
-		Vector<HashMap<Pair,Node>> states = new Vector<HashMap<Pair, GraphGenerator.Node>>();
-		states.add(mapCopy(Graph.State));
-		HashMap<Pair,Node> curr = states.get(0);
-		Pair p2 = new Pair(9,9);
-		Node p = curr.get(p2);
-		Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> possibleMoves = null;
-		possibleMoves = Graph.tickModel(curr, possibleActions);
 
-		possibleMoves.get(0).y.y.get(p2);
-		
-		Node marioNode = null;
-		Vector<genPair<Pair, MySprite>> existingEntities = new Vector<>();
-		for(Map.Entry<Pair, Node> et: curr.entrySet()){
-			Node cNode = et.getValue();
-			Pair pos = new Pair(cNode.xPos, cNode.yPos);
-			List<MySprite> cNodeEntities = cNode.modelEntitiesHere;
-			for(MySprite x: cNodeEntities){
-				existingEntities.add(new genPair<>(pos,x));
-			}
-			if(cNode.mario) marioNode = cNode;
-		}
-		
-		genPair<Node, Action> myAct = pickBest(possibleMoves, marioNode);
-		Action toDo = myAct.y;
-	
-		System.gc();
-		return action;
-	}*/
 	public static void main(String[] args){
-		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(3)+FastOpts.L_ENEMY(Enemy.GOOMBA);
+		String options = FastOpts.FAST_VISx2_02_JUMPING+FastOpts.L_DIFFICULTY(0)+FastOpts.L_ENEMY(Enemy.GOOMBA);
 		MarioSimulator simulator = new MarioSimulator(options);
 		IAgent agent = new SimulatedAnnealing();
 		simulator.run(agent);

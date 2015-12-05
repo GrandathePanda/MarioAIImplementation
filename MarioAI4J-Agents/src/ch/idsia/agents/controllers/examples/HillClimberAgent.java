@@ -42,32 +42,31 @@ public class HillClimberAgent extends MarioHijackAIBase implements IAgent{
 	public Action pickAction(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> states, Node marioPos){
 		Action currPicked = Action.Right;
 		int heuristicYolo = 0;
+		int greatCost = 999;
 		Pair curr = null;
-		System.out.println(states.size());
 		int counter = 0;
 		for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> each: states){
-			System.out.println(counter++);
+			int currCost = 0;
 			int currHeuristic = 0;
-			Pair marioPosChild = each.x;
-			HashMap<Pair, Node> child = each.y.y;
-			if(child.get(marioPosChild).enemyHere){
-				--currHeuristic;
+			Pair marioLoc = each.x;
+			genPair<Action,HashMap<Pair,Node>> child = each.y;
+			
+			HashMap<Pair, Node> child1 = each.y.y;
+			if(child1.get(marioLoc).enemyHere){
+				++currCost;
 			}
-			if(child.get(marioPosChild).blockHere){
-				--currHeuristic;
+			if(child1.get(marioLoc).blockHere){
+				++currCost;
 			}
-			System.out.println("child yPos: " + child.get(marioPosChild).yPos);
-			System.out.println("marioPos: " + marioPos.yPos);
-			if(child.get(marioPosChild).yPos > marioPos.yPos){
-				System.out.println("here" + each.y.x);
+			if(child1.get(marioLoc).xPos >= marioPos.xPos){
 				currHeuristic++;
 			}
-			if(currHeuristic > heuristicYolo){
-				System.out.println("Greater");
+			if(currHeuristic >= heuristicYolo && currCost <= greatCost){
 				heuristicYolo = currHeuristic;
+				greatCost = currCost;
 				currPicked = each.y.x;
 			}
-			System.out.println("current heuristic: " + currHeuristic);
+			++counter;
 		}
 		return currPicked;
 	}

@@ -50,44 +50,6 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 	 * @return Haversine distance between the two.
 	 */
 
-	private MarioInput doActions(Vector<Action> ac) {
-		MarioInput doThese = new MarioInput();
-		for(Action x : ac) {
-//			System.out.println(x);
-			switch (x) {
-				case Jump:
-					doThese.set(MarioKey.JUMP, mario.mayJump);
-					break;
-				case RightLongJump:
-					doThese.press(MarioKey.JUMP);
-					doThese.release(MarioKey.LEFT);
-					doThese.press(MarioKey.RIGHT);
-				case LeftLongJump:
-					doThese.press(MarioKey.JUMP);
-					doThese.release(MarioKey.RIGHT);
-					action.press(MarioKey.LEFT);
-				case Right:
-					doThese.release(MarioKey.LEFT);
-					doThese.press(MarioKey.RIGHT);
-					break;
-				case RightSpeed:
-					doThese.release(MarioKey.LEFT);
-					doThese.press(MarioKey.RIGHT);
-					doThese.press(MarioKey.SPEED);
-					break;
-				case Left:
-					doThese.release(MarioKey.RIGHT);
-					doThese.press(MarioKey.LEFT);
-					break;
-				case LeftSpeed:
-					doThese.release(MarioKey.RIGHT);
-					doThese.press(MarioKey.LEFT);
-					doThese.press(MarioKey.SPEED);
-					break;
-			}
-		}
-		return doThese;
-	}
 	
 	public double distance(int x, int y, int otherX, int otherY){
 		int curr = (otherX - x ) * (otherX - x) + (otherY - y)  * (otherY - y);
@@ -98,18 +60,18 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickRandom(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> vec){
 		int rand = (int)Math.random();
 		double actRand = Math.random() * 10;
+		if(vec.size() == 0){
+			return null;
+		}
 		int index = (int)actRand%vec.size();
 		return vec.get(index);
 	}
 	
-//	public Vector<genPair<Pair, genPair<Action, HashMap<Pair,Node>>> generateRandomActionsVector()
 
 	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickBetter(genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p1,genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p2 ){
 		int heuristic1 = 0;
 		int heuristic2 = 0;
-		if(p1.x != p2.x){
-			System.out.println("err");
-		}
+
 		Pair marioLoc = p1.x;
 		genPair<Action,HashMap<Pair,Node>> p1Child = p1.y;
 		
@@ -150,9 +112,6 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 	
 	public Vector<Action> pickBestVectorOfActions(Vector<Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>>> tC){
 		Vector<Action> ret = new Vector<Action>();
-		System.out.println(tC.size() + " tC Size");
-		System.out.println(tC.get(0).size() + " sample TC VEC SIZE");
-//		return ret;
 		Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> p1 = null;
 		Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> p2 = null;
 		int currBestHeuristic = 0;
@@ -173,29 +132,21 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 				if(currChild.y.get(marioCurrLoc).enemyHere){
 					++currCost;
 				}
-//				if(currChild.y.get(marioCurrLoc).blockHere){
-//					++currLeastEnemyCost;
-//				}
-				System.out.println(currChild.y.get(marioCurrLoc).xPos + "mario Loc");
+
 				if(currChild.y.get(marioCurrLoc).xPos > 0){
 					++currHeuristic;
-					System.out.println("inc heuri");
 				}
 			}
-			System.out.println(currHeuristic + " curHeuristic " + currBestHeuristic + " curBestHeuristic " + currCost + " currCost " + currLeastEnemyCost + " currLEC");
 			if(currHeuristic >= currBestHeuristic && currCost < currLeastEnemyCost){
-				System.out.println("hm?!?");
 				currBestHeuristic = currHeuristic;
 				currLeastEnemyCost = currCost;
 				currBestVec = eachVec;
 			}
-			System.out.println("yo");
 		}
 			p1 = currBestVec;
 			currBestHeuristic = 0;
 			currLeastEnemyCost = Integer.MAX_VALUE;
 			currBestVec = null;
-//		System.out.println("here");
 		tC.remove(currBestVec);
 		for(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> eachVec: tC){
 			Pair marioStartLoc = null;
@@ -207,15 +158,12 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 					continue;
 				}
 				Pair marioCurrLoc = each.x;
-				System.out.println(marioCurrLoc.x + " " + marioCurrLoc.y);
 				genPair<Action,HashMap<Pair,Node>> currChild = each.y;
 				
 				if(currChild.y.get(marioCurrLoc).enemyHere){
 					++currCost;
 				}
-//				if(currChild.y.get(marioCurrLoc).blockHere){
-//					++currLeastEnemyCost;
-//				}
+
 				if(currChild.y.get(marioCurrLoc).xPos > 0){
 					++currHeuristic;
 				}
@@ -224,21 +172,14 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 				currBestHeuristic = currHeuristic;
 				currLeastEnemyCost = currCost;
 				currBestVec = eachVec;
-				System.out.println("hi");
 			}
 		}
-		System.out.println("ere");
 			p2 = currBestVec;
 			currBestHeuristic = 0;
 			currLeastEnemyCost = Integer.MAX_VALUE;
 		
 		//P1 and P2 populated. Begin Cross breeding
-		if(p1 == null){
-			System.out.println("swed");
-		}
-		System.out.println(p1.size() + " p1 size");
-		System.out.println(p2.size() + " p2 size");
-		System.out.println("erey");
+
 		if(p1.size() == p2.size()){
 			for(int x =0 ; x < p1.size() ; ++x){
 				genPair<Pair,genPair<Action,HashMap<Pair,Node>>> gP1 = p1.get(x);
@@ -251,10 +192,8 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 					ret.add(gP1.y.x);
 				} else if(!Node2.enemyHere && Node2.xPos > 0){
 					ret.add(gP2.y.x);
-					System.out.println("might be cuz xPos is 0");
 				} else {
 					ret.add(Action.Right);
-					System.out.println("herey");
 				}
 			}
 		}
@@ -313,7 +252,7 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 					firstStateSeenCurrent = true;
 				}
 				if(childStates.isEmpty()){
-					System.out.println("empty!");
+					break;
 				}
 				for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> ab: childStates) {
 					double cost = 0;
@@ -330,12 +269,11 @@ public class GeneticAlgorithm extends MarioHijackAIBase implements IAgent {
 			}
 			toChoose.add(possiblePath);
 		}
-		System.out.println(toChoose.size() + " toChoose Size");
 
 
 		Vector<Action> tC = null;
 		tC = pickBestVectorOfActions(toChoose);
-		return doActions(tC);
+		return Graph.doActions(tC);
 	}
 
 	public static void main(String[] args){

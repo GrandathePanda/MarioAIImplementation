@@ -108,13 +108,10 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 			}
 			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> x : childStates) {
 				Pair marioPosChild = x.x;
-				System.out.println("MarioX: "+marioPosChild.x+" MarioY: "+marioPosChild.y);
 				HashMap<Pair,Node> child = x.y.y;
 				Action doThis = x.y.x;
 				if(marioPosChild.x > 2 || runs >= 9) weMadeIt = true;
 				if(runs < limit) frontierStates.addFirst(child);
-				//action.press(MarioKey.RIGHT);
-				System.out.println(doThis.toString()+" ");
 				switch(doThis) {
 					case Jump:
 						action.set(MarioKey.JUMP,simM.mayJump && g1);
@@ -153,7 +150,6 @@ public class IterativeDeepeningAgent extends MarioHijackAIBase implements IAgent
 			++runs;
 		}
 		
-		System.out.println("REturning");
 		System.gc();
 		return action;
 	}

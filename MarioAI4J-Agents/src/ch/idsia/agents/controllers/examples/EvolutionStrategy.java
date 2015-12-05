@@ -53,7 +53,6 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 	private MarioInput doActions(Vector<Action> ac) {
 		MarioInput doThese = new MarioInput();
 		for(Action x : ac) {
-//			System.out.println(x);
 			switch (x) {
 				case Jump:
 					doThese.set(MarioKey.JUMP, mario.mayJump);
@@ -102,14 +101,11 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 		return vec.get(index);
 	}
 	
-//	public Vector<genPair<Pair, genPair<Action, HashMap<Pair,Node>>> generateRandomActionsVector()
 
 	public genPair<Pair, genPair<Action, HashMap<Pair,Node>>> pickBetter(genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p1,genPair<Pair, genPair<Action, HashMap<Pair,Node>>> p2 ){
 		int heuristic1 = 0;
 		int heuristic2 = 0;
-		if(p1.x != p2.x){
-			System.out.println("err");
-		}
+
 		Pair marioLoc = p1.x;
 		genPair<Action,HashMap<Pair,Node>> p1Child = p1.y;
 		
@@ -150,9 +146,6 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 	
 	public Vector<Action> pickBestVectorOfActions(Vector<Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>>> tC){
 		Vector<Action> ret = new Vector<Action>();
-		System.out.println(tC.size() + " tC Size");
-		System.out.println(tC.get(0).size() + " sample TC VEC SIZE");
-//		return ret;
 		Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> p1 = null;
 		Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> p2 = null;
 		int currBestHeuristic = 0;
@@ -173,29 +166,21 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 				if(currChild.y.get(marioCurrLoc).enemyHere){
 					++currCost;
 				}
-//				if(currChild.y.get(marioCurrLoc).blockHere){
-//					++currLeastEnemyCost;
-//				}
-				System.out.println(currChild.y.get(marioCurrLoc).xPos + "mario Loc");
+
 				if(currChild.y.get(marioCurrLoc).xPos > 0){
 					++currHeuristic;
-					System.out.println("inc heuri");
 				}
 			}
-			System.out.println(currHeuristic + " curHeuristic " + currBestHeuristic + " curBestHeuristic " + currCost + " currCost " + currLeastEnemyCost + " currLEC");
 			if(currHeuristic >= currBestHeuristic && currCost < currLeastEnemyCost){
-				System.out.println("hm?!?");
 				currBestHeuristic = currHeuristic;
 				currLeastEnemyCost = currCost;
 				currBestVec = eachVec;
 			}
-			System.out.println("yo");
 		}
 			p1 = currBestVec;
 			currBestHeuristic = 0;
 			currLeastEnemyCost = Integer.MAX_VALUE;
 			currBestVec = null;
-//		System.out.println("here");
 		tC.remove(currBestVec);
 		for(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> eachVec: tC){
 			Pair marioStartLoc = null;
@@ -207,15 +192,12 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 					continue;
 				}
 				Pair marioCurrLoc = each.x;
-				System.out.println(marioCurrLoc.x + " " + marioCurrLoc.y);
 				genPair<Action,HashMap<Pair,Node>> currChild = each.y;
 				
 				if(currChild.y.get(marioCurrLoc).enemyHere){
 					++currCost;
 				}
-//				if(currChild.y.get(marioCurrLoc).blockHere){
-//					++currLeastEnemyCost;
-//				}
+
 				if(currChild.y.get(marioCurrLoc).xPos > 0){
 					++currHeuristic;
 				}
@@ -224,21 +206,14 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 				currBestHeuristic = currHeuristic;
 				currLeastEnemyCost = currCost;
 				currBestVec = eachVec;
-				System.out.println("hi");
 			}
 		}
-		System.out.println("ere");
 			p2 = currBestVec;
 			currBestHeuristic = 0;
 			currLeastEnemyCost = Integer.MAX_VALUE;
 		
 		//P1 and P2 populated. Begin Cross breeding
-		if(p1 == null){
-			System.out.println("swed");
-		}
-		System.out.println(p1.size() + " p1 size");
-		System.out.println(p2.size() + " p2 size");
-		System.out.println("erey");
+
 		if(p1.size() == p2.size()){
 			for(int x =0 ; x < p1.size() ; ++x){
 				genPair<Pair,genPair<Action,HashMap<Pair,Node>>> gP1 = p1.get(x);
@@ -248,16 +223,11 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 				Node Node1 = gP1.y.y.get(p1Pair);
 				Node Node2 = gP2.y.y.get(p2Pair);
 				//Calculate mutation chance. 50/50 chance to mutate.
-//				int chanceToMutate = (int)(Math.random()*2).floor;
 				double chanceToMutate = Math.random()*2;
 				chanceToMutate = Math.floor(chanceToMutate);
 				int chance = (int)chanceToMutate;
-//				System.out.println(chance);
 				if(chance == 1){
-					System.out.println("its a one!");
-//					if(gP1.y.x == Action.Left){
-//						continue;
-//					}
+
 					if(mario.mayShoot){
 						ret.add(Action.RightSpeed);
 					}
@@ -271,10 +241,8 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 					ret.add(gP1.y.x);
 				} else if(!Node2.enemyHere && Node2.xPos > 0){
 					ret.add(gP2.y.x);
-					System.out.println("might be cuz xPos is 0");
 				} else {
 					ret.add(Action.Right);
-					System.out.println("herey");
 				}
 			}
 		}
@@ -285,7 +253,6 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 	}
 	boolean graph = false;
 	GraphGenerator Graph = null;
-//	Action[] possibleActions = {Action.Jump,Action.LeftLongJump,Action.RightLongJump,Action.Left,Action.Right,Action.LeftSpeed,Action.RightSpeed};
 	public MarioInput actionSelectionAI(){
 		Vector<HashMap<Pair,Node>> solutionStates = new Vector<HashMap<Pair, Node>>();
 		LinkedList<HashMap<Pair,Node>> frontierStates = new LinkedList<HashMap<Pair,Node>>();
@@ -333,7 +300,7 @@ public class EvolutionStrategy extends MarioHijackAIBase implements IAgent {
 					firstStateSeenCurrent = true;
 				}
 				if(childStates.isEmpty()){
-					System.out.println("empty!");
+					break;
 				}
 				for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> ab: childStates) {
 					double cost = 0;

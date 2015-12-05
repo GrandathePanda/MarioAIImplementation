@@ -56,7 +56,6 @@ public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 	private MarioInput doActions(Vector<Action> ac) {
 		MarioInput doThese = new MarioInput();
 		for(Action x : ac) {
-//			System.out.println(x);
 			switch (x) {
 				case Jump:
 					doThese.set(MarioKey.JUMP, mario.mayJump);
@@ -106,12 +105,8 @@ public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 			while(it.hasNext()){
 				Node p = (Node)it.next();
 				
-//				if(p.blockHere){
-//					it.remove();
-//				}
 			}
 		}
-		System.out.println("got out");
 		return vec;
 	}
 	/**
@@ -123,38 +118,27 @@ public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 	public genPair<Node, Action> pickBest(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> vec, Node currentPos){
 		//Takes the node looks at xPos and yPos, picks the option that will bring it 
 		//furthest to the right
-		System.out.println("vec size: " + vec.size());
-//		vec = eliminateUseless(vec);
 		double currGreatestHeuristic = 0.0; //Current greatest heuristic, or furthest distance
 		Node greatestNode = null; //Current chosen Node.
 		Action toDo = null; //current chosen Action
-//		System.out.println("vec size: " +vec.size());
 		for(genPair<Pair,genPair<Action, HashMap<Pair,Node>>> curr: vec){ //Loop through all possible location results, finds the one with gratest distance
-//			Pair marioPosChild = x.x;
 			int counter = 0;
 
 			HashMap<Pair,Node> child = curr.y.y;
-//			System.out.println(child.size()); //***NOTE*** I NEED THIS TO JUST LOOP THROUGH 81 ELEMENTS SURROUNDING MARIO. NOT THE FULL MAP!
 			Iterator it = child.entrySet().iterator();
 			while(it.hasNext()){ //Loop through and picks the action/node with heighest heuristic
 				if(counter == 8){
-					System.out.println("breaking");
 					break;
 				}
 				Map.Entry pair = (Map.Entry)it.next();
 				Node p = (Node)pair.getValue();
 				double distance = distance(p.xPos, p.yPos, currentPos.xPos, currentPos.yPos); //cannot calculate distance this way
-				if(curr.y.x == Action.Jump){
-					System.out.println("TRYING");
-				}
-//				System.out.println("p.xPos: " + p.xPos + " p.yPos: " + p.yPos + " currentPos.xPos: " + currentPos.xPos + " currentPos.yPos: " + currentPos.yPos);
-//				System.out.println("Distance: " + distance);
 
-				if(/*p.xPos > currentPos.xPos && */distance > currGreatestHeuristic){
+
+				if(distance > currGreatestHeuristic){
 					greatestNode = p;
 					currGreatestHeuristic = distance;
 					toDo = curr.y.x;
-//					System.out.println("Node: " + greatestNode.xPos + ", " + greatestNode.yPos + " heuristic: " + currGreatestHeuristic + " action: " + toDo );
 				}
 				++counter;
 				it.remove();
@@ -162,15 +146,11 @@ public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 
 		}
 		
-		System.out.println("**************************************** HERE");
-//		System.out.println("I have changed my mind: " + counter + " number of times.");
-		System.out.println("I will do: " + toDo);
 		genPair<Node, Action> ret = new genPair<Node,Action>(greatestNode, toDo);
 		return ret;
 	}
 	
 	public Vector<Action> pickMove(Vector<genPair<Pair,genPair<Action,HashMap<Pair,Node>>>> childStates){
-		System.out.println("Child states size: " + childStates.size());
 		Vector<Action> ret = null;
 		double greatestDistance = 0;
 		Pair greatPos;
@@ -182,7 +162,6 @@ public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 			}
 			Pair marioPos = each.x;
 			genPair<Action, HashMap<Pair,Node>> currChild = each.y;
-//			double distance = distance(9,-4,each.x.x,each.x.y);
 			double distance  = 1.0;
 			if(greatestDistance < distance){
 				greatestDistance = distance;
@@ -247,14 +226,12 @@ public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 			Pair greatPos;
 			Action currActions = Action.Left;
 			int count = 1;
-			System.out.println(childStates.size());
 			for(genPair<Pair,genPair<Action,HashMap<Pair,Node>>> each: childStates){
 				if(count == childStates.size()){
 					break;
 				}
 				Pair marioPos = each.x;
 				genPair<Action, HashMap<Pair,Node>> currChild = each.y;
-//				double distance = distance(9,-4,each.x.x,each.x.y);
 				double distance  = 1.0;
 				if(greatestDistance < distance){
 					greatestDistance = distance;
@@ -262,7 +239,6 @@ public class KNearestNeighbors extends MarioHijackAIBase implements IAgent {
 					currActions = each.y.x;
 				}
 				++count;
-//				System.out.println(currActions);
 				toDo.add(currActions);
 
 			}
